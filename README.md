@@ -314,6 +314,4 @@ direction in which the wave propagates. Degrees 0-360. True North.|
 |Circle |  Circle | | | 
 |GML |  GML | GMLidenfitifer| | 
 
-
-
-[objectclasses]: https://github.com/AMSP-04/NETN-METOC/blob/master/NETN-METOC_v0.4%20Object%20Class%20Tree.png "Object Classes"
+[objectclasses]: https://github.com/AMSP-04/NETN-METOC/blob/master/objectclasses.png
