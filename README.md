@@ -9,7 +9,14 @@ The purpose of the NETN METOC module is to provide a standard way to exchange da
 
 ## Concepts
 
-![alt text](https://github.com/AMSP-04/NETN-METOC/blob/master/NETN-METOC_v0.4%20Object%20Class%20Tree.png "NETN METOC Object Classes")
+* Terrestrial Surface Condition
+* Water Surface Condition
+* Atmospheric Layer Condition
+* Water Layer Condition
+
+
 ## Design
+![alt text](https://github.com/AMSP-04/NETN-METOC/blob/master/NETN-METOC_v0.4%20Object%20Class%20Tree.png "NETN METOC Object Classes")
+
 
 ## Agreements
