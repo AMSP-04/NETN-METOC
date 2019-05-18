@@ -34,8 +34,7 @@ Environment Condition Objects are either surface based (terrestrial or water) or
 Environment Condition Objects include either Weather attributes or Sub Surface (Water) attributes.
 
 Environment Condition Objects are created by any federate to express need for environmental information. Ownership of environmental object attributes are divested to Weather Service federate(s) with the modelling responsibility of correlated environment conditions.
-
-![alt text](./NETN-METOC_v0.4%20Object%20Class%20Tree.png "NETN METOC Object Classes")
+            
 
 |Object Class|Semantics|
 |---|---|
@@ -158,7 +157,8 @@ Violent rain — when the precipitation rate is > 50 mm (2.0 in) per hour[107]|
 |SpeedFloat32|HLAfloat32BE|m/s|Speed in meters per second.|
 |DegreesFloat32|HLAfloat32BE|Degrees|Degrees from True North. 0-360 or -180 to 180. 0 = True North.|
 
-### PrecipitationTypeEnum16Type of precipitation. Default is NoPrecipitation.
+### PrecipitationTypeEnum16
+Type of precipitation. Default is NoPrecipitation.
 
 |Enumerator Name|Value|
 |---|---|
@@ -167,7 +167,8 @@ Violent rain — when the precipitation rate is > 50 mm (2.0 in) per hour[107]|
 | Snow | 2| 
 | Hail | 3| 
 
-### CloudTypeEnum16Classification of different types of clouds.
+### CloudTypeEnum16
+Classification of different types of clouds.
 
 |Enumerator Name|Value|
 |---|---|
@@ -184,7 +185,8 @@ Violent rain — when the precipitation rate is > 50 mm (2.0 in) per hour[107]|
 | Stratus | 10| 
 | Other | 11| 
 
-### RoadIceConditionEnum16Ice condition for roads.
+### RoadIceConditionEnum16
+Ice condition for roads.
 
 |Enumerator Name|Value|
 |---|---|
@@ -195,7 +197,8 @@ Violent rain — when the precipitation rate is > 50 mm (2.0 in) per hour[107]|
 | SheetIce | 4| 
 | ExtremeSheetIce | 5| 
 
-### SurfaceMoistureEnum16Road surface wetness ot soil moisture
+### SurfaceMoistureEnum16
+Road surface wetness ot soil moisture
 
 |Enumerator Name|Value|
 |---|---|
@@ -204,7 +207,8 @@ Violent rain — when the precipitation rate is > 50 mm (2.0 in) per hour[107]|
 | Flooded | 2| 
 | HeavilyFlooded | 3| 
 
-### SeaStateEnum16Sate of the sea measured in Douglas Sea Scale.
+### SeaStateEnum16
+Sate of the sea measured in Douglas Sea Scale.
 
 |Enumerator Name|Value|
 |---|---|
@@ -313,4 +317,3 @@ direction in which the wave propagates. Degrees 0-360. True North.|
 |Polygon |  Polygon | | | 
 |Circle |  Circle | | | 
 |GML |  GML | GMLidenfitifer| | 
-
