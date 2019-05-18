@@ -36,7 +36,7 @@ Environment Condition Objects include either Weather attributes or Sub Surface (
 Environment Condition Objects are created by any federate to express need for environmental information. Ownership of environmental object attributes are divested to Weather Service federate(s) with the modelling responsibility of correlated environment conditions.
             
 
-|Object Class|Semantics|
+|Object Class|Description|
 |---|---|
 |METOC_EnvironmentCondition|Superclass for Environment Conditions and Layers. The conditions can be global in which case no RegionReference is provided or regional in which case a reference to a GeometryFeature published in the federation is required.|
 |WeatherCondition|If overlapping Atmospheric Conditions exists the following merging rules allies: |
@@ -49,7 +49,7 @@ Environment Condition Objects are created by any federate to express need for en
 
 Superclass for Environment Conditions and Layers. The conditions can be global in which case no RegionReference is provided or regional in which case a reference to a GeometryFeature published in the federation is required.
 
-|Attribute Name|Datatype|Semantics|
+|Attribute Name|Datatype|Description|
 |---|---|---|
 |GeoReference|GeoReferenceVariant|Optional: If not provided the environment condition is global.| 
 |Temperature|TemperatureDegreeCelsiusFloat32|| 
@@ -60,7 +60,7 @@ If overlapping Atmospheric Conditions exists the following merging rules allies:
 Humidity, AirTemperature and BarometricPressure is calculated as the average of the overlapping conditions. 
 Visibility is calculated as the minimum visibility distance of the overlapping conditions.
 
-|Attribute Name|Datatype|Semantics|
+|Attribute Name|Datatype|Description|
 |---|---|---|
 |Wind|WindStruct|| 
 |Precipitation|PrecipitationStruct|Required: No Precipitation, Rain, Snow or Hail| 
