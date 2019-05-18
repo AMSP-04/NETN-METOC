@@ -9,13 +9,58 @@ The purpose of the NETN METOC module is to provide a standard way to exchange da
 
 ## Concepts
 
-### Layer
-* Atmospheric Layer Condition
-* Water Layer Condition
+Current weather conditions impact simulations such as platforms and sensors on the ground, on the sea, under water and in the air. In a federated distributed simulation a correlated representation of these condistions is key to meet interoperability and model requirements. Different simulations require different fidelity of weather conditions with respect to data resolution and accuracy.
 
-### Surface
-* Terrestrial Surface Condition
-* Water Surface Condition
+The NETN METOC focus on representation of weather conditions related surfaces and layers. The main difference is that a surface condition does not have a volume and only represents the conditions directly related to the surface of a piece of terrain or water. The layer conditions represent a volume of water or air and is specified with hight/depth from surface and layer thickness. Both concepts are also geographically positioned by reference to other concepts shared in the federation such as position of objects, areal objects or reference to terrain features such as roads etc. 
+
+Based on these concepts different levels of fidelity in representing weather conditions can be achieved. Global conditions can be expressed as well as highly detailed conditions e.g. surrounding a specific aircraft.
+
+The aspects and attributes of wather conditions included in the scope of the NETN METOC module is based on input from several sources and are designed to cover the most common levels of representation required by a large set of exising simulators.
+
+### Layer Conditions
+The Atmospheric Layer Condition cover the following aspects:
+* Temperature
+* Wind
+* Precipitation
+* Haze
+* Humidity
+* Barometric Pressure
+* Visibility Range
+* Clouds
+
+The Water Layer Condition cover the following aspects:
+* Temperature
+* Salinity
+* Current
+
+### Surface Conditions
+The Terrestrial Surface Condition cover the following aspects:
+* Temperature
+* Wind
+* Precipitation
+* Haze
+* Humidity
+* Barometric Pressure
+* Visibility Range
+* Snow
+* Moisture
+* Ice Condition
+
+The Water Surface Condition cover the following aspects:
+* Temperature
+* Wind
+* Precipitation
+* Haze
+* Humidity
+* Barometric Pressure
+* Visibility Range
+* Sea State
+* Salinity
+* Tide
+* Ice
+* Current
+* Wave
+* Swell
 
 ## Design
 ![alt text](https://github.com/AMSP-04/NETN-METOC/blob/master/NETN-METOC_v0.4%20Object%20Class%20Tree.png "NETN METOC Object Classes")
