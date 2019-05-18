@@ -9,6 +9,7 @@
 	<xsl:apply-templates select="ns:objects"/>
 	<!-- xsl:apply-templates select="ns:interactions"/ -->
 	<xsl:apply-templates select="ns:dataTypes"/>
+[objectclasses]: https://github.com/AMSP-04/NETN-METOC/blob/master/objectclasses.png
 </xsl:template>
 
 <xsl:template match="ns:modelIdentification">
