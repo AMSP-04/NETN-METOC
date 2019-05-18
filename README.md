@@ -63,7 +63,7 @@ The Water Surface Condition cover the following aspects:
 * Swell
 
 ## Design
-![alt text](https://github.com/AMSP-04/NETN-METOC/blob/master/NETN-METOC_v0.4%20Object%20Class%20Tree.png "NETN METOC Object Classes")
+![alt text](./NETN-METOC_v0.4%20Object%20Class%20Tree.png "NETN METOC Object Classes")
 
 
 ## Agreements
