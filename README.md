@@ -65,5 +65,16 @@ The Water Surface Condition cover the following aspects:
 ## Design
 ![alt text](./NETN-METOC_v0.4%20Object%20Class%20Tree.png "NETN METOC Object Classes")
 
+Environment conditions represented as object instances in the federation. Each instance is related to one of the following: Global condition (no GeoReference), condition related to specific object instance (RPR BaseEntity or Environment Object), explicitly defined geographical areas (Polygon or Circle) or a reference to WFS/GML identifier.
+
+- Environment Condition Objects are either surface based (terrestrial or water) or a layer (above terrain or below water surface). 
+- Environment Condition Objects include either Weather attributes or Sub Surface (Water) attributes. 
+
+Environment Condition Objects are created by any federate to express need for environmental information. Ownership of environmental object attributes are divested to Weather Service federate(s) with the modelling responsibility of correlated environment conditions.
+
+Updates of Environment Condition Objects are sent in DDM update regions related to geographic area (2D) and Layer.
+
+Updates are received by subscribing federates (using DDM or not) to affect the model. 
+
 
 ## Agreements
