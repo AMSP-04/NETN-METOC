@@ -1,66 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xsl:stylesheet version="1.0" xmlns:vomt="http://www.pitch.se/visualomt" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:clitype="clitype" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:iso4217="http://www.xbrl.org/2003/iso4217" xmlns:ix="http://www.xbrl.org/2008/inlineXBRL" xmlns:java="java" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:ns="http://standards.ieee.org/IEEE1516-2010" xmlns:xbrldi="http://xbrl.org/2006/xbrldi" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:altova="http://www.altova.com" exclude-result-prefixes="clitype fn iso4217 ix java link ns xbrldi xbrli xlink xs xsi altova">
-	<xsl:param name="spaceName"></xsl:param>
-	<xsl:param name="pageName"></xsl:param>
-	<xsl:param name="pageName2"></xsl:param>
-	<xsl:param name="dependency"></xsl:param>
-	<xsl:param name="url1"></xsl:param>
-	<xsl:variable name="dependencySpace" select="substring-before($dependency,':')"/>
-	<xsl:variable name="dependencyPage" select="substring-after($dependency,':')"/>
-
-
+	
 <xsl:output version="4.0" method="text" indent="no" encoding="UTF-8" doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN" doctype-system="http://www.w3.org/TR/html4/loose.dtd"/>
 
 <xsl:template match="/ns:objectModel">
-	<!-- sl:apply-templates select="ns:modelIdentification"/ -->
+	<xsl:apply-templates select="ns:modelIdentification"/>
 	<xsl:apply-templates select="ns:objects"/>
 	<!-- xsl:apply-templates select="ns:interactions"/ -->
 	<xsl:apply-templates select="ns:dataTypes"/>
 </xsl:template>
 
 <xsl:template match="ns:modelIdentification">
-**Version**: <xsl:value-of select="ns:version"/>, <xsl:value-of select="ns:modificationDate"/>
-**Classification**: <xsl:value-of select="ns:securityClassification"/>
-<xsl:if test="ns:poc[ns:pocType='Primary author']">
-**Primary Authors**: <xsl:apply-templates select="ns:poc[ns:pocType='Primary author']/ns:pocName"/></xsl:if>
-<xsl:if test="ns:poc[ns:pocType='Contributor']">
-**Contributors**: <xsl:apply-templates select="ns:poc[ns:pocType='Contributor']/ns:pocName"/></xsl:if>
+	<xsl:text># </xsl:text><xsl:value-of select="ns:name"/>
 
-| Name |  <xsl:value-of select="ns:name" />|
-| Type |   <xsl:value-of select="ns:type" />|
-| Version|  <xsl:value-of select="ns:version" />|
-| Modification Date | <xsl:value-of select="ns:modificationDate" /> |
-| Security Classification | <xsl:value-of select="ns:securityClassification" /> |
-
-## Introduction
-
-<xsl:if test="ns:purpose">
-### Purpose
-<xsl:value-of select="ns:purpose"/>	
-</xsl:if>
-
-<xsl:if test="ns:useLimitation">
-### Use Limitation / Scope
-<xsl:value-of select="ns:useLimitation"/>	
-</xsl:if>
-
-<xsl:if test="ns:applicationDomain">
-### Application Domain / Objective
-<xsl:value-of select="ns:applicationDomain"/>	
-</xsl:if>
-
-<xsl:if test="ns:useHistory">
-### Use History
-<xsl:value-of select="ns:useHistory"/>	
-
-</xsl:if>
-
-<xsl:if test="ns:reference">
-## References
-<xsl:apply-templates select="ns:reference"/>	
-</xsl:if>
+	<xsl:text>&#xd;</xsl:text>
+	<xsl:if test="ns:description"><xsl:value-of select="ns:description"/></xsl:if>
+	<xsl:if test="ns:purpose">
+		<xsl:text>&#xd;&#xd;## Purpose&#xd;</xsl:text>
+		<xsl:value-of select="ns:purpose"/>	
+	</xsl:if>
+	<xsl:if test="ns:useLimitation">
+		<xsl:text>&#xd;&#xd;## Scope&#xd;</xsl:text>
+		<xsl:value-of select="ns:useLimitation"/>	
+	</xsl:if>
 </xsl:template>
+
+
+
 
 <xsl:template match="ns:poc">
 <![CDATA[&nbsp;]]><xsl:value-of select="ns:pocName"/> <xsl:value-of select="ns:pocOrg"/> <xsl:value-of select="ns:pocTelephone"/> <xsl:value-of select="ns:pocEmail"/>
@@ -76,15 +43,24 @@
 
 <xsl:template match="ns:objects">
 ## Object Classes
-	<!-- xsl:apply-templates select="//ns:objectClass"/ -->
+<xsl:if test="@notes">
+<xsl:apply-templates select="@notes"/>
+
+![][objectclasses]
+
+</xsl:if>
+
+|Object Class|Description|
+|---|---|
+<xsl:apply-templates select="//ns:objectClass"/>
 	<xsl:apply-templates select="//ns:objectClass" mode="detail"/>
 </xsl:template>
 
 
 <xsl:template match="ns:objectClass">
-	<xsl:variable name="fullname"><xsl:apply-templates select="ancestor::ns:objectClass" mode="parent"/><xsl:value-of select="ns:name"/></xsl:variable>
-	<xsl:if test="ns:attribute or ns:semantics">|<xsl:value-of select="$fullname"/>|<xsl:apply-templates select="ns:semantics" mode="abbreviated"/>|
-	</xsl:if>
+<xsl:variable name="fullname"><xsl:apply-templates select="ancestor::ns:objectClass" mode="parent"/><xsl:value-of select="ns:name"/></xsl:variable>
+<xsl:if test="ns:attribute or ns:semantics">|<xsl:value-of select="ns:name"/>|<xsl:apply-templates select="ns:semantics" mode="abbreviated"/>|
+</xsl:if>
 </xsl:template>
 
 <xsl:template match="ns:semantics" mode="abbreviated">
@@ -114,7 +90,7 @@
 			<xsl:apply-templates select="@notes"/>
 		</xsl:if>
 		<xsl:text>&#xd;&#xd;</xsl:text>
-|Attribute Name|Datatype|Semantics|
+|Attribute Name|Datatype|Description|
 |---|---|---|
 <xsl:apply-templates select="ns:attribute"/>
 		<xsl:apply-templates select="parent::ns:objectClass" mode="inherited"/>
@@ -185,10 +161,9 @@
 <xsl:template match="ns:simpleDataTypes">
 	<xsl:if test="ns:simpleData">
 ### Simple Datatypes
-|Datatype Name|Representation|Units|Semantics|
+|Datatype Name|Representation|Units|Description|
 |---|---|---|---|
-<xsl:apply-templates select="ns:simpleData"/>
-	</xsl:if>
+<xsl:apply-templates select="ns:simpleData"/></xsl:if>
 </xsl:template>
 
 <xsl:template match="ns:simpleData">|<xsl:value-of select="ns:name"/>|<xsl:value-of select="ns:representation"/>|<xsl:value-of select="ns:units"/>|<xsl:value-of select="ns:semantics"/>|
@@ -199,19 +174,23 @@
 <xsl:if test="ns:enumeratedData">
 ### Enumerated Datatypes
 
-|Datatype Name|Representation|Semantics|
+|Datatype Name|Representation|Description|
 |---|---|---|
 <xsl:apply-templates select="ns:enumeratedData" mode="summary"></xsl:apply-templates>
 	</xsl:if>
 </xsl:template>
 
 
-<xsl:template match="ns:enumeratedData" mode="summary">|<xsl:value-of select="ns:name"/>|<xsl:value-of select="ns:representation"/>|<xsl:value-of select="ns:semantics"/>|
+<xsl:template match="ns:enumeratedData" mode="summary">|<xsl:value-of select="ns:name"/>|
+
+<xsl:text>&#xd;</xsl:text>
+
+<xsl:value-of select="ns:representation"/>|<xsl:value-of select="ns:semantics"/>|
 </xsl:template>
 
 <xsl:template match="ns:enumeratedData">
 ### <xsl:value-of select="ns:name"/>
-  
+<xsl:text>&#xd;</xsl:text>  
 <xsl:value-of select="ns:semantics"/>
 
 |Enumerator Name|Value|
@@ -230,7 +209,7 @@
 	<xsl:if test="ns:arrayData">
 ### Array Datatypes
 
-|Datatype Name|Datatype|Cardinality|Encoding|Semantics|
+|Datatype Name|Datatype|Cardinality|Encoding|Description|
 |---|---|---|---|---|
 <xsl:apply-templates select="ns:arrayData"></xsl:apply-templates>
 	</xsl:if>
@@ -247,7 +226,7 @@
 <xsl:template match="ns:fixedRecordDataTypes">
 	<xsl:if test="ns:fixedRecordData">
 ### Fixed Record (Struct) Datatypes
-|Datatype Name|Encoding|Semantics|
+|Datatype Name|Encoding|Description|
 <xsl:apply-templates select="ns:fixedRecordData" mode="summary"></xsl:apply-templates>
 	</xsl:if>
 </xsl:template>
@@ -259,7 +238,7 @@
 
 <xsl:value-of select="ns:semantics"/>
 
-|Field Name|Datatype|Semantics|
+|Field Name|Datatype|Description|
 |---|---|---|
 <xsl:apply-templates select="ns:field"/>
 </xsl:template>
@@ -292,7 +271,7 @@
 
 <xsl:value-of select="ns:semantics"/>
 
-|Enumerator|Name|Datatype|Semantics|
+|Enumerator|Name|Datatype|Description|
 |---|---|---|---|
 <xsl:apply-templates select="ns:alternative"/>
 </xsl:template>
@@ -364,7 +343,7 @@
 ## Interaction Classes
 <xsl:apply-templates select="//ns:note[ns:label = @ns:notes]"/>
 
-|Class Name|Semantics|
+|Class Name|Description|
 |---|---|
 <xsl:apply-templates select="//ns:interactionClass"/>
 
