@@ -36,6 +36,10 @@ Environment Condition Objects include either Weather attributes or Sub Surface (
 Environment Condition Objects are created by any federate to express need for environmental information. Ownership of environmental object attributes are divested to Weather Service federate(s) with the modelling responsibility of correlated environment conditions.
             
 
+![][objectclasses]
+
+
+
 |Object Class|Description|
 |---|---|
 |METOC_EnvironmentCondition|Superclass for Environment Conditions and Layers. The conditions can be global in which case no RegionReference is provided or regional in which case a reference to a GeometryFeature published in the federation is required.|
@@ -77,7 +81,7 @@ If overlapping Atmospheric Conditions exists the following merging rules allies:
 Humidity, AirTemperature and BarometricPressure is calculated as the average of the overlapping conditions. 
 Visibility is calculated as the minimum visibility distance of the overlapping conditions.
 
-|Attribute Name|Datatype|Semantics|
+|Attribute Name|Datatype|Description|
 |---|---|---|
 |Snow|SnowStruct|| 
 |Moisture|SurfaceMoistureEnum16|| 
@@ -95,7 +99,7 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
 
 Condition of sea surface in the specified region.
 
-|Attribute Name|Datatype|Semantics|
+|Attribute Name|Datatype|Description|
 |---|---|---|
 |SeaState|SeaStateEnum16|Required| 
 |Salinity|PercentFloat32|Optional.| 
@@ -119,7 +123,7 @@ If overlapping Atmospheric Conditions exists the following merging rules allies:
 Humidity, AirTemperature and BarometricPressure is calculated as the average of the overlapping conditions. 
 Visibility is calculated as the minimum visibility distance of the overlapping conditions.
 
-|Attribute Name|Datatype|Semantics|
+|Attribute Name|Datatype|Description|
 |---|---|---|
 |Layer|LayerStruct|Layer base represents the bottom of the atmospheric layer and layer base + thinckness represents the top of the layer.| 
 |Cloud|CloudStruct|| 
@@ -136,7 +140,7 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
 
 
 
-|Attribute Name|Datatype|Semantics|
+|Attribute Name|Datatype|Description|
 |---|---|---|
 |Layer|LayerStruct|| 
 |Current|CurrentStruct|| 
@@ -147,7 +151,7 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
 ## Datatypes
 
 ### Simple Datatypes
-|Datatype Name|Representation|Units|Semantics|
+|Datatype Name|Representation|Units|Description|
 |---|---|---|---|
 |PrecipitationIntensityFloat32|HLAfloat32BE|mm/hour|Light rain — when the precipitation rate is < 2.5 mm (0.098 in) per hour 
 Moderate rain — when the precipitation rate is between 2.5 mm (0.098 in) - 7.6 mm (0.30 in) or 10 mm (0.39 in) per hour[106][107] 
@@ -235,7 +239,7 @@ Sate of the sea measured in Douglas Sea Scale.
 
 ### WaveStruct
 
-|Field Name|Datatype|Semantics|
+|Field Name|Datatype|Description|
 |---|---|---|
 |Length|MeterFloat32|Distance from a particular phase on a wave to the same phase on an adjacent wave.|
 |Height|MeterFloat32|Average vertical distance between trough and crest produced by the wave.|
@@ -245,19 +249,19 @@ direction in which the wave propagates. Degrees 0-360. True North.|
 
 ### IceStruct
 
-|Field Name|Datatype|Semantics|
+|Field Name|Datatype|Description|
 |---|---|---|
 
 ### CurrentStruct
 
-|Field Name|Datatype|Semantics|
+|Field Name|Datatype|Description|
 |---|---|---|
 |Direction|DegreesFloat32||
 |Speed|SpeedFloat32||
 
 ### IceStruct
 
-|Field Name|Datatype|Semantics|
+|Field Name|Datatype|Description|
 |---|---|---|
 |Type|||
 |Thickness|MeterFloat32||
@@ -265,7 +269,7 @@ direction in which the wave propagates. Degrees 0-360. True North.|
 
 ### CloudStruct
 
-|Field Name|Datatype|Semantics|
+|Field Name|Datatype|Description|
 |---|---|---|
 |Type|CloudTypeEnum16||
 |Coverage|PercentFloat32||
@@ -273,14 +277,14 @@ direction in which the wave propagates. Degrees 0-360. True North.|
 
 ### LayerStruct
 
-|Field Name|Datatype|Semantics|
+|Field Name|Datatype|Description|
 |---|---|---|
 |Base|MeterFloat32|0=MSL|
 |Thickness|MeterFloat32|Positive value|
 
 ### WindStruct
 
-|Field Name|Datatype|Semantics|
+|Field Name|Datatype|Description|
 |---|---|---|
 |Direction|DegreesFloat32|Required: Direction in degrees clockwise from due north.|
 |HorizontalSpeed|SpeedFloat32|Required: Wind speed (m/s) in the specified WindDirection.|
@@ -288,21 +292,21 @@ direction in which the wave propagates. Degrees 0-360. True North.|
 
 ### PrecipitationStruct
 
-|Field Name|Datatype|Semantics|
+|Field Name|Datatype|Description|
 |---|---|---|
 |Type|PrecipitationTypeEnum16|Required: No Precipitation, Rain, Snow or Hail|
 |Intensity|PrecipitationIntensityFloat32|Optional: Amount in mm/per hour. Default is 0 mm/hour.|
 
 ### SnowStruct
 
-|Field Name|Datatype|Semantics|
+|Field Name|Datatype|Description|
 |---|---|---|
 |Depth|MeterFloat32||
 |Density||kg/m3|
 
 ### HazeStruct
 
-|Field Name|Datatype|Semantics|
+|Field Name|Datatype|Description|
 |---|---|---|
 |Type|HazeTypeEnum||
 |Density|HazeDensity||
@@ -311,9 +315,11 @@ direction in which the wave propagates. Degrees 0-360. True North.|
 **Discriminant** GeoReferenceType
 **Datatype** GeoReferenceTypeEnum
 
-|Enumerator|Name|Datatype|Semantics|
+|Enumerator|Name|Datatype|Description|
 |---|---|---|---|
 |[RPR_BaseEntity..RPR_EnvironmentObject] |  Object | EntityIdentifierStruct| | 
 |Polygon |  Polygon | | | 
 |Circle |  Circle | | | 
 |GML |  GML | GMLidenfitifer| | 
+
+[objectclasses]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
