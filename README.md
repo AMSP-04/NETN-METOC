@@ -247,11 +247,6 @@ Sate of the sea measured in Douglas Sea Scale.
 |Direction|DegreesFloat32|The value of this parameter shall be applied as the 
 direction in which the wave propagates. Degrees 0-360. True North.|
 
-### IceStruct
-
-|Field Name|Datatype|Description|
-|---|---|---|
-
 ### CurrentStruct
 
 |Field Name|Datatype|Description|
@@ -321,5 +316,6 @@ direction in which the wave propagates. Degrees 0-360. True North.|
 |Polygon |  Polygon | | | 
 |Circle |  Circle | | | 
 |GML |  GML | GMLidenfitifer| | 
+
 
 [objectclasses]: https://github.com/AMSP-04/NETN-METOC/blob/master/NETN-METOC_v0.4%20Object%20Class%20Tree.png "Object Classes"
