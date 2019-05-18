@@ -1,7 +1,4 @@
 # NETN METOC
-![Hello World](data:image/png;base64,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)
-
-	
 NATO Education and Training Network (NETN) Meteorological and Oceanographic (METOC) Module. 
         
 This module is a specification of how to represent METOC related data to be shared among participants in a federated distributed simulation. The specification is based on IEEE 1516 High Level Architecture (HLA) Object Model Template (OMT) and primarily intended to support interoperability in a federated simulation (federation) based on HLA. An HLA OMT based Federation Object Model (FOM) is used to specify types of data and how it is encoded on the network. The NETN METOC FOM module is available as a XML file for use in HLA based federations.
@@ -27,22 +24,293 @@ Water Layer Conditions cover the following aspects: Temperature, Salinity and Cu
 Terrestrial Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Snow Condition, Moisture and Ice Condition
 
 Water Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Sea State, Salinity, Tide, Ice Conditions, Currents, Waves and Swell.
-    
         
+## Object Classes
 
-## Design
-![alt text](./NETN-METOC_v0.4%20Object%20Class%20Tree.png "NETN METOC Object Classes")
+Environment conditions are represented as object instances in the federation. Each instance is related to one of the following: Global condition (no GeoReference), condition related to specific object instance (RPR BaseEntity or Environment Object), explicitly defined geographical areas (Polygon or Circle) or a reference to WFS/GML identifier.
 
-Environment conditions represented as object instances in the federation. Each instance is related to one of the following: Global condition (no GeoReference), condition related to specific object instance (RPR BaseEntity or Environment Object), explicitly defined geographical areas (Polygon or Circle) or a reference to WFS/GML identifier.
+Environment Condition Objects are either surface based (terrestrial or water) or a layer (above terrain or below water surface).
 
-- Environment Condition Objects are either surface based (terrestrial or water) or a layer (above terrain or below water surface). 
-- Environment Condition Objects include either Weather attributes or Sub Surface (Water) attributes. 
+Environment Condition Objects include either Weather attributes or Sub Surface (Water) attributes.
 
 Environment Condition Objects are created by any federate to express need for environmental information. Ownership of environmental object attributes are divested to Weather Service federate(s) with the modelling responsibility of correlated environment conditions.
 
-Updates of Environment Condition Objects are sent in DDM update regions related to geographic area (2D) and Layer.
+![alt text](./NETN-METOC_v0.4%20Object%20Class%20Tree.png "NETN METOC Object Classes")
 
-Updates are received by subscribing federates (using DDM or not) to affect the model. 
+|Object Class|Semantics|
+|---|---|
+|METOC_EnvironmentCondition|Superclass for Environment Conditions and Layers. The conditions can be global in which case no RegionReference is provided or regional in which case a reference to a GeometryFeature published in the federation is required.|
+|WeatherCondition|If overlapping Atmospheric Conditions exists the following merging rules allies: |
+|TerrestrialCondition|If overlapping Atmospheric Conditions exists the following merging rules allies: |
+|WaterSurfaceCondition|Condition of sea surface in the specified region.|
+|AtmosphericLayerCondition|If overlapping Atmospheric Conditions exists the following merging rules allies: |
+|WaterLayerCondition||
+
+### METOC_EnvironmentCondition
+
+Superclass for Environment Conditions and Layers. The conditions can be global in which case no RegionReference is provided or regional in which case a reference to a GeometryFeature published in the federation is required.
+
+|Attribute Name|Datatype|Semantics|
+|---|---|---|
+|GeoReference|GeoReferenceVariant|Optional: If not provided the environment condition is global.| 
+|Temperature|TemperatureDegreeCelsiusFloat32|| 
+
+### WeatherCondition
+
+If overlapping Atmospheric Conditions exists the following merging rules allies: 
+Humidity, AirTemperature and BarometricPressure is calculated as the average of the overlapping conditions. 
+Visibility is calculated as the minimum visibility distance of the overlapping conditions.
+
+|Attribute Name|Datatype|Semantics|
+|---|---|---|
+|Wind|WindStruct|| 
+|Precipitation|PrecipitationStruct|Required: No Precipitation, Rain, Snow or Hail| 
+|Haze|HazeStruct|Smoke, Fog, etc.| 
+|Humidity|PercentFloat32|Required: Normal value = 0,75| 
+|BarometricPressure|AtmosphericPressureFloat32|Pressure measured in milibar or hectopascal (1 mbar = 1hPa).| 
+|VisibilityRange|MeterFloat32|The distance at which an object or light can be clearly discerned.| 
+|GeoReference|GeoReferenceVariant|Optional: If not provided the environment condition is global.| 
+|Temperature|TemperatureDegreeCelsiusFloat32|| 
+
+### TerrestrialCondition
+
+If overlapping Atmospheric Conditions exists the following merging rules allies: 
+Humidity, AirTemperature and BarometricPressure is calculated as the average of the overlapping conditions. 
+Visibility is calculated as the minimum visibility distance of the overlapping conditions.
+
+|Attribute Name|Datatype|Semantics|
+|---|---|---|
+|Snow|SnowStruct|| 
+|Moisture|SurfaceMoistureEnum16|| 
+|IceCondition|RoadIceConditionEnum16|| 
+|Wind|WindStruct|| 
+|Precipitation|PrecipitationStruct|Required: No Precipitation, Rain, Snow or Hail| 
+|Haze|HazeStruct|Smoke, Fog, etc.| 
+|Humidity|PercentFloat32|Required: Normal value = 0,75| 
+|BarometricPressure|AtmosphericPressureFloat32|Pressure measured in milibar or hectopascal (1 mbar = 1hPa).| 
+|VisibilityRange|MeterFloat32|The distance at which an object or light can be clearly discerned.| 
+|GeoReference|GeoReferenceVariant|Optional: If not provided the environment condition is global.| 
+|Temperature|TemperatureDegreeCelsiusFloat32|| 
+
+### WaterSurfaceCondition
+
+Condition of sea surface in the specified region.
+
+|Attribute Name|Datatype|Semantics|
+|---|---|---|
+|SeaState|SeaStateEnum16|Required| 
+|Salinity|PercentFloat32|Optional.| 
+|Tide|MeterFloat32|Optional. The height relative to the MSL.| 
+|Ice|IceStruct|Optional.| 
+|Current|CurrentStruct|Optional. N/A if Ice| 
+|Wave|WaveStruct|Optional. N/A if Ice| 
+|Swell|WaveStruct|Optional. N/A if Ice| 
+|Wind|WindStruct|| 
+|Precipitation|PrecipitationStruct|Required: No Precipitation, Rain, Snow or Hail| 
+|Haze|HazeStruct|Smoke, Fog, etc.| 
+|Humidity|PercentFloat32|Required: Normal value = 0,75| 
+|BarometricPressure|AtmosphericPressureFloat32|Pressure measured in milibar or hectopascal (1 mbar = 1hPa).| 
+|VisibilityRange|MeterFloat32|The distance at which an object or light can be clearly discerned.| 
+|GeoReference|GeoReferenceVariant|Optional: If not provided the environment condition is global.| 
+|Temperature|TemperatureDegreeCelsiusFloat32|| 
+
+### AtmosphericLayerCondition
+
+If overlapping Atmospheric Conditions exists the following merging rules allies: 
+Humidity, AirTemperature and BarometricPressure is calculated as the average of the overlapping conditions. 
+Visibility is calculated as the minimum visibility distance of the overlapping conditions.
+
+|Attribute Name|Datatype|Semantics|
+|---|---|---|
+|Layer|LayerStruct|Layer base represents the bottom of the atmospheric layer and layer base + thinckness represents the top of the layer.| 
+|Cloud|CloudStruct|| 
+|Wind|WindStruct|| 
+|Precipitation|PrecipitationStruct|Required: No Precipitation, Rain, Snow or Hail| 
+|Haze|HazeStruct|Smoke, Fog, etc.| 
+|Humidity|PercentFloat32|Required: Normal value = 0,75| 
+|BarometricPressure|AtmosphericPressureFloat32|Pressure measured in milibar or hectopascal (1 mbar = 1hPa).| 
+|VisibilityRange|MeterFloat32|The distance at which an object or light can be clearly discerned.| 
+|GeoReference|GeoReferenceVariant|Optional: If not provided the environment condition is global.| 
+|Temperature|TemperatureDegreeCelsiusFloat32|| 
+
+### WaterLayerCondition
 
 
-## Agreements
+
+|Attribute Name|Datatype|Semantics|
+|---|---|---|
+|Layer|LayerStruct|| 
+|Current|CurrentStruct|| 
+|Salinity|PercentFloat32|% salt in water| 
+|GeoReference|GeoReferenceVariant|Optional: If not provided the environment condition is global.| 
+|Temperature|TemperatureDegreeCelsiusFloat32|| 
+
+## Datatypes
+
+### Simple Datatypes
+|Datatype Name|Representation|Units|Semantics|
+|---|---|---|---|
+|PrecipitationIntensityFloat32|HLAfloat32BE|mm/hour|Light rain — when the precipitation rate is < 2.5 mm (0.098 in) per hour 
+Moderate rain — when the precipitation rate is between 2.5 mm (0.098 in) - 7.6 mm (0.30 in) or 10 mm (0.39 in) per hour[106][107] 
+Heavy rain — when the precipitation rate is > 7.6 mm (0.30 in) per hour,[106] or between 10 mm (0.39 in) and 50 mm (2.0 in) per hour[107] 
+Violent rain — when the precipitation rate is > 50 mm (2.0 in) per hour[107]|
+|AtmosphericPressureFloat32|HLAfloat32BE|hPa|Pressure mesured in Milibar or Hecto Pascal. 1 mbar = 1 hPa|
+|SpeedFloat32|HLAfloat32BE|m/s|Speed in meters per second.|
+|DegreesFloat32|HLAfloat32BE|Degrees|Degrees from True North. 0-360 or -180 to 180. 0 = True North.|
+
+### PrecipitationTypeEnum16Type of precipitation. Default is NoPrecipitation.
+
+|Enumerator Name|Value|
+|---|---|
+| NoPrecipitation | 0| 
+| Rain | 1| 
+| Snow | 2| 
+| Hail | 3| 
+
+### CloudTypeEnum16Classification of different types of clouds.
+
+|Enumerator Name|Value|
+|---|---|
+| None | 0| 
+| Altocumulus | 1| 
+| Altostratus | 2| 
+| Cirrocumulus | 3| 
+| Cirrostratus | 4| 
+| Cirrus | 5| 
+| Cumulonimbus | 6| 
+| Cumulus | 7| 
+| Nimbostratus | 8| 
+| Stratocumulus | 9| 
+| Stratus | 10| 
+| Other | 11| 
+
+### RoadIceConditionEnum16Ice condition for roads.
+
+|Enumerator Name|Value|
+|---|---|
+| None | 0| 
+| Patches | 1| 
+| BlackIce | 2| 
+| Slush | 3| 
+| SheetIce | 4| 
+| ExtremeSheetIce | 5| 
+
+### SurfaceMoistureEnum16Road surface wetness ot soil moisture
+
+|Enumerator Name|Value|
+|---|---|
+| Dry | 0| 
+| Wet | 1| 
+| Flooded | 2| 
+| HeavilyFlooded | 3| 
+
+### SeaStateEnum16Sate of the sea measured in Douglas Sea Scale.
+
+|Enumerator Name|Value|
+|---|---|
+| Calm_glassy | 0| 
+| Calm_rippled | 1| 
+| Smooth_wavelets | 2| 
+| Slight | 3| 
+| Moderate | 4| 
+| Rough | 5| 
+| Very_Rough | 6| 
+| High | 7| 
+| Very_High | 8| 
+| Phenomenal | 9| 
+
+### GeoReferenceTypeEnum
+
+|Enumerator Name|Value|
+|---|---|
+| RPR_BaseEntity | 1| 
+| RPR_EnvironmentObject | 2| 
+| Circle | 3| 
+| Polygon | 4| 
+| GML | 5| 
+
+### WaveStruct
+
+|Field Name|Datatype|Semantics|
+|---|---|---|
+|Length|MeterFloat32|Distance from a particular phase on a wave to the same phase on an adjacent wave.|
+|Height|MeterFloat32|Average vertical distance between trough and crest produced by the wave.|
+|Period|TimeSecondInteger32||
+|Direction|DegreesFloat32|The value of this parameter shall be applied as the 
+direction in which the wave propagates. Degrees 0-360. True North.|
+
+### IceStruct
+
+|Field Name|Datatype|Semantics|
+|---|---|---|
+
+### CurrentStruct
+
+|Field Name|Datatype|Semantics|
+|---|---|---|
+|Direction|DegreesFloat32||
+|Speed|SpeedFloat32||
+
+### IceStruct
+
+|Field Name|Datatype|Semantics|
+|---|---|---|
+|Type|||
+|Thickness|MeterFloat32||
+|Coverage|PercentFloat32||
+
+### CloudStruct
+
+|Field Name|Datatype|Semantics|
+|---|---|---|
+|Type|CloudTypeEnum16||
+|Coverage|PercentFloat32||
+|Density|Density|g/m3|
+
+### LayerStruct
+
+|Field Name|Datatype|Semantics|
+|---|---|---|
+|Base|MeterFloat32|0=MSL|
+|Thickness|MeterFloat32|Positive value|
+
+### WindStruct
+
+|Field Name|Datatype|Semantics|
+|---|---|---|
+|Direction|DegreesFloat32|Required: Direction in degrees clockwise from due north.|
+|HorizontalSpeed|SpeedFloat32|Required: Wind speed (m/s) in the specified WindDirection.|
+|VerticalSpeed|SpeedFloat32|Optional: Wind speed in m/s. Negative number is  a downdraft. Default is 0.|
+
+### PrecipitationStruct
+
+|Field Name|Datatype|Semantics|
+|---|---|---|
+|Type|PrecipitationTypeEnum16|Required: No Precipitation, Rain, Snow or Hail|
+|Intensity|PrecipitationIntensityFloat32|Optional: Amount in mm/per hour. Default is 0 mm/hour.|
+
+### SnowStruct
+
+|Field Name|Datatype|Semantics|
+|---|---|---|
+|Depth|MeterFloat32||
+|Density||kg/m3|
+
+### HazeStruct
+
+|Field Name|Datatype|Semantics|
+|---|---|---|
+|Type|HazeTypeEnum||
+|Density|HazeDensity||
+
+### GeoReferenceVariant
+**Discriminant** GeoReferenceType
+**Datatype** GeoReferenceTypeEnum
+
+|Enumerator|Name|Datatype|Semantics|
+|---|---|---|---|
+|[RPR_BaseEntity..RPR_EnvironmentObject] |  Object | EntityIdentifierStruct| | 
+|Polygon |  Polygon | | | 
+|Circle |  Circle | | | 
+|GML |  GML | GMLidenfitifer| | 
+
