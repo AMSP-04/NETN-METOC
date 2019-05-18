@@ -153,10 +153,7 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
 ### Simple Datatypes
 |Datatype Name|Representation|Units|Description|
 |---|---|---|---|
-|PrecipitationIntensityFloat32|HLAfloat32BE|mm/hour|Light rain — when the precipitation rate is < 2.5 mm (0.098 in) per hour 
-Moderate rain — when the precipitation rate is between 2.5 mm (0.098 in) - 7.6 mm (0.30 in) or 10 mm (0.39 in) per hour[106][107] 
-Heavy rain — when the precipitation rate is > 7.6 mm (0.30 in) per hour,[106] or between 10 mm (0.39 in) and 50 mm (2.0 in) per hour[107] 
-Violent rain — when the precipitation rate is > 50 mm (2.0 in) per hour[107]|
+|PrecipitationIntensityFloat32|HLAfloat32BE|mm/hour|Light rain — when the precipitation rate is < 2.5 mm (0.098 in) per hour. Moderate rain — when the precipitation rate is between 2.5 mm (0.098 in) - 7.6 mm (0.30 in) or 10 mm (0.39 in) per hour. Heavy rain — when the precipitation rate is > 7.6 mm (0.30 in) per hour, or between 10 mm (0.39 in) and 50 mm (2.0 in) per hour. Violent rain — when the precipitation rate is > 50 mm (2.0 in) per hour.|
 |AtmosphericPressureFloat32|HLAfloat32BE|hPa|Pressure mesured in Milibar or Hecto Pascal. 1 mbar = 1 hPa|
 |SpeedFloat32|HLAfloat32BE|m/s|Speed in meters per second.|
 |DegreesFloat32|HLAfloat32BE|Degrees|Degrees from True North. 0-360 or -180 to 180. 0 = True North.|
@@ -316,6 +313,7 @@ direction in which the wave propagates. Degrees 0-360. True North.|
 |Polygon |  Polygon | | | 
 |Circle |  Circle | | | 
 |GML |  GML | GMLidenfitifer| | 
+
 
 
 [objectclasses]: https://github.com/AMSP-04/NETN-METOC/blob/master/NETN-METOC_v0.4%20Object%20Class%20Tree.png "Object Classes"
