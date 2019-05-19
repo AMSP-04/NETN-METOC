@@ -6,6 +6,7 @@
 
 <xsl:template match="/ns:objectModel">
 	<xsl:apply-templates select="ns:modelIdentification"/>
+	<xsl:apply-templates select="//ns:objectClass[ns:sharing = 'PublishSubscribe']" mode="detail"/>
 	<!-- xsl:apply-templates select="ns:objects"/ -->
 	<!-- xsl:apply-templates select="ns:interactions"/ -->
 	<!-- xsl:apply-templates select="ns:dataTypes"/ -->
@@ -90,10 +91,9 @@
 			<xsl:apply-templates select="@notes"/>
 		</xsl:if>
 		<xsl:text>&#xd;&#xd;</xsl:text>
-|Attribute Name|Datatype|Description|
-|---|---|---|
-<xsl:apply-templates select="ns:attribute"/>
-		<xsl:apply-templates select="parent::ns:objectClass" mode="inherited"/>
+
+<!--xsl:apply-templates select="ns:attribute"/-->
+		<!--xsl:apply-templates select="parent::ns:objectClass" mode="inherited"/-->
 	</xsl:if>
 </xsl:template>
 
