@@ -1,8 +1,14 @@
 ## Examples
 
-### Weather Condition Covering a Geographical Area
+### Global Weather
 
-Information about the general weather condition in a specific grographical area can be represented using the HLA object class **WeatherCondition**. General weather conditions such as Temperature, Wind and Precipitaion can be modelled but also more detailed information regarding Barometric Pressure and Humidity. Visual range and Haze conditions can also be represented.
+and althogh in this example we are referencing a specific geographical area, if no such reference is provided the weather condition is assumed to be global.
 
-All attributes of WeatherCondition objects are optional and althogh in this example we are referencing a specific geographical area, if no such reference is provided the weather condition is assumed to be global.
+### Overlapping Conditions
+If EnvironmentConditions with overlapping regions/locations exist the following rules applies: 
+
+* Wind Speed, Wind Direction, Precipitation Intensity, Temperature, Humidity, BarometricPressure are calculated as the average in the overlapping EnvironmentConditions
+* Visibility is calculated as the minimum visibility distance of the overlapping EnvironmentConditions.
+* Conflicting precipitation types are resolved according to the following precedence: Snow, Hail, Rain, No Precipitation. E.g. If there is one overlapping Environment Condition with Snow the result is always Snow.
+* For the same Haze type the average density should be used. Multipe overlapping EnvironmentConditions with different Haze type can exist.
 
