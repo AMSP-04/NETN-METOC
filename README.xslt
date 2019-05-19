@@ -6,10 +6,12 @@
 
 <xsl:template match="/ns:objectModel">
 	<xsl:apply-templates select="ns:modelIdentification"/>
-	<xsl:apply-templates select="ns:objects"/>
+	<!-- xsl:apply-templates select="ns:objects"/ -->
 	<!-- xsl:apply-templates select="ns:interactions"/ -->
-	<xsl:apply-templates select="ns:dataTypes"/>
-[objectclasses]: https://github.com/AMSP-04/NETN-METOC/blob/master/objectclasses.png
+	<!-- xsl:apply-templates select="ns:dataTypes"/ -->
+
+
+[objectclasses]: ./objectclasses.png
 </xsl:template>
 
 <xsl:template match="ns:modelIdentification">
@@ -24,6 +26,11 @@
 	<xsl:if test="ns:useLimitation">
 		<xsl:text>&#xd;&#xd;## Scope&#xd;</xsl:text>
 		<xsl:value-of select="ns:useLimitation"/>	
+	</xsl:if>
+	<xsl:if test="@notes">
+	<xsl:text>&#xd;&#xd;## Overview&#xd;</xsl:text>
+		<xsl:apply-templates select="@notes"/>
+![][objectclasses]
 	</xsl:if>
 </xsl:template>
 
@@ -40,21 +47,13 @@
 <xsl:template match="ns:reference">|<xsl:value-of select="ns:type"/>|<xsl:value-of select="ns:identification"/>|
 </xsl:template>
 
-
-
 <xsl:template match="ns:objects">
 ## Object Classes
-<xsl:if test="@notes">
-<xsl:apply-templates select="@notes"/>
-
-![][objectclasses]
-
-</xsl:if>
 
 |Object Class|Description|
 |---|---|
 <xsl:apply-templates select="//ns:objectClass"/>
-	<xsl:apply-templates select="//ns:objectClass" mode="detail"/>
+<xsl:apply-templates select="//ns:objectClass[ns:sharing = 'PublishSubscribe']" mode="detail"/>
 </xsl:template>
 
 
