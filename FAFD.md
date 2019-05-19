@@ -1,8 +1,9 @@
 ## Examples
 
 ### Global Weather
+To represent global weather without reference to a specific geographical area or location can 
 
-and althogh in this example we are referencing a specific geographical area, if no such reference is provided the weather condition is assumed to be global.
+, if no such reference is provided the weather condition is assumed to be global.
 
 ### Overlapping Conditions
 If EnvironmentConditions with overlapping regions/locations exist the following rules applies: 
