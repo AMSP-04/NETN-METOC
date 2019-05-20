@@ -118,8 +118,7 @@ Optional. Default precipitation is No Precipitation.
 Current precipitation type (No Precipitation, Rain, Snow or Hail) and intensity in the region/location specified by the Environment Condition.  
 If EnvironmentConditions with overlapping regions/locations exist the average intensity should be used. 
 Conflicting precipitation types are resolved according to the following precedence: Snow, Hail, Rain, No Precipitation. 
-E.g. If there is one overlapping Environment Condition with Snow the result is always Snow.
-</semantics>
+E.g. If there is one overlapping Environment Condition with Snow the result is always Snow.</semantics>
                     </attribute>
                     <attribute>
                         <name>Haze</name>
@@ -134,8 +133,7 @@ E.g. If there is one overlapping Environment Condition with Snow the result is a
 Optional. Default is No Haze. 
 Current Haze type and density in the region/location specified by the Environment Condition. 
 If EnvironmentConditions with overlapping regions/locations exist having the same Haze type the average density should be used. 
-Multipe overlapping EnvironmentConditions with different Haze type can exist.
-</semantics>
+Multipe overlapping EnvironmentConditions with different Haze type can exist.</semantics>
                     </attribute>
                     <attribute>
                         <name>Humidity</name>
@@ -149,8 +147,7 @@ Multipe overlapping EnvironmentConditions with different Haze type can exist.
                         <semantics>
 Optional. Default is 75% (Normal value)
 Humidity in percent in the region/location specified by the Environment Condition. 
-If EnvironmentConditions with overlapping regions/locations exist the average humidity should be used. 
-</semantics>
+If EnvironmentConditions with overlapping regions/locations exist the average humidity should be used. </semantics>
                     </attribute>
                     <attribute>
                         <name>BarometricPressure</name>
@@ -164,8 +161,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average hu
                         <semantics>
 Optional.
 Barometric pressure measured in milibar or hectopascal (1 mbar = 1hPa) in the region/location specified by the Environment Condition. 
-If EnvironmentConditions with overlapping regions/locations exist the average barometric pressure should be used. 
-</semantics>
+If EnvironmentConditions with overlapping regions/locations exist the average barometric pressure should be used. </semantics>
                     </attribute>
                     <attribute>
                         <name>VisibilityRange</name>
@@ -179,8 +175,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average ba
                         <semantics>
 Optional.
 The distance at which an object or light can be clearly discerned in the region/location specified by the Environment Condition. 
-If EnvironmentConditions with overlapping regions/locations exist the minimum distance should be used. 
-</semantics>
+If EnvironmentConditions with overlapping regions/locations exist the minimum distance should be used. </semantics>
                     </attribute>
                     <objectClass>
                         <name>LandSurfaceCondition</name>
@@ -188,8 +183,7 @@ If EnvironmentConditions with overlapping regions/locations exist the minimum di
                         <semantics>
 The environment conditions related to land surface can be represented using LandSurfaceCondition objects. 
 Besides the common attributes such as Temperature, Wind and Precipitaion etc. additional detail regarding snow, moisture, and ice conditions of the land surface can be represented.  
-All attributes of LandSurfaceCondition objects are optional.
-                        </semantics>
+All attributes of LandSurfaceCondition objects are optional.</semantics>
                         <attribute>
                             <name>Snow</name>
                             <dataType>SnowStruct</dataType>

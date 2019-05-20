@@ -26,21 +26,5 @@ Environment Condition Objects include either Weather attributes or Sub Surface (
 Environment Condition Objects are created by any federate to express need for environmental information. Ownership of environmental object attributes are divested to Weather Service federate(s) with the modelling responsibility of correlated environment conditions.
 ![][objectclasses]
 	
-### WeatherCondition
-Information about the general weather condition can be represented using WeatherCondition objects. 
-Common data such as Temperature, Wind and Precipitaion is represented but also detailes regarding Barometric Pressure and Humidity. 
-Information about Visual Range and Haze conditions can also be represented. 
-All attributes of WeatherCondition objects are optional.
-### LandSurfaceCondition
-The environment conditions related to land surface can be represented using LandSurfaceCondition objects. 
-Besides the common attributes such as Temperature, Wind and Precipitaion etc. additional detail regarding snow, moisture, and ice conditions of the land surface can be represented.  
-All attributes of LandSurfaceCondition objects are optional.
-                        
-### WaterSurfaceConditionCondition of sea surface in the specified region.
-### AtmosphericLayerConditionIf overlapping Atmospheric Conditions exists the following merging rules allies: 
-Humidity, AirTemperature and BarometricPressure is calculated as the average of the overlapping conditions. 
-Visibility is calculated as the minimum visibility distance of the overlapping conditions.
-### WaterLayerCondition
-
 
 [objectclasses]: ./objectclasses.png
