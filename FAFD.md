@@ -22,3 +22,5 @@ If EnvironmentConditions with overlapping regions/locations exist the following 
 * LandSurface ice condition is calculated as the highest enumerated value making the resulting value the one with most severe ice condition.
 
 ### Data Distribution Management Services
+
+### CIGI
