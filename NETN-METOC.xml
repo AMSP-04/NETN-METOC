@@ -3,11 +3,9 @@
     <modelIdentification notes="netn-metoc_2">
         <name>NETN METOC</name>
         <type>FOM</type>
-        <version>0.6</version>
-        <modificationDate>2019-05-19</modificationDate>
-        <securityClassification>Unclassified</securityClassification>
-        <releaseRestriction>Draft versions restricted for use by NATO MSG-156 &amp; MSG-163. </releaseRestriction>
-        <releaseRestriction>Exceptions allowed on a case by case basis with explicit purpose of receiving additional feedback and without any support or guarentees attached.</releaseRestriction>
+        <version>1.0 (RC V0.7)</version>
+        <modificationDate>2019-07-15</modificationDate>
+        <securityClassification>Not Classified</securityClassification>
         <purpose>The purpose of the NETN METOC module is to provide a standard way to exchange data related to weather conditions and primary effects of weather on terrain, on water surfaces, in the atmosphere and subsurface water conditions. The main objective is to provide a reference model that represents a core common subset of METOC related aspects and to allow extension of the module to incorporate additional detail if required. Therefore, the NETN METOC module shall be viewed as a reference FOM module where extensions are not only allowed but encouraged to fully meet federation specific requirements. However, any extension should also be considered as candidates for improving the NETN METOC module or candidates for new standard NETN modules.         </purpose>
         <applicationDomain>All M&amp;S</applicationDomain>
         <description>
@@ -15,37 +13,47 @@ NATO Education and Training Network (NETN) Meteorological and Oceanographic (MET
         
 This module is a specification of how to represent METOC related data to be shared among participants in a federated distributed simulation. The specification is based on IEEE 1516 High Level Architecture (HLA) Object Model Template (OMT) and primarily intended to support interoperability in a federated simulation (federation) based on HLA. An HLA OMT based Federation Object Model (FOM) is used to specify types of data and how it is encoded on the network. The NETN METOC FOM module is available as a XML file for use in HLA based federations.
         </description>
-        <useLimitation>
-Current weather conditions impact simulations such as platforms and sensors on the ground, on the sea, under water and in the air. In a federated distributed simulation a correlated representation of these condistions is key to meet interoperability and model requirements. Different simulations require different fidelity of weather conditions with respect to data resolution and accuracy.
-
-The NETN METOC focus on representation of weather conditions related surfaces and layers. The main difference is that a surface condition does not have a volume and only represents the conditions directly related to the surface of a piece of terrain or water. The layer conditions represent a volume of water or air and is specified with hight/depth from surface and layer thickness. Both concepts are also geographically positioned by reference to other concepts shared in the federation such as position of objects, areal objects or reference to terrain features such as roads etc.
-
-Based on these concepts different levels of fidelity in representing weather conditions can be achieved. Global conditions can be expressed as well as highly detailed conditions e.g. surrounding a specific aircraft.
-
-The aspects and attributes of wather conditions included in the scope of the NETN METOC module is based on input from several sources and are designed to cover the most common levels of representation required by a large set of exising simulators.
-
-Atmospheric Layer Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range and Clouds.
-
-Water Layer Conditions cover the following aspects: Temperature, Salinity and Currents.
-
-Land Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Snow Condition, Moisture and Ice Condition
-
-Water Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Sea State, Salinity, Tide, Ice Conditions, Currents, Waves and Swell. </useLimitation>
-        <useHistory>v0.1 based on CIGI input. Review by MSG-156.</useHistory>
-        <useHistory>v0.2 restructured based on German Maritime FOM (GMF) and EnviroFed input</useHistory>
-        <useHistory>v0.3 optimized representation of datatypes using fixed records</useHistory>
-        <useHistory>v0.4 updated datatypes</useHistory>
-        <useHistory>v0.5 removed dependencies and updated descriptions</useHistory>
-        <useHistory>v0.6 renaming of classes and update sharing</useHistory>
+        <useLimitation> Current weather conditions impact simulations such as platforms and sensors on the ground, on the sea, under water and in the air. In a federated distributed simulation a correlated representation of these condistions is key to meet interoperability and model requirements. Different simulations require different fidelity of weather conditions with respect to data resolution and accuracy.  The NETN METOC focus on representation of weather conditions related surfaces and layers. The main difference is that a surface condition does not have a volume and only represents the conditions directly related to the surface of a piece of terrain or water. The layer conditions represent a volume of water or air and is specified with hight/depth from surface and layer thickness. Both concepts are also geographically positioned by reference to other concepts shared in the federation such as position of objects, areal objects or reference to terrain features such as roads etc.  Based on these concepts different levels of fidelity in representing weather conditions can be achieved. Global conditions can be expressed as well as highly detailed conditions e.g. surrounding a specific aircraft.  The aspects and attributes of wather conditions included in the scope of the NETN METOC module is based on input from several sources and are designed to cover the most common levels of representation required by a large set of exising simulators.  Atmospheric Layer Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range and Clouds.  Water Layer Conditions cover the following aspects: Temperature, Salinity and Currents.  Land Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Snow Condition, Moisture and Ice Condition  Water Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Sea State, Salinity, Tide, Ice Conditions, Currents, Waves and Swell. </useLimitation>
+        <useHistory>v1.0 - Initial version developed by MSG-156 &amp; MSG-163</useHistory>
         <useHistory></useHistory>
         <poc>
             <pocType>Primary author</pocType>
             <pocName>Björn Löfstrand</pocName>
-            <pocOrg notes="netn-metoc_1">Pitch Technologies</pocOrg>
-            <pocTelephone>+46702475152</pocTelephone>
+            <pocOrg>Pitch Technologies, Sweden</pocOrg>
+            <pocTelephone>+46134705500</pocTelephone>
             <pocEmail>bjorn.lofstrand@pitchtechnologies.com</pocEmail>
         </poc>
-        <other>Indended to be a stand-alone module in AMSP-04 and can be used with NETN and RPR-FOM based federations.</other>
+        <poc>
+            <pocType>Proponent</pocType>
+            <pocName>Lars Jansson</pocName>
+            <pocOrg>Swedish Defence Materiel Administration</pocOrg>
+        </poc>
+        <poc>
+            <pocType>Contributor</pocType>
+            <pocName>Neil Smith</pocName>
+            <pocOrg>DSTL, UK</pocOrg>
+        </poc>
+        <poc>
+            <pocType>Contributor</pocType>
+            <pocName>Arno Gerretsen</pocName>
+            <pocOrg>NLR, the Netherlands</pocOrg>
+        </poc>
+        <poc>
+            <pocType>Contributor</pocType>
+            <pocName>Michael Jobson</pocName>
+            <pocOrg>Boeing, UK</pocOrg>
+        </poc>
+        <poc>
+            <pocType>Release authority</pocType>
+            <pocName>NATO Modelling and Simulation Group</pocName>
+            <pocOrg>NATO Science and Technology Organization</pocOrg>
+            <pocEmail>msg@cso.nato.int</pocEmail>
+        </poc>
+        <other>
+Copyright © 2019 by NATO/OTAN. All rights reserved.
+This work is licensed under a Creative Commons Attribution-NoDerivatives 4.0 International License.
+
+Above license gives you the right to use and redistribute the NETN FOM Module (XML file and Documentation) in its entirety without modification. You are also allowed to develop your own new FOM Modules (in separate XML files and separate documentation) that build-on/extends the NETN module by reference. You are NOT allowed to modify the NETN FOM Module or its documentation without prior permission by the NATO Modelling and Simulation Group.</other>
         <glyph type="png" height="64" width="64" alt="">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</glyph>
     </modelIdentification>
     <objects>
@@ -64,8 +72,7 @@ Water Surface Conditions cover the following aspects: Temperature, Winds, Precip
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>
-Optional. 
+                    <semantics>Optional. 
 If not provided the environment condition is considered global.</semantics>
                 </attribute>
                 <attribute>
@@ -77,16 +84,14 @@ If not provided the environment condition is considered global.</semantics>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>
-Optional. 
+                    <semantics>Optional. 
 Temperature in the region/location specified by the EnvironmentCondition. 
 If EnvironmentConditions with overlapping regions/locations exist the average temperature should be used.</semantics>
                 </attribute>
                 <objectClass>
                     <name>WeatherCondition</name>
                     <sharing>PublishSubscribe</sharing>
-                    <semantics>
-Information about the general weather condition can be represented using WeatherCondition objects. 
+                    <semantics>Information about the general weather condition can be represented using WeatherCondition objects. 
 Common data such as Temperature, Wind and Precipitaion is represented but also detailes regarding Barometric Pressure and Humidity. 
 Information about Visual Range and Haze conditions can also be represented. 
 All attributes of WeatherCondition objects are optional.</semantics>
@@ -99,8 +104,7 @@ All attributes of WeatherCondition objects are optional.</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>
-Optional. 
+                        <semantics>Optional. 
 Wind speed and direction in the region/location specified by the EnvironmentCondition. 
 If EnvironmentConditions with overlapping regions/locations exist the average wind speed and direction should be used.</semantics>
                     </attribute>
@@ -113,9 +117,8 @@ If EnvironmentConditions with overlapping regions/locations exist the average wi
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>
-Optional. Default precipitation is No Precipitation.
-Current precipitation type (No Precipitation, Rain, Snow or Hail) and intensity in the region/location specified by the Environment Condition.  
+                        <semantics>Optional. Default precipitation is No Precipitation. 
+Current precipitation type (No Precipitation, Rain, Snow or Hail) and intensity in the region/location specified by the Environment Condition. 
 If EnvironmentConditions with overlapping regions/locations exist the average intensity should be used. 
 Conflicting precipitation types are resolved according to the following precedence: Snow, Hail, Rain, No Precipitation. 
 E.g. If there is one overlapping Environment Condition with Snow the result is always Snow.</semantics>
@@ -129,8 +132,7 @@ E.g. If there is one overlapping Environment Condition with Snow the result is a
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>
-Optional. Default is No Haze. 
+                        <semantics>Optional. Default is No Haze. 
 Current Haze type and density in the region/location specified by the Environment Condition. 
 If EnvironmentConditions with overlapping regions/locations exist having the same Haze type the average density should be used. 
 Multipe overlapping EnvironmentConditions with different Haze type can exist.</semantics>
@@ -144,10 +146,9 @@ Multipe overlapping EnvironmentConditions with different Haze type can exist.</s
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>
-Optional. Default is 75% (Normal value)
+                        <semantics>Optional. Default is 75% (Normal value) 
 Humidity in percent in the region/location specified by the Environment Condition. 
-If EnvironmentConditions with overlapping regions/locations exist the average humidity should be used. </semantics>
+If EnvironmentConditions with overlapping regions/locations exist the average humidity should be used.</semantics>
                     </attribute>
                     <attribute>
                         <name>BarometricPressure</name>
@@ -158,10 +159,9 @@ If EnvironmentConditions with overlapping regions/locations exist the average hu
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>
-Optional.
+                        <semantics>Optional. 
 Barometric pressure measured in milibar or hectopascal (1 mbar = 1hPa) in the region/location specified by the Environment Condition. 
-If EnvironmentConditions with overlapping regions/locations exist the average barometric pressure should be used. </semantics>
+If EnvironmentConditions with overlapping regions/locations exist the average barometric pressure should be used.</semantics>
                     </attribute>
                     <attribute>
                         <name>VisibilityRange</name>
@@ -172,17 +172,15 @@ If EnvironmentConditions with overlapping regions/locations exist the average ba
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>
-Optional.
+                        <semantics>Optional. 
 The distance at which an object or light can be clearly discerned in the region/location specified by the Environment Condition. 
-If EnvironmentConditions with overlapping regions/locations exist the minimum distance should be used. </semantics>
+If EnvironmentConditions with overlapping regions/locations exist the minimum distance should be used.</semantics>
                     </attribute>
                     <objectClass>
                         <name>LandSurfaceCondition</name>
                         <sharing>PublishSubscribe</sharing>
-                        <semantics>
-The environment conditions related to land surface can be represented using LandSurfaceCondition objects. 
-Besides the common attributes such as Temperature, Wind and Precipitaion etc. additional detail regarding snow, moisture, and ice conditions of the land surface can be represented.  
+                        <semantics>The environment conditions related to land surface can be represented using LandSurfaceCondition objects. 
+Besides the common attributes such as Temperature, Wind and Precipitaion etc. additional detail regarding snow, moisture, and ice conditions of the land surface can be represented. 
 All attributes of LandSurfaceCondition objects are optional.</semantics>
                         <attribute>
                             <name>Snow</name>
@@ -193,11 +191,9 @@ All attributes of LandSurfaceCondition objects are optional.</semantics>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>
-Optional.
+                            <semantics>Optional. 
 Current snow depth and desity in the region/location specified by the Environment Condition. 
-If EnvironmentConditions with overlapping regions/locations exist the average snow depth and density should be used.
-                            </semantics>
+If EnvironmentConditions with overlapping regions/locations exist the average snow depth and density should be used.</semantics>
                         </attribute>
                         <attribute>
                             <name>Moisture</name>
@@ -208,11 +204,9 @@ If EnvironmentConditions with overlapping regions/locations exist the average sn
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>
-Optional.
+                            <semantics>Optional. 
 Surface moisture in the region/location specified by the Environment Condition. 
-If EnvironmentConditions with overlapping regions/locations exist, moisture is calculated as the highest enumerated value making the resulting value the one with most moisture.
-                            </semantics>
+If EnvironmentConditions with overlapping regions/locations exist, moisture is calculated as the highest enumerated value making the resulting value the one with most moisture.</semantics>
                         </attribute>
                         <attribute>
                             <name>IceCondition</name>
@@ -223,11 +217,9 @@ If EnvironmentConditions with overlapping regions/locations exist, moisture is c
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>
-Optional.
+                            <semantics>Optional. 
 Surface ice condition in the region/location specified by the Environment Condition. 
-If EnvironmentConditions with overlapping regions/locations exist, surface ice condition is calculated as the highest enumerated value making the resulting value the one with the moste severe ice condition.
-                            </semantics>
+If EnvironmentConditions with overlapping regions/locations exist, surface ice condition is calculated as the highest enumerated value making the resulting value the one with the moste severe ice condition.</semantics>
                         </attribute>
                     </objectClass>
                     <objectClass>
@@ -818,10 +810,6 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
     </dataTypes>
     <notes>
         <note>
-            <label>netn-metoc_1</label>
-            <semantics>On behalf of Swedish Defence Materiel Administration in support of MSG-163 maintenance of AMSP-04.</semantics>
-        </note>
-        <note>
             <label>netn-metoc_2</label>
             <semantics>Environment conditions are represented as object instances in the federation. Each instance is related to one of the following: Global condition (no GeoReference), condition related to specific object instance (RPR BaseEntity or Environment Object), explicitly defined geographical areas (Polygon or Circle) or a reference to WFS/GML identifier. 
  
@@ -839,4 +827,3 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
         </note>
     </notes>
 </objectModel>
-
