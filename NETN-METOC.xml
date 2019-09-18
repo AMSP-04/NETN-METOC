@@ -16,7 +16,6 @@ This module is a specification of how to represent METOC related data to be shar
         <useLimitation> Current weather conditions impact simulations such as platforms and sensors on the ground, on the sea, under water and in the air. In a federated distributed simulation a correlated representation of these condistions is key to meet interoperability and model requirements. Different simulations require different fidelity of weather conditions with respect to data resolution and accuracy.  The NETN METOC focus on representation of weather conditions related surfaces and layers. The main difference is that a surface condition does not have a volume and only represents the conditions directly related to the surface of a piece of terrain or water. The layer conditions represent a volume of water or air and is specified with hight/depth from surface and layer thickness. Both concepts are also geographically positioned by reference to other concepts shared in the federation such as position of objects, areal objects or reference to terrain features such as roads etc.  Based on these concepts different levels of fidelity in representing weather conditions can be achieved. Global conditions can be expressed as well as highly detailed conditions e.g. surrounding a specific aircraft.  The aspects and attributes of wather conditions included in the scope of the NETN METOC module is based on input from several sources and are designed to cover the most common levels of representation required by a large set of exising simulators.  Atmospheric Layer Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range and Clouds.  Water Layer Conditions cover the following aspects: Temperature, Salinity and Currents.  Land Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Snow Condition, Moisture and Ice Condition  Water Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Sea State, Salinity, Tide, Ice Conditions, Currents, Waves and Swell. </useLimitation>
         <useHistory>v1.0 - Initial version developed by MSG-156</useHistory>
         <useHistory></useHistory>
-     
         <poc>
             <pocType>Release authority</pocType>
             <pocName>NATO Modelling and Simulation Group</pocName>
@@ -35,7 +34,7 @@ This module is a specification of how to represent METOC related data to be shar
             <pocOrg>NATO Modelling and Simulation Group</pocOrg>
             <pocEmail>msg@cso.nato.int</pocEmail>
         </poc>
-           <poc>
+        <poc>
             <pocType>Contributor</pocType>
             <pocName>Björn Löfstrand</pocName>
             <pocOrg>Pitch Technologies, Sweden</pocOrg>
@@ -417,41 +416,45 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
         </simpleDataTypes>
         <enumeratedDataTypes>
             <enumeratedData>
-                <name>PrecipitationTypeEnum16</name>
-                <representation>HLAinteger16BE</representation>
+                <name>PrecipitationTypeEnum32</name>
+                <representation>HLAinteger32BE</representation>
                 <semantics>Type of precipitation. Default is NoPrecipitation.</semantics>
-                <enumerator>
-                    <name>NoPrecipitation</name>
-                    <value>0</value>
-                </enumerator>
                 <enumerator>
                     <name>Rain</name>
                     <value>1</value>
                 </enumerator>
                 <enumerator>
                     <name>Snow</name>
-                    <value>2</value>
+                    <value>3</value>
                 </enumerator>
                 <enumerator>
                     <name>Hail</name>
-                    <value>3</value>
+                    <value>4</value>
                 </enumerator>
-            </enumeratedData>
-            <enumeratedData>
-                <name>CloudTypeEnum16</name>
-                <representation>HLAinteger16BE</representation>
-                <semantics>Classification of different types of clouds.</semantics>
                 <enumerator>
-                    <name>None</name>
+                    <name>NoPrecipitation</name>
                     <value>0</value>
                 </enumerator>
                 <enumerator>
-                    <name>Altocumulus</name>
+                    <name>FreezingRain</name>
+                    <value>2</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>CloudTypeEnum32</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Classification of different types of clouds.</semantics>
+                <enumerator>
+                    <name>NoCloud</name>
                     <value>1</value>
                 </enumerator>
                 <enumerator>
+                    <name>Altocumulus</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
                     <name>Altostratus</name>
-                    <value>2</value>
+                    <value>6</value>
                 </enumerator>
                 <enumerator>
                     <name>Cirrocumulus</name>
@@ -463,15 +466,15 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                 </enumerator>
                 <enumerator>
                     <name>Cirrus</name>
-                    <value>5</value>
+                    <value>2</value>
                 </enumerator>
                 <enumerator>
                     <name>Cumulonimbus</name>
-                    <value>6</value>
+                    <value>12</value>
                 </enumerator>
                 <enumerator>
                     <name>Cumulus</name>
-                    <value>7</value>
+                    <value>9</value>
                 </enumerator>
                 <enumerator>
                     <name>Nimbostratus</name>
@@ -479,15 +482,23 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                 </enumerator>
                 <enumerator>
                     <name>Stratocumulus</name>
-                    <value>9</value>
+                    <value>7</value>
                 </enumerator>
                 <enumerator>
                     <name>Stratus</name>
                     <value>10</value>
                 </enumerator>
                 <enumerator>
-                    <name>Other</name>
+                    <name>Unknown</name>
+                    <value>13</value>
+                </enumerator>
+                <enumerator>
+                    <name>CumulusCongestus</name>
                     <value>11</value>
+                </enumerator>
+                <enumerator>
+                    <name>InvalidCloudClassification</name>
+                    <value>0</value>
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
@@ -610,6 +621,35 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                     <value>5</value>
                 </enumerator>
             </enumeratedData>
+            <enumeratedData>
+                <name>StandardAtmosphereModelEnum8</name>
+                <representation>HLAoctet</representation>
+                <semantics>Describes the type of standard atmosphere model</semantics>
+                <enumerator>
+                    <name>ISA</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>SubArcticWinter</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>SubArcticSummer</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>MidLatitudeWinter</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>MidLatitudeSummer</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>Tropical</name>
+                    <value>6</value>
+                </enumerator>
+            </enumeratedData>
         </enumeratedDataTypes>
         <arrayDataTypes/>
         <fixedRecordDataTypes>
@@ -679,7 +719,7 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                 <semantics></semantics>
                 <field>
                     <name>Type</name>
-                    <dataType>CloudTypeEnum16</dataType>
+                    <dataType>CloudTypeEnum32</dataType>
                     <semantics></semantics>
                 </field>
                 <field>
@@ -734,7 +774,7 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                 <semantics></semantics>
                 <field>
                     <name>Type</name>
-                    <dataType>PrecipitationTypeEnum16</dataType>
+                    <dataType>PrecipitationTypeEnum32</dataType>
                     <semantics>Required: No Precipitation, Rain, Snow or Hail</semantics>
                 </field>
                 <field>
