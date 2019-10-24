@@ -42,7 +42,7 @@ Environment Condition Objects are created by any federate to express need for en
 ## License
 
 Copyright (C) 2019 NATO/OTAN.
-This work is licensed under a [Creative Commons Attribution-NoDerivatives 4.0 International License](LICENSE.md). 
+This work is licensed under a [Creative Commons Attribution-NoDerivatives 4.0 International License](LICENCE.md). 
 
 The work includes the [NETN-METOC.xml](NETN-METOC.xml) FOM Module and documentation NETN-METOC.md.
 
