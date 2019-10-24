@@ -87,6 +87,28 @@ If not provided the environment condition is considered global.</semantics>
 Temperature in the region/location specified by the EnvironmentCondition. 
 If EnvironmentConditions with overlapping regions/locations exist the average temperature should be used.</semantics>
                 </attribute>
+                <attribute>
+                    <name>ServiceModelId</name>
+                    <dataType>UuidArrayOfHLAbyte16</dataType>
+                    <updateType>NA</updateType>
+                    <updateCondition></updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Required: Identifies the METOC model used to provide information regarding environment conditions related to weather etc.</semantics>
+                </attribute>
+                <attribute>
+                    <name>UUID</name>
+                    <dataType>UuidArrayOfHLAbyte16</dataType>
+                    <updateType>NA</updateType>
+                    <updateCondition></updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>Neither</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Unique identifier for the environment condition object.</semantics>
+                </attribute>
                 <objectClass>
                     <name>WeatherCondition</name>
                     <sharing>PublishSubscribe</sharing>
@@ -361,7 +383,7 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                     </attribute>
                     <attribute>
                         <name>Salinity</name>
-                        <dataType>PercentFloat32</dataType>
+                        <dataType>SalinityFloat32</dataType>
                         <updateType>NA</updateType>
                         <updateCondition></updateCondition>
                         <ownership>DivestAcquire</ownership>
@@ -377,6 +399,92 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
     <interactions>
         <interactionClass>
             <name>HLAinteractionRoot</name>
+            <interactionClass>
+                <name>METOC_Service</name>
+                <sharing>Neither</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics></semantics>
+                <parameter>
+                    <name>ServiceModelId</name>
+                    <dataType>UUID</dataType>
+                    <semantics>Unique identifier of the model used for providing METOC information. Multiple Models may exist.</semantics>
+                </parameter>
+                <interactionClass>
+                    <name>METOC_Request</name>
+                    <sharing>Neither</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                    <parameter>
+                        <name>SingleRequest</name>
+                        <dataType>HLAboolean</dataType>
+                        <semantics>Required: Indicate if this is a one-time request with a single interaction response or if the weather service will create an HLA object to represent continueous updates of the request.</semantics>
+                    </parameter>
+                    <parameter>
+                        <name>GeoReference</name>
+                        <dataType>GeoReferenceVariant</dataType>
+                        <semantics></semantics>
+                    </parameter>
+                    <parameter>
+                        <name>RequestType</name>
+                        <dataType>EnvironmentConditionEnum</dataType>
+                        <semantics>Expected type of response by weather service.</semantics>
+                    </parameter>
+                    <parameter>
+                        <name>Layer</name>
+                        <dataType>LayerStruct</dataType>
+                        <semantics></semantics>
+                    </parameter>
+                </interactionClass>
+                <interactionClass>
+                    <name>METOC_Response</name>
+                    <sharing>Neither</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Optional: Indicate corresponding EnvironmentObject created as a response to a METOC_Request with parameter SingleRequest set to false and where the weather service creates and METOC_EnvironmentalCondition object to represent continueous updates.</semantics>
+                    <parameter>
+                        <name>EnvironmentObjectIdentifier</name>
+                        <dataType>UUID</dataType>
+                        <semantics></semantics>
+                    </parameter>
+                    <interactionClass>
+                        <name>WeatherCondition</name>
+                        <sharing>Neither</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics></semantics>
+                        <interactionClass>
+                            <name>LandSurfaceCondition</name>
+                            <sharing>Neither</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics></semantics>
+                        </interactionClass>
+                        <interactionClass>
+                            <name>AtmosphericLayerCondition</name>
+                            <sharing>Neither</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics></semantics>
+                        </interactionClass>
+                        <interactionClass>
+                            <name>WaterSurfaceCondition</name>
+                            <sharing>Neither</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics></semantics>
+                        </interactionClass>
+                    </interactionClass>
+                    <interactionClass>
+                        <name>WaterLayerCondition</name>
+                        <sharing>Neither</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics></semantics>
+                    </interactionClass>
+                </interactionClass>
+            </interactionClass>
         </interactionClass>
     </interactions>
     <dataTypes>
@@ -412,6 +520,22 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                 <resolution>NA</resolution>
                 <accuracy>NA</accuracy>
                 <semantics>Degrees from True North. 0-360 or -180 to 180. 0 = True North.</semantics>
+            </simpleData>
+            <simpleData>
+                <name>SalinityFloat32</name>
+                <representation>HLAfloat32BE</representation>
+                <units>PSU</units>
+                <resolution>NA</resolution>
+                <accuracy>NA</accuracy>
+                <semantics>Practical Salinity Unit (PSU) measured in g/kg.</semantics>
+            </simpleData>
+            <simpleData>
+                <name>TemperatureDegreeCelsiusFloat32</name>
+                <representation>HLAfloat32BE</representation>
+                <units>DegreeCelcius</units>
+                <resolution>NA</resolution>
+                <accuracy>NA</accuracy>
+                <semantics>Degrees in Celsius</semantics>
             </simpleData>
         </simpleDataTypes>
         <enumeratedDataTypes>
@@ -619,6 +743,14 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                 <enumerator>
                     <name>GML</name>
                     <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>Point</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>Path</name>
+                    <value>7</value>
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
@@ -841,6 +973,18 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                     <enumerator>GML</enumerator>
                     <name>GML</name>
                     <dataType>GMLidenfitifer</dataType>
+                    <semantics></semantics>
+                </alternative>
+                <alternative>
+                    <enumerator>Point</enumerator>
+                    <name>Point</name>
+                    <dataType></dataType>
+                    <semantics></semantics>
+                </alternative>
+                <alternative>
+                    <enumerator>Path</enumerator>
+                    <name>Path</name>
+                    <dataType></dataType>
                     <semantics></semantics>
                 </alternative>
                 <encoding>HLAvariantRecord</encoding>
