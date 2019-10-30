@@ -394,6 +394,55 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                     </attribute>
                 </objectClass>
             </objectClass>
+            <objectClass>
+                <name>METOC_ServiceModel</name>
+                <sharing>Neither</sharing>
+                <semantics></semantics>
+                <attribute>
+                    <name>ServiceProvider</name>
+                    <dataType>HLAunicodeString</dataType>
+                    <updateType>NA</updateType>
+                    <updateCondition></updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>UUID</name>
+                    <dataType>UuidArrayOfHLAbyte16</dataType>
+                    <updateType>NA</updateType>
+                    <updateCondition></updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>ModelType</name>
+                    <dataType>WeatherModelTypeEnum</dataType>
+                    <updateType>NA</updateType>
+                    <updateCondition></updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Historical, Standard, Simulated</semantics>
+                </attribute>
+                <attribute>
+                    <name>Active</name>
+                    <dataType>HLAboolean</dataType>
+                    <updateType>NA</updateType>
+                    <updateCondition></updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+            </objectClass>
         </objectClass>
     </objects>
     <interactions>
@@ -406,7 +455,7 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                 <order>Receive</order>
                 <semantics></semantics>
                 <parameter>
-                    <name>ServiceModelId</name>
+                    <name>ModelId</name>
                     <dataType>UUID</dataType>
                     <semantics>Unique identifier of the model used for providing METOC information. Multiple Models may exist.</semantics>
                 </parameter>
