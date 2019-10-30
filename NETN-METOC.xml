@@ -63,6 +63,28 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                 <sharing>Neither</sharing>
                 <semantics>Superclass for Environment Conditions and Layers. The conditions can be global in which case no RegionReference is provided or regional in which case a reference to a GeometryFeature published in the federation is required.</semantics>
                 <attribute>
+                    <name>UUID</name>
+                    <dataType>UuidArrayOfHLAbyte16</dataType>
+                    <updateType>NA</updateType>
+                    <updateCondition></updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>Neither</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Unique identifier for the environment condition object.</semantics>
+                </attribute>
+                <attribute>
+                    <name>ServiceId</name>
+                    <dataType>UuidArrayOfHLAbyte16</dataType>
+                    <updateType>NA</updateType>
+                    <updateCondition></updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Required: Identifies the METOC model used to provide information regarding environment conditions related to weather etc.</semantics>
+                </attribute>
+                <attribute>
                     <name>GeoReference</name>
                     <dataType>GeoReferenceVariant</dataType>
                     <updateType>Static</updateType>
@@ -74,7 +96,15 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                     <semantics>Optional. 
 If not provided the environment condition is considered global.</semantics>
                 </attribute>
-                <attribute>
+               
+                <objectClass>
+                    <name>WeatherCondition</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>Information about the general weather condition can be represented using WeatherCondition objects. 
+Common data such as Temperature, Wind and Precipitaion is represented but also detailes regarding Barometric Pressure and Humidity. 
+Information about Visual Range and Haze conditions can also be represented. 
+All attributes of WeatherCondition objects are optional.</semantics>
+ <attribute>
                     <name>Temperature</name>
                     <dataType>TemperatureDegreeCelsiusFloat32</dataType>
                     <updateType>NA</updateType>
@@ -87,35 +117,6 @@ If not provided the environment condition is considered global.</semantics>
 Temperature in the region/location specified by the EnvironmentCondition. 
 If EnvironmentConditions with overlapping regions/locations exist the average temperature should be used.</semantics>
                 </attribute>
-                <attribute>
-                    <name>ServiceModelId</name>
-                    <dataType>UuidArrayOfHLAbyte16</dataType>
-                    <updateType>NA</updateType>
-                    <updateCondition></updateCondition>
-                    <ownership>NoTransfer</ownership>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Required: Identifies the METOC model used to provide information regarding environment conditions related to weather etc.</semantics>
-                </attribute>
-                <attribute>
-                    <name>UUID</name>
-                    <dataType>UuidArrayOfHLAbyte16</dataType>
-                    <updateType>NA</updateType>
-                    <updateCondition></updateCondition>
-                    <ownership>NoTransfer</ownership>
-                    <sharing>Neither</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Unique identifier for the environment condition object.</semantics>
-                </attribute>
-                <objectClass>
-                    <name>WeatherCondition</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <semantics>Information about the general weather condition can be represented using WeatherCondition objects. 
-Common data such as Temperature, Wind and Precipitaion is represented but also detailes regarding Barometric Pressure and Humidity. 
-Information about Visual Range and Haze conditions can also be represented. 
-All attributes of WeatherCondition objects are optional.</semantics>
                     <attribute>
                         <name>Wind</name>
                         <dataType>WindStruct</dataType>
@@ -359,6 +360,19 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                     <name>WaterLayerCondition</name>
                     <sharing>PublishSubscribe</sharing>
                     <semantics></semantics>
+                     <attribute>
+                    <name>Temperature</name>
+                    <dataType>TemperatureDegreeCelsiusFloat32</dataType>
+                    <updateType>NA</updateType>
+                    <updateCondition></updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Optional. 
+Temperature in the region/location specified by the EnvironmentCondition. 
+If EnvironmentConditions with overlapping regions/locations exist the average temperature should be used.</semantics>
+                </attribute>
                     <attribute>
                         <name>Layer</name>
                         <dataType>LayerStruct</dataType>
@@ -395,11 +409,22 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                 </objectClass>
             </objectClass>
             <objectClass>
-                <name>METOC_ServiceModel</name>
+                <name>METOC_Service</name>
                 <sharing>Neither</sharing>
                 <semantics></semantics>
                 <attribute>
-                    <name>ServiceProvider</name>
+                    <name>UUID</name>
+                    <dataType>UuidArrayOfHLAbyte16</dataType>
+                    <updateType>NA</updateType>
+                    <updateCondition></updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>Name</name>
                     <dataType>HLAunicodeString</dataType>
                     <updateType>NA</updateType>
                     <updateCondition></updateCondition>
@@ -410,8 +435,8 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                     <semantics></semantics>
                 </attribute>
                 <attribute>
-                    <name>UUID</name>
-                    <dataType>UuidArrayOfHLAbyte16</dataType>
+                    <name>Description</name>
+                    <dataType>HLAunicodeString</dataType>
                     <updateType>NA</updateType>
                     <updateCondition></updateCondition>
                     <ownership>NoTransfer</ownership>
@@ -429,11 +454,22 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>Historical, Standard, Simulated</semantics>
+                    <semantics>Real (Historical), Live (Current), Standard, Simulated</semantics>
                 </attribute>
                 <attribute>
                     <name>Active</name>
                     <dataType>HLAboolean</dataType>
+                    <updateType>NA</updateType>
+                    <updateCondition></updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>Domains</name>
+                    <dataType>DomainList</dataType>
                     <updateType>NA</updateType>
                     <updateCondition></updateCondition>
                     <ownership>NoTransfer</ownership>
@@ -503,12 +539,92 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
                         <semantics></semantics>
+                    <parameter>
+                    <name>Temperature</name>
+                    <dataType>TemperatureDegreeCelsiusFloat32</dataType>
+                
+                    <semantics>Optional. 
+Temperature in the region/location specified by the EnvironmentCondition. 
+If EnvironmentConditions with overlapping regions/locations exist the average temperature should be used.</semantics>
+                </parameter>
+                     <parameter>
+                        <name>Wind</name>
+                        <dataType>WindStruct</dataType>
+                        <semantics>Optional. 
+Wind speed and direction in the region/location specified by the EnvironmentCondition. 
+If EnvironmentConditions with overlapping regions/locations exist the average wind speed and direction should be used.</semantics>
+                    </parameter>
+                    <parameter>
+                        <name>Precipitation</name>
+                        <dataType>PrecipitationStruct</dataType>
+                        <semantics>Optional. Default precipitation is No Precipitation. 
+Current precipitation type (No Precipitation, Rain, Snow or Hail) and intensity in the region/location specified by the Environment Condition. 
+If EnvironmentConditions with overlapping regions/locations exist the average intensity should be used. 
+Conflicting precipitation types are resolved according to the following precedence: Snow, Hail, Rain, No Precipitation. 
+E.g. If there is one overlapping Environment Condition with Snow the result is always Snow.</semantics>
+                    </parameter>
+                    <parameter>
+                        <name>Haze</name>
+                        <dataType>HazeStruct</dataType>
+                        <semantics>Optional. Default is No Haze. 
+Current Haze type and density in the region/location specified by the Environment Condition. 
+If EnvironmentConditions with overlapping regions/locations exist having the same Haze type the average density should be used. 
+Multipe overlapping EnvironmentConditions with different Haze type can exist.</semantics>
+                    </parameter>
+                    <parameter>
+                        <name>Humidity</name>
+                        <dataType>PercentFloat32</dataType>
+                        <semantics>Optional. Default is 75% (Normal value) 
+Humidity in percent in the region/location specified by the Environment Condition. 
+If EnvironmentConditions with overlapping regions/locations exist the average humidity should be used.</semantics>
+                    </parameter>
+                    <parameter>
+                        <name>BarometricPressure</name>
+                        <dataType>AtmosphericPressureFloat32</dataType>
+                        <semantics>Optional. 
+Barometric pressure measured in milibar or hectopascal (1 mbar = 1hPa) in the region/location specified by the Environment Condition. 
+If EnvironmentConditions with overlapping regions/locations exist the average barometric pressure should be used.</semantics>
+                    </parameter>
+                    <parameter>
+                        <name>VisibilityRange</name>
+                        <dataType>MeterFloat32</dataType>
+                        <semantics>Optional. 
+The distance at which an object or light can be clearly discerned in the region/location specified by the Environment Condition. 
+If EnvironmentConditions with overlapping regions/locations exist the minimum distance should be used.</semantics>
+                    </parameter>
+
                         <interactionClass>
                             <name>LandSurfaceCondition</name>
                             <sharing>Neither</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
                             <semantics></semantics>
+
+                             <parameter>
+                            <name>Snow</name>
+                            <dataType>SnowStruct</dataType>
+                            <semantics>Optional. 
+Current snow depth and desity in the region/location specified by the Environment Condition. 
+If EnvironmentConditions with overlapping regions/locations exist the average snow depth and density should be used.</semantics>
+                        </parameter>
+                        <parameter>
+                            <name>Moisture</name>
+                            <dataType>SurfaceMoistureEnum16</dataType>
+                        
+                            <semantics>Optional. 
+Surface moisture in the region/location specified by the Environment Condition. 
+If EnvironmentConditions with overlapping regions/locations exist, moisture is calculated as the highest enumerated value making the resulting value the one with most moisture.</semantics>
+                        </parameter>
+                        <parameter>
+                            <name>IceCondition</name>
+                            <dataType>RoadIceConditionEnum16</dataType>
+                    
+                            <semantics>Optional. 
+Surface ice condition in the region/location specified by the Environment Condition. 
+If EnvironmentConditions with overlapping regions/locations exist, surface ice condition is calculated as the highest enumerated value making the resulting value the one with the moste severe ice condition.</semantics>
+                        </parameter>
+
+
                         </interactionClass>
                         <interactionClass>
                             <name>AtmosphericLayerCondition</name>
@@ -516,6 +632,19 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
                             <semantics></semantics>
+                            <parameter>
+                            <name>Layer</name>
+                            <dataType>LayerStruct</dataType>
+                          
+                            <semantics>Layer base represents the bottom of the atmospheric layer and layer base + thinckness represents the top of the layer.</semantics>
+                        </parameter>
+                        <parameter>
+                            <name>Cloud</name>
+                            <dataType>CloudStruct</dataType>
+                        
+                            <semantics></semantics>
+                        </parameter>
+
                         </interactionClass>
                         <interactionClass>
                             <name>WaterSurfaceCondition</name>
@@ -523,6 +652,50 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
                             <semantics></semantics>
+<parameter>
+                            <name>SeaState</name>
+                            <dataType>SeaStateEnum16</dataType>
+                       
+                            <semantics>Required</semantics>
+                        </parameter>
+                        <parameter>
+                            <name>Salinity</name>
+                            <dataType>PercentFloat32</dataType>
+                        
+                        
+                            <semantics>Optional.</semantics>
+                        </parameter>
+                        <parameter>
+                            <name>Tide</name>
+                            <dataType>MeterFloat32</dataType>
+                     
+                            <semantics>Optional. The height relative to the MSL.</semantics>
+                        </parameter>
+                        <parameter>
+                            <name>Ice</name>
+                            <dataType>IceStruct</dataType>
+                  
+                            <semantics>Optional.</semantics>
+                        </parameter>
+                        <parameter>
+                            <name>Current</name>
+                            <dataType>CurrentStruct</dataType>
+                    
+                            <semantics>Optional. N/A if Ice</semantics>
+                        </parameter>
+                        <parameter>
+                            <name>Wave</name>
+                            <dataType>WaveStruct</dataType>
+                         
+                            <semantics>Optional. N/A if Ice</semantics>
+                        </parameter>
+                        <parameter>
+                            <name>Swell</name>
+                            <dataType>WaveStruct</dataType>
+                     
+                            <semantics>Optional. N/A if Ice</semantics>
+                        </parameter>
+
                         </interactionClass>
                     </interactionClass>
                     <interactionClass>
@@ -531,6 +704,32 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
                         <semantics></semantics>
+                        <parameter>
+                    <name>Temperature</name>
+                    <dataType>TemperatureDegreeCelsiusFloat32</dataType>
+                 
+                    <semantics>Optional. 
+Temperature in the region/location specified by the EnvironmentCondition. 
+If EnvironmentConditions with overlapping regions/locations exist the average temperature should be used.</semantics>
+                </parameter>
+                    <parameter>
+                        <name>Layer</name>
+                        <dataType>LayerStruct</dataType>
+                     
+                        <semantics></semantics>
+                    </parameter>
+                    <parameter>
+                        <name>Current</name>
+                        <dataType>CurrentStruct</dataType>
+               
+                        <semantics></semantics>
+                    </parameter>
+                    <parameter>
+                        <name>Salinity</name>
+                        <dataType>SalinityFloat32</dataType>
+                  
+                        <semantics>% salt in water</semantics>
+                    </parameter>
                     </interactionClass>
                 </interactionClass>
             </interactionClass>
