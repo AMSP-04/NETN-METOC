@@ -73,3 +73,22 @@ If EnvironmentConditions with overlapping regions/locations exist the following 
 ### Data Distribution Management Services
 
 ### CIGI
+
+<!--
+
+title Trafficability
+
+Simulator<-Weather Service:Register/DiscoverObjectInstance(MM#1, "METOC_Model")
+
+Simulator<-Weather Service:Update/ReflectAttributeInstance(MM#1, UUID, )
+
+Simulator->Weather Service:METOC_Request(id, false, "FV30", "LandSurfaceCondition")
+
+
+Simulator<-Weather Service:RegisterObjectInstance("LandSurfaceCondition")
+
+Simulator<-Weather Service:UpdateAttributeValues(uuid, moisture, snow, precipitation, visibilityrange)
+
+Simulator<-Weather Service:METOC_Response(id, uuid)
+
+-->
