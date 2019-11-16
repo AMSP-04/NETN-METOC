@@ -1,6 +1,7 @@
 # NETN METOC
 NATO Education and Training Network (NETN) Meteorological and Oceanographic (METOC) Module. 
         
+![overview](./images/overview.png)
 
 ## Introduction
 This module is a specification of how to represent METOC related data to be shared among participants in a federated distributed simulation. The specification is based on IEEE 1516 High Level Architecture (HLA) Object Model Template (OMT) and primarily intended to support interoperability in a federated simulation (federation) based on HLA. An HLA OMT based Federation Object Model (FOM) is used to specify types of data and how it is encoded on the network. The NETN METOC FOM module is available as a XML file for use in HLA based federations.
