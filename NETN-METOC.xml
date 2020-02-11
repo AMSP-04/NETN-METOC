@@ -494,6 +494,11 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                     <dataType>UuidArrayOfHLAbyte16</dataType>
                     <semantics>Unique identifier of the model used for providing METOC information. Multiple Models may exist.</semantics>
                 </parameter>
+                <parameter>
+                    <name>RequestId</name>
+                    <dataType>UuidArrayOfHLAbyte16</dataType>
+                    <semantics>Unique identifier of the request. Will be referenced in the resulting METOC_Response interaction, in case of a single request, or otherwise in the resulting METOC_EnvironmentCondition instance.</semantics>
+                </parameter>
                 <interactionClass>
                     <name>METOC_Request</name>
                     <sharing>PublishSubscribe</sharing>
