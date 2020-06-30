@@ -61,7 +61,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>Required: Unique identifier for the environment condition object.</semantics>
+                    <semantics>Required: Unique identifier for the environment condition object or METOC service.</semantics>
                 </attribute>
                 <attribute>
                     <name>Name</name>
@@ -79,17 +79,6 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                     <sharing>Neither</sharing>
                     <semantics>Root class for all types of environment condition objects.</semantics>
                     <attribute>
-                        <name>GeoReference</name>
-                        <dataType>GeoReferenceVariant</dataType>
-                        <updateType>Static</updateType>
-                        <updateCondition>NA</updateCondition>
-                        <ownership>DivestAcquire</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Optional: If not provided the environment condition is considered global.</semantics>
-                    </attribute>
-                    <attribute>
                         <name>Service</name>
                         <dataType>UuidArrayOfHLAbyte16</dataType>
                         <updateType>Static</updateType>
@@ -98,7 +87,18 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional: Identifies the METOC service which produced the environment condition information.</semantics>
+                        <semantics>Required: Identifies the METOC service which produced the environment condition information.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>GeoReference</name>
+                        <dataType>GeoReferenceVariant</dataType>
+                        <updateType>Static</updateType>
+                        <updateCondition>NA</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional: A geographical location, region, feature or simulated object. Default if not provided, the environment condition is considered global.</semantics>
                     </attribute>
                     <objectClass>
                         <name>Weather</name>
@@ -424,7 +424,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Simulated, Real (Historical), Live (Current) or Standard model.</semantics>
+                        <semantics>Required: Type of METOC model specifying if the service delivers Simulated, Real (Historical), Live (Current) or Standard model data.</semantics>
                     </attribute>
                 </objectClass>
             </objectClass>
@@ -434,23 +434,18 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
         <interactionClass>
             <name>HLAinteractionRoot</name>
             <interactionClass>
-                <name>METOC_Service</name>
+                <name>METOC_Interaction</name>
                 <sharing>Neither</sharing>
                 <transportation>HLAreliable</transportation>
                 <order>Receive</order>
                 <semantics>Root class for requesting environment data from a METOC Service.</semantics>
                 <parameter>
-                    <name>Service</name>
-                    <dataType>UuidArrayOfHLAbyte16</dataType>
-                    <semantics>Required: Unique identifier of the model used for providing METOC information. Multiple Models may exist.</semantics>
-                </parameter>
-                <parameter>
-                    <name>RequestId</name>
-                    <dataType>UuidArrayOfHLAbyte16</dataType>
+                    <name>EventId</name>
+                    <dataType>TransactionId</dataType>
                     <semantics>Required: Unique identifier of the request. Will be referenced in a resulting resulting METOC_Response interaction.</semantics>
                 </parameter>
                 <interactionClass>
-                    <name>RequestEnvironmentCondition</name>
+                    <name>Request</name>
                     <sharing>Neither</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -458,12 +453,17 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                     <parameter>
                         <name>GeoReference</name>
                         <dataType>GeoReferenceVariant</dataType>
-                        <semantics>Required: Geographical reference to indicate for which point, area, path or object this request is related to.</semantics>
+                        <semantics>Optional: Geographical reference to indicate for which point, area, path or object this request is related to. If not provided, the request is for a global environment condition.</semantics>
                     </parameter>
                     <parameter>
-                        <name>AsObject</name>
+                        <name>UpdateAsObject</name>
                         <dataType>HLAboolean</dataType>
                         <semantics>Optional: Indicates if the service is requested to represent the environment condition as an EnvironmentCondition object instance. Default is False.</semantics>
+                    </parameter>
+                    <parameter>
+                        <name>Service</name>
+                        <dataType>UuidArrayOfHLAbyte16</dataType>
+                        <semantics>Required: Unique identifier of the model used for providing METOC information. Multiple Models may exist.</semantics>
                     </parameter>
                     <interactionClass>
                         <name>RequestWeatherCondition</name>
@@ -512,7 +512,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                     </interactionClass>
                 </interactionClass>
                 <interactionClass>
-                    <name>EnvironmentConditionResponse</name>
+                    <name>Response</name>
                     <sharing>Neither</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -520,7 +520,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                     <parameter>
                         <name>EnvironmentObject</name>
                         <dataType>UuidArrayOfHLAbyte16</dataType>
-                        <semantics>Optional: Reference to an existing environment condition object if the corresponding request includes AsObject set to true. </semantics>
+                        <semantics>Optional: Reference to an existing environment condition object if the corresponding request includes UpdateAsObject set to true.</semantics>
                     </parameter>
                     <parameter>
                         <name>GeoReference</name>
@@ -670,6 +670,11 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                             <name>Salinity</name>
                             <dataType>SalinityFloat32</dataType>
                             <semantics>Optional: Average salinity in the body of water.</semantics>
+                        </parameter>
+                        <parameter>
+                            <name>BottomType</name>
+                            <dataType>SedimentTypeEnum32</dataType>
+                            <semantics>Optional: Type of sediment on the sea floor. Default is 0 (NoSediment). If EnvironmentConditions with overlapping regions/locations exist, the sediment type in the overlapping region is determined by the latest updated value.</semantics>
                         </parameter>
                     </interactionClass>
                 </interactionClass>
