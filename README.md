@@ -28,17 +28,22 @@ Land Surface Conditions cover the following aspects: Temperature, Winds, Precipi
 Water Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Sea State, Salinity, Tide, Ice Conditions, Currents, Waves and Swell. 
 
 ## Overview
-Environment conditions are represented as object instances in the federation. Each instance is related to one of the following: Global condition (no GeoReference), condition related to specific object instance (RPR BaseEntity or Environment Object), explicitly defined geographical areas (Polygon or Circle) or a reference to WFS/GML identifier. 
- 
-Environment Condition Objects are either surface-based (land or water) or a layer (above terrain or below the water surface). 
- 
-Environment Condition Objects include either Weather attributes or Sub Surface (Water) attributes. 
- 
-Environment Condition Objects are created by any federate to express a need for environmental information. Ownership of environmental object attributes is divested to Weather Service federate(s) with the modelling responsibility of correlated environment conditions.
-![][objectclasses]
-	
+Environment Conditions are either surface based (land or water) or a layer (above terrain or below water surface) and include either Weather attributes or Sub Surface (Water) attributes. 
 
-[objectclasses]: ./objectclasses.png
+* Atmospheric Layer Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range and Clouds.
+
+* Water Layer Conditions cover the following aspects: Temperature, Salinity, and Currents.
+
+* Land Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Snow Condition, Moisture and Ice Condition
+
+* Water Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Sea State, Salinity, Tide, Ice Conditions, Currents, Waves and Swell. 
+
+To exchange Environment Conditions the NETN-METOC offers two methods of interaction.
+
+1. Pull: Request and Response pattern for Environment Conditions based on HLA Interaction Classes.
+2. Push: Request for Continueous updates of Environment Condition based on HLA Interactions and then updates of HLA Object instance attributes.
+
+Depending on federation design & agreements, one or both methods may be suitable.
 
 ## Licence
 
