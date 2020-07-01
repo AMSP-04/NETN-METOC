@@ -71,7 +71,7 @@ Version numbering of this FOM Module and associated documentation is based on th
 
 |Version|Description|
 |---|---|
-|v1.0 (Planned) |Initial version based on input from MSG-156 and MSG-163 |
+|v1.0 |Initial version based on input from MSG-156 and MSG-163 |
 
 [Changelog](changelog.md)
 
