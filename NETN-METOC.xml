@@ -4,7 +4,7 @@
         <name>NETN METOC</name>
         <type>FOM</type>
         <version>1.0</version>
-        <modificationDate>2020-06-25</modificationDate>
+        <modificationDate>2020-07-01</modificationDate>
         <securityClassification>Not Classified</securityClassification>
         <purpose>The purpose of the NETN METOC module is to provide a standard way to exchange data related to weather conditions and primary effects of weather on terrain, on water surfaces, in the atmosphere and subsurface water conditions. The main objective is to provide a reference model that represents a core common subset of METOC related aspects and to allow extension of the module to incorporate additional detail if required. Therefore, the NETN METOC module shall be viewed as a reference FOM module where extensions are not only allowed but encouraged to fully meet federation specific requirements. However, any extension should also be considered as candidates for improving the NETN METOC module or candidates for new standard NETN modules.         </purpose>
         <applicationDomain>Training</applicationDomain>
@@ -892,11 +892,59 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
             </enumeratedData>
             <enumeratedData>
                 <name>HazeTypeEnum</name>
-                <representation>HLAinteger16BE</representation>
-                <semantics>TBD</semantics>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Type of visibility obstruction.</semantics>
                 <enumerator>
                     <name>None</name>
                     <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>Fog</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>IceFog</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>SteamFog</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>Mist</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>Smoke</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>VolcanicAsh</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>Dust</name>
+                    <value>7</value>
+                </enumerator>
+                <enumerator>
+                    <name>Sand</name>
+                    <value>8</value>
+                </enumerator>
+                <enumerator>
+                    <name>Snow</name>
+                    <value>9</value>
+                </enumerator>
+                <enumerator>
+                    <name>OtherBlue</name>
+                    <value>10</value>
+                </enumerator>
+                <enumerator>
+                    <name>OtherRed</name>
+                    <value>11</value>
+                </enumerator>
+                <enumerator>
+                    <name>OtherGreen</name>
+                    <value>12</value>
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
