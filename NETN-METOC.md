@@ -88,7 +88,7 @@ If EnvironmentConditions with overlapping regions/locations exist the following 
 
 
 ### Weather
-The `Weather` object class represent common weather related attributes. Additional environmetn condition details for `LandSurface`, `WaterSurface` and in `TroposphereLayer` are provided in corresponding subclasses.
+The `Weather` object class represents common weather related attributes. Additional environment condition details for `LandSurface`, `WaterSurface` and in `TroposphereLayer` are provided in corresponding subclasses.
 
 <img src="./images/Weather.png" width="1000px"/>
 
@@ -96,28 +96,28 @@ Figure: Weather related attributes
 
 |Attribute|Description|
 |---|---|
-|Tempereature|**Optional:** Temperature in the region/location specified by the EnvironmentCondition. If EnvironmentConditions with overlapping regions/locations exist the average temperature should be used.|
+|Temperature|**Optional:** Temperature in the region/location specified by the EnvironmentCondition. If EnvironmentConditions with overlapping regions/locations exist the average temperature should be used.|
 |Wind|**Optional:** Wind speed and direction in the region/location specified by the EnvironmentCondition. If EnvironmentConditions with overlapping regions/locations exist the average wind speed and direction should be used.|
 |Precipitation|**Optional:** Default precipitation is No Precipitation. Current precipitation type (No Precipitation, Rain, Snow or Hail) and intensity in the region/location specified by the Environment Condition. If EnvironmentConditions with overlapping regions/locations exist the average intensity should be used.  Conflicting precipitation types are resolved according to the following precedence: Snow, Hail, Rain, No Precipitation. E.g. If there is one overlapping Environment Condition with Snow the result is always Snow.|
 |Haze|**Optional:** Default is No Haze. Current Haze type and density in the region/location specified by the Environment Condition. If EnvironmentConditions with overlapping regions/locations exist having the same Haze type the average density should be used.|
 |Humidity|**Optional:** Default is 75% (Normal value). Humidity in percent in the region/location specified by the Environment Condition. If EnvironmentConditions with overlapping regions/locations exist the average humidity should be used.|
-|BarometricPressure|**Optional:** Barometric pressure measured in milibar or hectopascal (1 mbar = 1hPa) in the region/location specified by the Environment Condition. If EnvironmentConditions with overlapping regions/locations exist the average barometric pressure should be used.|
+|BarometricPressure|**Optional:** Barometric pressure measured in millibar or hectopascal (1 mbar = 1hPa) in the region/location specified by the Environment Condition. If EnvironmentConditions with overlapping regions/locations exist the average barometric pressure should be used.|
 |VisibilityRange|**Optional:** The distance at which an object or light can be clearly discerned by the human eye in the region/location specified by the Environment Condition. If EnvironmentConditions with overlapping regions/locations exist the minimum distance should be used.|
 
 ### Land Surface
 
 |Attribute|Description|
 |---|---|
-|Snow|**Optional.** Current snow depth and desity in the region/location specified by the Environment Condition. If EnvironmentConditions with overlapping regions/locations exist the average snow depth and density should be used. Default is no snow.|
+|Snow|**Optional.** Current snow depth and density in the region/location specified by the Environment Condition. If EnvironmentConditions with overlapping regions/locations exist the average snow depth and density should be used. Default is no snow.|
 |Moisture|**Optional:** Surface moisture in the region/location specified by the Environment Condition. If EnvironmentConditions with overlapping regions/locations exist, moisture is calculated as the highest enumerated value making the resulting value the one with most moisture. Default is 0 (Dry).|
-|IceCondition|**Optional:** Surface ice condition in the region/location specified by the Environment Condition. If EnvironmentConditions with overlapping regions/locations exist, surface ice condition is calculated as the highest enumerated value making the resulting value the one with the moste severe ice condition. Default is no ice.|
+|IceCondition|**Optional:** Surface ice condition in the region/location specified by the Environment Condition. If EnvironmentConditions with overlapping regions/locations exist, surface ice condition is calculated as the highest enumerated value making the resulting value the one with the most severe ice condition. Default is no ice.|
 
 ### Water Surface
 
 |Attribute|Description|
 |---|---|
 |SeaState|**Optional.** Default is 0 (Calm_glassy). If EnvironmentConditions with overlapping regions/locations exist, the sea state in the overlapping region is determined by the latest updated value.|
-|Salinity|**Optional.** Salinity of sea water. Salinity is a crucial property of the seas and is widely measured. Among the variouse ways to characterize the average salinity are 35 ppt (parts per thousand), 35 psu (practical salinity units). Default value is 35.|
+|Salinity|**Optional.** Salinity of sea water. Salinity is a crucial property of the seas and is widely measured. Among the various ways to characterize the average salinity are 35 ppt (parts per thousand), 35 psu (practical salinity units). Default value is 35.|
 |Tide|**Optional.** The height relative to the MSL. Default is 0.  If EnvironmentConditions with overlapping regions/locations exist, the sea state in the overlapping region is determined average MSL.|
 |Ice|**Optional.** Ice condition on surface. Default is no ice.  If EnvironmentConditions with overlapping regions/locations exist, the ice condition in the overlapping region is determined by the latest updated value.|
 |Current|**Optional.** Default is no current. N/A if Ice.  If EnvironmentConditions with overlapping regions/locations exist, the current in the overlapping region is the average current direction and speed.|
@@ -128,7 +128,7 @@ Figure: Weather related attributes
 
 |Attribute|Description|
 |---|---|
-|Layer|**Optional.** Layer base represents the bottom of the atmospheric layer and layer base + thinckness represents the top of the layer. Default is from surface and the entire body of atmosphere in the EnvironmentCondition area.|
+|Layer|**Optional.** Layer base represents the bottom of the atmospheric layer and layer base + thickness represents the top of the layer. Default is from surface and the entire body of atmosphere in the EnvironmentCondition area.|
 |Cloud|**Optional.** Data about Clouds existing in the Atmospheric layer. Default is no clouds.  If EnvironmentConditions with overlapping regions/locations exist, the cloud condition in the overlapping region is determined by the latest updated value.|
 
 ### Subsurface Layer
@@ -142,7 +142,7 @@ Figure: Subsurface environment condition
 |Temperature|**Optional.** Temperature in the region/location specified by the EnvironmentCondition. If EnvironmentConditions with overlapping regions/locations exist the average temperature should be used.|
 |Layer|**Optional.** Defines a body of water based on environment condition location, depth and layer thickness. Default is from surface and the entire body of water down to the sea floor in the EnvironmentCondition area.|Layer|**Optional.** Layer base represents the bottom of the atmospheric layer and layer base + thinckness represents the top of the layer. Default is from surface and the entire body of atmosphere in the EnvironmentCondition area.|
 |Current|**Optional.** Describes current in the water layer. Default is no current. If EnvironmentConditions with overlapping regions/locations exist the average current direction and speed should be used.|
-|Salinity|**Optional.** Salinity of sea water. Salinity is a crucial property of the seas and is widely measured. Among the variouse ways to characterize the average salinity are 35 ppt (parts per thousand), 35 psu (practical salinity units). Default value is 35. If EnvironmentConditions with overlapping regions/locations exist the average salinity should be used.|
+|Salinity|**Optional.** Salinity of sea water. Salinity is a crucial property of the seas and is widely measured. Among the various ways to characterize the average salinity are 35 ppt (parts per thousand), 35 psu (practical salinity units). Default value is 35. If EnvironmentConditions with overlapping regions/locations exist the average salinity should be used.|
 |BottomType|**Optional.** Type of sediment on the sea floor. Default is 0 (NoSediment). If EnvironmentConditions with overlapping regions/locations exist, the sediment type in the overlapping region is determined by the latest updated value.|
 
 ## Environment Condition Request - Response
@@ -171,4 +171,4 @@ For different type of requests use the corresponding `Request` interaction sub c
 |GeoReference|**Optional:**  Geographical reference to indicate for which point, area, path or object this request is related to. Default if not provided the environment condition data is global.|
 |Status|**Required:** Specifies the result of the request action. TRUE indicates success.|
 
-Sublasses of the `Response` interaction class provide additional parameters for environment condition data.
+Subclasses of the `Response` interaction class provide additional parameters for environment condition data.

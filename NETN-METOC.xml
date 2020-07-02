@@ -4,7 +4,7 @@
         <name>NETN METOC</name>
         <type>FOM</type>
         <version>1.0</version>
-        <modificationDate>2020-07-01</modificationDate>
+        <modificationDate>2020-07-02</modificationDate>
         <securityClassification>Not Classified</securityClassification>
         <purpose>The purpose of the NETN METOC module is to provide a standard way to exchange data related to weather conditions and primary effects of weather on terrain, on water surfaces, in the atmosphere and subsurface water conditions. The main objective is to provide a reference model that represents a core common subset of METOC related aspects and to allow extension of the module to incorporate additional detail if required. Therefore, the NETN METOC module shall be viewed as a reference FOM module where extensions are not only allowed but encouraged to fully meet federation specific requirements. However, any extension should also be considered as candidates for improving the NETN METOC module or candidates for new standard NETN modules.         </purpose>
         <applicationDomain>Training</applicationDomain>
@@ -211,7 +211,7 @@ All attributes of LandSurfaceCondition objects are optional.</semantics>
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional. Current snow depth and desity in the region/location specified by the Environment Condition. 
+                                <semantics>Optional. Current snow depth and density in the region/location specified by the Environment Condition. 
 If EnvironmentConditions with overlapping regions/locations exist the average snow depth and density should be used. Default is no snow.</semantics>
                             </attribute>
                             <attribute>
@@ -234,7 +234,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average sn
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: Surface ice condition in the region/location specified by the Environment Condition. If EnvironmentConditions with overlapping regions/locations exist, surface ice condition is calculated as the highest enumerated value making the resulting value the one with the moste severe ice condition. Default is no ice.</semantics>
+                                <semantics>Optional: Surface ice condition in the region/location specified by the Environment Condition. If EnvironmentConditions with overlapping regions/locations exist, surface ice condition is calculated as the highest enumerated value making the resulting value the one with the most severe ice condition. Default is no ice.</semantics>
                             </attribute>
                         </objectClass>
                         <objectClass>
@@ -261,7 +261,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average sn
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: Salinity of sea water. Salinity is a crucial property of the seas and is widely measured. Among the variouse ways to characterize the average salinity are 35 ppt (parts per thousand), 35 psu (practical salinity units). Default value is 35.</semantics>
+                                <semantics>Optional: Salinity of sea water. Salinity is a crucial property of the seas and is widely measured. Among the various ways to characterize the average salinity are 35 ppt (parts per thousand), 35 psu (practical salinity units). Default value is 35.</semantics>
                             </attribute>
                             <attribute>
                                 <name>Tide</name>
@@ -334,7 +334,7 @@ Visibility is calculated as the minimum visibility distance of the overlapping c
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: Layer base represents the bottom of the atmospheric layer and layer base + thinckness represents the top of the layer. Default is from surface and the entire body of atmosphere in the EnvironmentCondition area.</semantics>
+                                <semantics>Optional: Layer base represents the bottom of the atmospheric layer and layer base + thickness represents the top of the layer. Default is from surface and the entire body of atmosphere in the EnvironmentCondition area.</semantics>
                             </attribute>
                             <attribute>
                                 <name>Cloud</name>
@@ -396,7 +396,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Salinity of sea water. Salinity is a crucial property of the seas and is widely measured. Among the variouse ways to characterize the average salinity are 35 ppt (parts per thousand), 35 psu (practical salinity units). Default value is 35. If EnvironmentConditions with overlapping regions/locations exist the average salinity should be used.</semantics>
+                            <semantics>Optional: Salinity of sea water. Salinity is a crucial property of the seas and is widely measured. Among the various ways to characterize the average salinity are 35 ppt (parts per thousand), 35 psu (practical salinity units). Default value is 35. If EnvironmentConditions with overlapping regions/locations exist the average salinity should be used.</semantics>
                         </attribute>
                         <attribute>
                             <name>BottomType</name>
@@ -516,7 +516,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                     <sharing>Neither</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>Resonse to a RequestEnvironmentCondition. RequestId paramater should match the corresponding parameter in the request.</semantics>
+                    <semantics>Response to a RequestEnvironmentCondition. RequestId paramater should match the corresponding parameter in the request.</semantics>
                     <parameter>
                         <name>EnvironmentObject</name>
                         <dataType>UuidArrayOfHLAbyte16</dataType>
@@ -566,7 +566,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                         <parameter>
                             <name>BarometricPressure</name>
                             <dataType>AtmosphericPressureFloat32</dataType>
-                            <semantics>Optional. Average barometric pressure measured in milibar or hectopascal (1 mbar = 1hPa) in the region/location.</semantics>
+                            <semantics>Optional. Average barometric pressure measured in millibar or hectopascal (1 mbar = 1hPa) in the region/location.</semantics>
                         </parameter>
                         <parameter>
                             <name>VisibilityRange</name>
@@ -582,7 +582,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                             <parameter>
                                 <name>Snow</name>
                                 <dataType>SnowStruct</dataType>
-                                <semantics>Optional. Average snow depth and desity in the region/location.</semantics>
+                                <semantics>Optional. Average snow depth and density in the region/location.</semantics>
                             </parameter>
                             <parameter>
                                 <name>Moisture</name>
@@ -697,7 +697,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 <units>hPa</units>
                 <resolution>NA</resolution>
                 <accuracy>NA</accuracy>
-                <semantics>Pressure mesured in Milibar or Hecto Pascal. 1 mbar = 1 hPa</semantics>
+                <semantics>Pressure measured in Millibar or Hecto Pascal. 1 mbar = 1 hPa</semantics>
             </simpleData>
             <simpleData>
                 <name>SalinityFloat32</name>
@@ -827,7 +827,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
             <enumeratedData>
                 <name>SurfaceMoistureEnum16</name>
                 <representation>HLAinteger16BE</representation>
-                <semantics>Road surface wetness ot soil moisture</semantics>
+                <semantics>Road surface wetness of soil moisture</semantics>
                 <enumerator>
                     <name>Dry</name>
                     <value>0</value>
@@ -848,7 +848,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
             <enumeratedData>
                 <name>SeaStateEnum16</name>
                 <representation>HLAinteger16BE</representation>
-                <semantics>Sate of the sea measured in Douglas Sea Scale.</semantics>
+                <semantics>State of the sea measured in Douglas Sea Scale.</semantics>
                 <enumerator>
                     <name>Calm_glassy</name>
                     <value>0</value>
@@ -1232,7 +1232,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                     <enumerator>Point</enumerator>
                     <name>Location</name>
                     <dataType>GeodeticLocation</dataType>
-                    <semantics>A location on the surface of the eath defined by lat, lon WGS84.</semantics>
+                    <semantics>A location on the surface of the earth defined by lat, lon WGS84.</semantics>
                 </alternative>
                 <alternative>
                     <enumerator>Rect</enumerator>
