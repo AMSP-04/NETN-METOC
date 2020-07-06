@@ -87,7 +87,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required: Identifies the METOC Service which produced the Environment Condition object.</semantics>
+                        <semantics>Required: Identifies the METOC Service which produced the EnvironmentCondition object.</semantics>
                     </attribute>
                     <attribute>
                         <name>GeoReference</name>
@@ -100,11 +100,11 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <order>Receive</order>
                         <semantics>Optional: A geographical location, region, feature or simulated object.
 
-If provided as a geographical location or region, the Environment Condition applies only at that location or within that region. It is further restricted by any surface type (water/land) or Layer defined by its particular sub class.
+If provided as a geographical location or region, the EnvironmentCondition applies only at that location or within that region. It is further restricted by any surface type (water/land) or Layer defined by its particular sub class.
 
-If provided as a RPREntityReference, NETNEntityReference or GMLFeatureReference identifying a feature (as opposed to a geometry object), the Environment Condition is considered to apply only to the immediate vicinity of the referenced entity/feature: any specified Layer attribute is ignored in this case.
+If provided as a RPREntityReference, NETNEntityReference or GMLFeatureReference identifying a feature (as opposed to a geometry object), the EnvironmentCondition is considered to apply only to the immediate vicinity of the referenced entity/feature: any specified Layer attribute is ignored in this case.
 
-If not provided, the Environment Condition is considered global, only restricted by the semantics of its particular sub class.</semantics>
+If not provided, the EnvironmentCondition is considered global, only restricted by the semantics of its particular sub class.</semantics>
                     </attribute>
                     <objectClass>
                         <name>Weather</name>
@@ -360,7 +360,7 @@ A TroposhpereLayer instance without a GeoReference is considered global within i
                     <objectClass>
                         <name>SubsurfaceLayer</name>
                         <sharing>PublishSubscribe</sharing>
-                        <semantics>Environment Condition of a subsurface water layer. If GeoReference is not provided, the condition is considered global within the specified Layer.</semantics>
+                        <semantics>EnvironmentCondition of a subsurface water layer. If GeoReference is not provided, the condition is considered global within the specified Layer.</semantics>
                         <attribute>
                             <name>Temperature</name>
                             <dataType>TemperatureDegreeCelsiusFloat32</dataType>
@@ -370,8 +370,8 @@ A TroposhpereLayer instance without a GeoReference is considered global within i
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Temperature in the region/location specified by the Environment Condition. 
-If Environment Conditions with overlapping regions/locations exist the average temperature should be used.</semantics>
+                            <semantics>Optional: Temperature in the region/location specified by the EnvironmentCondition. 
+If EnvironmentConditions with overlapping regions/locations exist the average temperature should be used.</semantics>
                         </attribute>
                         <attribute>
                             <name>Layer</name>
@@ -422,7 +422,7 @@ If Environment Conditions with overlapping regions/locations exist the average t
                 <objectClass>
                     <name>Service</name>
                     <sharing>PublishSubscribe</sharing>
-                    <semantics>All systems providing Environment Condition information as either object instances or as responses to service requests must register a Service object instance.</semantics>
+                    <semantics>All systems providing EnvironmentCondition information as either object instances or as responses to service requests must register a Service object instance.</semantics>
                     <attribute>
                         <name>ModelType</name>
                         <dataType>WeatherModelTypeEnum</dataType>
