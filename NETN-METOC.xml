@@ -77,7 +77,17 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                 <objectClass>
                     <name>EnvironmentCondition</name>
                     <sharing>Neither</sharing>
-                    <semantics>Root class for all types of environment condition objects.</semantics>
+                    <semantics>Root class for all types of EnvironmentCondition objects.
+
+The region where the EnvironmentCondition applies is defined by the GeoReference attribute, as follows.
+
+If GeoReference is provided as a geographical area, and the sub class in question has surface semantics (water/land), the EnvironmentCondition applies only within that area of the surface.
+
+If GeoReference is provided as a geographical area, and the sub class in question defines a Layer attribute, the EnvironmentCondition applies only within the volume bounded both by the Layer and by the body described by projecting each point of the area along a line through the center of the earth. (This means, e.g., that any volumes described by two adjacent geodetic quadrangles will never overlap, and if they belong to the same layer, will also be adjacent.)
+
+If GeoReference is provided as a RPREntityReference, NETNEntityReference or GMLFeatureReference identifying a feature (as opposed to a geometry object), the EnvironmentCondition is considered to apply only to the immediate vicinity of the referenced entity/feature: any Layer attribute specified by a sub class is ignored in this case.
+
+If not provided, the EnvironmentCondition is considered global, only restricted by the semantics of its particular sub class.</semantics>
                     <attribute>
                         <name>Service</name>
                         <dataType>UuidArrayOfHLAbyte16</dataType>
@@ -98,13 +108,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional: A geographical location, region, feature or simulated object.
-
-If provided as a geographical location or region, the EnvironmentCondition applies only at that location or within that region. It is further restricted by any surface type (water/land) or Layer defined by its particular sub class.
-
-If provided as a RPREntityReference, NETNEntityReference or GMLFeatureReference identifying a feature (as opposed to a geometry object), the EnvironmentCondition is considered to apply only to the immediate vicinity of the referenced entity/feature: any specified Layer attribute is ignored in this case.
-
-If not provided, the EnvironmentCondition is considered global, only restricted by the semantics of its particular sub class.</semantics>
+                        <semantics>Optional: A geographical location, region, feature or simulated object.</semantics>
                     </attribute>
                     <objectClass>
                         <name>Weather</name>
@@ -185,7 +189,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average hu
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Barometric pressure measured in milibar or hectopascal (1 mbar = 1hPa) in the region/location specified by the Environment Condition.
+                            <semantics>Optional: Barometric pressure measured in millibar or hectopascal (1 mbar = 1hPa) in the region/location specified by the Environment Condition.
 If EnvironmentConditions with overlapping regions/locations exist the average barometric pressure should be used.</semantics>
                         </attribute>
                         <attribute>
@@ -312,7 +316,7 @@ If EnvironmentConditions with overlapping regions/locations exist, surface ice c
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: Waves of the water surface. Default is no waves. Ignored if surface has 100% Ice coverage. If EnvironmentConditions with overlapping regions/locations exist, the wave condition in the overlapping region is determined by the latest updated value.</semantics>
+                                <semantics>Optional: Waves on the water surface. Default is no waves. Ignored if surface has 100% Ice coverage. If EnvironmentConditions with overlapping regions/locations exist, the wave condition in the overlapping region is determined by the latest updated value.</semantics>
                             </attribute>
                             <attribute>
                                 <name>Swell</name>
@@ -323,7 +327,7 @@ If EnvironmentConditions with overlapping regions/locations exist, surface ice c
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: Default is no Swell. N/A if Ice.  If EnvironmentConditions with overlapping regions/locations exist, the swell condition in the overlapping region is determined by the latest updated value.</semantics>
+                                <semantics>Optional: Swell of the body of water. Default is no Swell. Ignored if surface has 100% Ice coverage. If EnvironmentConditions with overlapping regions/locations exist, the swell condition in the overlapping region is determined by the latest updated value.</semantics>
                             </attribute>
                         </objectClass>
                         <objectClass>
@@ -425,7 +429,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                     <semantics>All systems providing EnvironmentCondition information as either object instances or as responses to service requests must register a Service object instance.</semantics>
                     <attribute>
                         <name>ModelType</name>
-                        <dataType>WeatherModelTypeEnum</dataType>
+                        <dataType>WeatherModelTypeEnum32</dataType>
                         <updateType>Static</updateType>
                         <updateCondition>NA</updateCondition>
                         <ownership>NoTransfer</ownership>
@@ -858,15 +862,15 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 <representation>HLAinteger16BE</representation>
                 <semantics>State of the sea measured in Douglas Sea Scale.</semantics>
                 <enumerator>
-                    <name>Calm_glassy</name>
+                    <name>CalmGlassy</name>
                     <value>0</value>
                 </enumerator>
                 <enumerator>
-                    <name>Calm_rippled</name>
+                    <name>CalmRippled</name>
                     <value>1</value>
                 </enumerator>
                 <enumerator>
-                    <name>Smooth_wavelets</name>
+                    <name>SmoothWavelets</name>
                     <value>2</value>
                 </enumerator>
                 <enumerator>
@@ -882,7 +886,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                     <value>5</value>
                 </enumerator>
                 <enumerator>
-                    <name>Very_Rough</name>
+                    <name>VeryRough</name>
                     <value>6</value>
                 </enumerator>
                 <enumerator>
@@ -890,7 +894,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                     <value>7</value>
                 </enumerator>
                 <enumerator>
-                    <name>Very_High</name>
+                    <name>VeryHigh</name>
                     <value>8</value>
                 </enumerator>
                 <enumerator>
@@ -899,7 +903,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
-                <name>HazeTypeEnum</name>
+                <name>HazeTypeEnum32</name>
                 <representation>HLAinteger32BE</representation>
                 <semantics>Type of visibility obstruction.</semantics>
                 <enumerator>
@@ -956,7 +960,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
-                <name>IceTypeEnum</name>
+                <name>IceTypeEnum16</name>
                 <representation>HLAinteger16BE</representation>
                 <semantics>Type of Ice.</semantics>
                 <enumerator>
@@ -969,7 +973,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
-                <name>WeatherModelTypeEnum</name>
+                <name>WeatherModelTypeEnum32</name>
                 <representation>HLAinteger32BE</representation>
                 <semantics>Type of weather model used by a METOC service.</semantics>
                 <enumerator>
@@ -994,7 +998,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
-                <name>GeoReferenceTypeEnum</name>
+                <name>GeoReferenceTypeEnum32</name>
                 <representation>HLAinteger32BE</representation>
                 <semantics>Enumerated set of different ways to reference the area affected by an Environment Condition.</semantics>
                 <enumerator>
@@ -1120,7 +1124,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 <semantics>Ice type, thickness and coverage on water surface.</semantics>
                 <field>
                     <name>Type</name>
-                    <dataType>IceTypeEnum</dataType>
+                    <dataType>IceTypeEnum16</dataType>
                     <semantics>Type of ice on water surface.</semantics>
                 </field>
                 <field>
@@ -1225,7 +1229,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 <semantics>Type and density of haze material.</semantics>
                 <field>
                     <name>Type</name>
-                    <dataType>HazeTypeEnum</dataType>
+                    <dataType>HazeTypeEnum32</dataType>
                     <semantics>Type of Haze.</semantics>
                 </field>
                 <field>
@@ -1239,7 +1243,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
             <variantRecordData>
                 <name>GeoReferenceVariant</name>
                 <discriminant>GeoReferenceType</discriminant>
-                <dataType>GeoReferenceTypeEnum</dataType>
+                <dataType>GeoReferenceTypeEnum32</dataType>
                 <alternative>
                     <enumerator>Point</enumerator>
                     <name>Location</name>
@@ -1253,6 +1257,12 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                     <semantics>A latitude-longitude quadrangle is a region bounded by two meridians and two parallels.</semantics>
                 </alternative>
                 <alternative>
+                    <enumerator>Circle</enumerator>
+                    <name>SphericalCircle</name>
+                    <dataType>GeodeticCircle</dataType>
+                    <semantics>See data type semantics.</semantics>
+                </alternative>
+                <alternative>
                     <enumerator>Polygon</enumerator>
                     <name>SphericalPolygon</name>
                     <dataType>GeodeticPolygon</dataType>
@@ -1262,7 +1272,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                     <enumerator>NETNGeoObjectReference</enumerator>
                     <name>NETNGeoObjectReference</name>
                     <dataType>UuidArrayOfHLAbyte16</dataType>
-                    <semantics>Reference to an object instance of leaf node subclass of NETN GeoObject defined in NETN-SE FOM Module.</semantics>
+                    <semantics>Reference to an object instance of class Point, Path or Area, defined in NETN-SE FOM Module.</semantics>
                 </alternative>
                 <alternative>
                     <enumerator>GeographyMarkupLanguageFeatureReference</enumerator>
@@ -1285,7 +1295,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 <encoding>HLAvariantRecord</encoding>
                 <semantics>The area affected by an Environment Condition can be expressed as:
 - a location on the earth's surface represented by a Point,
-- an area on the earth's surface, represented by a Quadrangle or SphericalPolygon, or
+- an area on the earth's surface, represented by a Quadrangle, SphericalPolygon, or SphericalCircle, or
 - a reference to some other object/data. Objects that can be referenced are RPR entities, NETN entities, NETN-SE GeoObjects and GML Features.</semantics>
             </variantRecordData>
         </variantRecordDataTypes>
