@@ -4,7 +4,7 @@
         <name>NETN METOC</name>
         <type>FOM</type>
         <version>1.0</version>
-        <modificationDate>2020-07-02</modificationDate>
+        <modificationDate>2020-07-20</modificationDate>
         <securityClassification>Not Classified</securityClassification>
         <purpose>The purpose of the NETN METOC module is to provide a standard way to exchange data related to weather conditions and primary effects of weather on terrain, on water surfaces, in the atmosphere and subsurface water conditions. The main objective is to provide a reference model that represents a core common subset of METOC related aspects and to allow extension of the module to incorporate additional detail if required. Therefore, the NETN METOC module shall be viewed as a reference FOM module where extensions are not only allowed but encouraged to fully meet federation specific requirements. However, any extension should also be considered as candidates for improving the NETN METOC module or candidates for new standard NETN modules.         </purpose>
         <applicationDomain>Training</applicationDomain>
@@ -54,7 +54,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                 <semantics>Superclass for Environment Conditions and Layers.</semantics>
                 <attribute>
                     <name>UniqueId</name>
-                    <dataType>UuidArrayOfHLAbyte16</dataType>
+                    <dataType>UUID</dataType>
                     <updateType>Static</updateType>
                     <updateCondition>NA</updateCondition>
                     <ownership>NoTransfer</ownership>
@@ -77,20 +77,20 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                 <objectClass>
                     <name>EnvironmentCondition</name>
                     <sharing>Neither</sharing>
-                    <semantics>Root class for all types of EnvironmentCondition objects.
-
-The region where the EnvironmentCondition applies is defined by the GeoReference attribute, as follows.
-
-If GeoReference is provided as a geographical area, and the sub class in question has surface semantics (water/land), the EnvironmentCondition applies only within that area of the surface.
-
-If GeoReference is provided as a geographical area, and the sub class in question defines a Layer attribute, the EnvironmentCondition applies only within the volume bounded both by the Layer and by the body described by projecting each point of the area along a line through the center of the earth. (This means, e.g., that any volumes described by two adjacent geodetic quadrangles will never overlap, and if they belong to the same layer, will also be adjacent.)
-
-If GeoReference is provided as a RPREntityReference, NETNEntityReference or GMLFeatureReference identifying a feature (as opposed to a geometry object), the EnvironmentCondition is considered to apply only to the immediate vicinity of the referenced entity/feature: any Layer attribute specified by a sub class is ignored in this case.
-
+                    <semantics>Root class for all types of EnvironmentCondition objects. 
+ 
+The region where the EnvironmentCondition applies is defined by the GeoReference attribute, as follows. 
+ 
+If GeoReference is provided as a geographical area, and the sub class in question has surface semantics (water/land), the EnvironmentCondition applies only within that area of the surface. 
+ 
+If GeoReference is provided as a geographical area, and the sub class in question defines a Layer attribute, the EnvironmentCondition applies only within the volume bounded both by the Layer and by the body described by projecting each point of the area along a line through the center of the earth. (This means, e.g., that any volumes described by two adjacent geodetic quadrangles will never overlap, and if they belong to the same layer, will also be adjacent.) 
+ 
+If GeoReference is provided as a RPREntityReference, NETNEntityReference or GMLFeatureReference identifying a feature (as opposed to a geometry object), the EnvironmentCondition is considered to apply only to the immediate vicinity of the referenced entity/feature: any Layer attribute specified by a sub class is ignored in this case. 
+ 
 If not provided, the EnvironmentCondition is considered global, only restricted by the semantics of its particular sub class.</semantics>
                     <attribute>
-                        <name>Service</name>
-                        <dataType>UuidArrayOfHLAbyte16</dataType>
+                        <name>ServiceId</name>
+                        <dataType>UUID</dataType>
                         <updateType>Static</updateType>
                         <updateCondition>NA</updateCondition>
                         <ownership>DivestAcquire</ownership>
@@ -116,7 +116,7 @@ If not provided, the EnvironmentCondition is considered global, only restricted 
                         <semantics>Information about the general weather condition can be represented using WeatherCondition objects. 
 Common data such as Temperature, Wind and Precipitaion is represented but also details regarding Barometric Pressure and Humidity. 
 Information about Visual Range and Haze conditions can also be represented. 
-All attributes of WeatherCondition objects are optional.
+All attributes of WeatherCondition objects are optional. 
 An instance of this class without a GeoReference is considered global above sea level.</semantics>
                         <attribute>
                             <name>Temperature</name>
@@ -151,7 +151,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average wi
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Current precipitation type and intensity in the region/location specified by the Environment Condition. Default is No Precipitation.
+                            <semantics>Optional: Current precipitation type and intensity in the region/location specified by the Environment Condition. Default is No Precipitation. 
 If EnvironmentConditions with overlapping regions/locations exist the average intensity should be used. 
 Conflicting precipitation types are resolved according to the following precedence: Snow, Hail, Rain, No Precipitation. 
 E.g. If there is one overlapping Environment Condition with Snow the result is always Snow.</semantics>
@@ -165,7 +165,7 @@ E.g. If there is one overlapping Environment Condition with Snow the result is a
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Current Haze type and density in the region/location specified by the Environment Condition. Default is No Haze.
+                            <semantics>Optional: Current Haze type and density in the region/location specified by the Environment Condition. Default is No Haze. 
 If EnvironmentConditions with overlapping regions/locations exist having the same Haze type the average density should be used.</semantics>
                         </attribute>
                         <attribute>
@@ -177,7 +177,7 @@ If EnvironmentConditions with overlapping regions/locations exist having the sam
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Humidity in percent in the region/location specified by the Environment Condition. Default is 75% (Normal value)
+                            <semantics>Optional: Humidity in percent in the region/location specified by the Environment Condition. Default is 75% (Normal value) 
 If EnvironmentConditions with overlapping regions/locations exist the average humidity should be used.</semantics>
                         </attribute>
                         <attribute>
@@ -189,7 +189,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average hu
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Barometric pressure measured in millibar or hectopascal (1 mbar = 1hPa) in the region/location specified by the Environment Condition.
+                            <semantics>Optional: Barometric pressure measured in millibar or hectopascal (1 mbar = 1hPa) in the region/location specified by the Environment Condition. 
 If EnvironmentConditions with overlapping regions/locations exist the average barometric pressure should be used.</semantics>
                         </attribute>
                         <attribute>
@@ -201,15 +201,15 @@ If EnvironmentConditions with overlapping regions/locations exist the average ba
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: The distance at which an object or light can be clearly discerned by the human eye in the region/location specified by the Environment Condition.
+                            <semantics>Optional: The distance at which an object or light can be clearly discerned by the human eye in the region/location specified by the Environment Condition. 
 If EnvironmentConditions with overlapping regions/locations exist the minimum distance should be used.</semantics>
                         </attribute>
                         <objectClass>
                             <name>LandSurface</name>
                             <sharing>PublishSubscribe</sharing>
-                            <semantics>The environment conditions related to a land surface.
+                            <semantics>The environment conditions related to a land surface. 
 Besides the common attributes such as Temperature, Wind and Precipitaion etc. additional detail regarding snow, moisture, and ice conditions of the land surface can be represented. 
-All attributes of LandSurfaceCondition objects are optional.
+All attributes of LandSurfaceCondition objects are optional. 
 An instance of this class without a GeoReference is considered to apply to all land surfaces.</semantics>
                             <attribute>
                                 <name>Snow</name>
@@ -220,7 +220,7 @@ An instance of this class without a GeoReference is considered to apply to all l
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional. Current snow depth and density in the region/location specified by the EnvironmentCondition. Default is no snow.
+                                <semantics>Optional. Current snow depth and density in the region/location specified by the EnvironmentCondition. Default is no snow. 
 If EnvironmentConditions with overlapping regions/locations exist the average snow depth and density should be used.</semantics>
                             </attribute>
                             <attribute>
@@ -232,7 +232,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average sn
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: Surface moisture in the region/location specified by the EnvironmentCondition. Default is 0 (Dry).
+                                <semantics>Optional: Surface moisture in the region/location specified by the EnvironmentCondition. Default is 0 (Dry). 
 If EnvironmentConditions with overlapping regions/locations exist, moisture is calculated as the highest enumerated value making the resulting value the one with most moisture.</semantics>
                             </attribute>
                             <attribute>
@@ -335,7 +335,7 @@ If EnvironmentConditions with overlapping regions/locations exist, surface ice c
                             <sharing>PublishSubscribe</sharing>
                             <semantics>If overlapping Atmospheric Conditions exist the following merging rules apply: 
 Humidity, AirTemperature and BarometricPressure are calculated as the average of the overlapping conditions. 
-Visibility is calculated as the minimum visibility distance of the overlapping conditions.
+Visibility is calculated as the minimum visibility distance of the overlapping conditions. 
 A TroposhpereLayer instance without a GeoReference is considered global within its specified Layer.</semantics>
                             <attribute>
                                 <name>Layer</name>
@@ -473,8 +473,8 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                         <semantics>Optional: Indicates if the service is requested to represent the environment condition as an EnvironmentCondition object instance. Default is False.</semantics>
                     </parameter>
                     <parameter>
-                        <name>Service</name>
-                        <dataType>UuidArrayOfHLAbyte16</dataType>
+                        <name>ServiceId</name>
+                        <dataType>UUID</dataType>
                         <semantics>Required: Unique identifier of the model used for providing METOC information. Multiple Models may exist.</semantics>
                     </parameter>
                     <interactionClass>
@@ -530,8 +530,8 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                     <order>Receive</order>
                     <semantics>Response to a RequestEnvironmentCondition. RequestId paramater should match the corresponding parameter in the request.</semantics>
                     <parameter>
-                        <name>EnvironmentObject</name>
-                        <dataType>UuidArrayOfHLAbyte16</dataType>
+                        <name>EnvironmentObjectId</name>
+                        <dataType>UUID</dataType>
                         <semantics>Optional: Reference to an existing environment condition object if the corresponding request includes UpdateAsObject set to true.</semantics>
                     </parameter>
                     <parameter>
@@ -1271,7 +1271,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 <alternative>
                     <enumerator>NETNGeoObjectReference</enumerator>
                     <name>NETNGeoObjectReference</name>
-                    <dataType>UuidArrayOfHLAbyte16</dataType>
+                    <dataType>UUID</dataType>
                     <semantics>Reference to an object instance of class Point, Path or Area, defined in NETN-SE FOM Module.</semantics>
                 </alternative>
                 <alternative>
@@ -1289,13 +1289,13 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 <alternative>
                     <enumerator>NETNEntityUuid</enumerator>
                     <name>NETNEntityReference</name>
-                    <dataType>UuidArrayOfHLAbyte16</dataType>
+                    <dataType>UUID</dataType>
                     <semantics>Reference to an object instance of a NETN leaf node subclass of RPR Base Entity. E.g. the NETN Aircraft or NETN Aggregate subclass of the corresponding RPR class. The reference refers to the UniqueId of the object instance.</semantics>
                 </alternative>
                 <encoding>HLAvariantRecord</encoding>
-                <semantics>The area affected by an Environment Condition can be expressed as:
-- a location on the earth's surface represented by a Point,
-- an area on the earth's surface, represented by a Quadrangle, SphericalPolygon, or SphericalCircle, or
+                <semantics>The area affected by an Environment Condition can be expressed as: 
+- a location on the earth's surface represented by a Point, 
+- an area on the earth's surface, represented by a Quadrangle, SphericalPolygon, or SphericalCircle, or 
 - a reference to some other object/data. Objects that can be referenced are RPR entities, NETN entities, NETN-SE GeoObjects and GML Features.</semantics>
             </variantRecordData>
         </variantRecordDataTypes>
