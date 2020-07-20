@@ -1154,7 +1154,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 </field>
                 <field>
                     <name>Density</name>
-                    <dataType>ConcentrationKgPerMeterCubedFloat32</dataType>
+                    <dataType>MassDensityFloat32</dataType>
                     <semantics>Average density of clouds.</semantics>
                 </field>
             </fixedRecordData>
@@ -1219,7 +1219,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 </field>
                 <field>
                     <name>Density</name>
-                    <dataType>ConcentrationKgPerMeterCubedFloat32</dataType>
+                    <dataType>MassDensityFloat32</dataType>
                     <semantics>kg/m3</semantics>
                 </field>
             </fixedRecordData>
@@ -1234,7 +1234,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 </field>
                 <field>
                     <name>Density</name>
-                    <dataType>ConcentrationKgPerMeterCubedFloat32</dataType>
+                    <dataType>MassDensityFloat32</dataType>
                     <semantics>Concentration/Density of haze measured in Kg/m3.</semantics>
                 </field>
             </fixedRecordData>
