@@ -64,7 +64,7 @@ Figure: Environment Condition Object Classes
 |---|---|
 |UniqueId|**Required:** Unique identifier for the Environment Condition object.|
 |Name|**Optional:** Name of the Environment Condition.|
-|Service|**Required:** Identifies the METOC service which produced the environment condition information.|
+|ServiceId|**Required:** Identifies the METOC service which produced the environment condition information.|
 |GeoReference|**Optional:** A geographical location, region, feature or simulated object. If not provided, the environment condition is considered global.|
 
 Environment conditions are always related to either the entire synthetic environment (global), a static or dynamic location, a region or a layer. This means that an environment condition can be related to:
@@ -155,17 +155,17 @@ Each request is directed to a METOC Service using the `Servive` parameter. Norma
 Figure: Subsurface environment condition
 
 ### Request
-|Attribute|Description|
+|Parameter|Description|
 |---|---|
 |GeoReference|**Optional:** Geographical reference to indicate for which point, area, path or object this request is related to. If not provided, the request is for a global environment condition.|
 |UpdateAsObject|**Optional:** Indicates if the service is requested to represent the environment condition as an EnvironmentCondition object instance. Default is False.|
-|Service|**Required:** Unique identifier of the model used for providing METOC information. Multiple Models may exist.|
+|ServiceId|**Required:** Unique identifier of the model used for providing METOC information. Multiple Models may exist.|
 
 For different type of requests use the corresponding `Request` interaction sub classes. Requests for subsurface and troposphere data inculde parameter for specifying the related layer information.
 
 ### Response
 
-|Attribute|Description|
+|Parameter|Description|
 |---|---|
 |EnvironmentObject|**Optional:** Reference to an existing environment condition object if the corresponding request includes UpdateAsObject set to true.|
 |GeoReference|**Optional:**  Geographical reference to indicate for which point, area, path or object this request is related to. Default if not provided the environment condition data is global.|
