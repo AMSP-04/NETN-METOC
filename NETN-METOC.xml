@@ -4,7 +4,7 @@
         <name>NETN METOC</name>
         <type>FOM</type>
         <version>1.0</version>
-        <modificationDate>2020-07-20</modificationDate>
+        <modificationDate>2020-08-07</modificationDate>
         <securityClassification>Not Classified</securityClassification>
         <purpose>The purpose of the NETN METOC module is to provide a standard way to exchange data related to weather conditions and primary effects of weather on terrain, on water surfaces, in the atmosphere and subsurface water conditions. The main objective is to provide a reference model that represents a core common subset of METOC related aspects and to allow extension of the module to incorporate additional detail if required. Therefore, the NETN METOC module shall be viewed as a reference FOM module where extensions are not only allowed but encouraged to fully meet federation specific requirements. However, any extension should also be considered as candidates for improving the NETN METOC module or candidates for new standard NETN modules.         </purpose>
         <applicationDomain>Training</applicationDomain>
@@ -998,51 +998,6 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
-                <name>GeoReferenceTypeEnum32</name>
-                <representation>HLAinteger32BE</representation>
-                <semantics>Enumerated set of different ways to reference the area affected by an Environment Condition.</semantics>
-                <enumerator>
-                    <name>None</name>
-                    <value>0</value>
-                </enumerator>
-                <enumerator>
-                    <name>Rect</name>
-                    <value>1</value>
-                </enumerator>
-                <enumerator>
-                    <name>Circle</name>
-                    <value>2</value>
-                </enumerator>
-                <enumerator>
-                    <name>Polygon</name>
-                    <value>3</value>
-                </enumerator>
-                <enumerator>
-                    <name>Point</name>
-                    <value>4</value>
-                </enumerator>
-                <enumerator>
-                    <name>Path</name>
-                    <value>5</value>
-                </enumerator>
-                <enumerator>
-                    <name>NETNGeoObjectReference</name>
-                    <value>6</value>
-                </enumerator>
-                <enumerator>
-                    <name>GeographyMarkupLanguageFeatureReference</name>
-                    <value>7</value>
-                </enumerator>
-                <enumerator>
-                    <name>RPREntityIdentifier</name>
-                    <value>8</value>
-                </enumerator>
-                <enumerator>
-                    <name>NETNEntityUuid</name>
-                    <value>9</value>
-                </enumerator>
-            </enumeratedData>
-            <enumeratedData>
                 <name>SedimentTypeEnum32</name>
                 <representation>HLAinteger32BE</representation>
                 <semantics>The type of sediment on the sea floor.</semantics>
@@ -1243,59 +1198,53 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
             <variantRecordData>
                 <name>GeoReferenceVariant</name>
                 <discriminant>GeoReferenceType</discriminant>
-                <dataType>GeoReferenceTypeEnum32</dataType>
+                <dataType>GeoLocationTypeEnum32</dataType>
                 <alternative>
                     <enumerator>Point</enumerator>
-                    <name>Location</name>
+                    <name>GeodeticLocation</name>
                     <dataType>GeodeticLocation</dataType>
                     <semantics>A location on the surface of the earth defined by lat, lon WGS84.</semantics>
                 </alternative>
                 <alternative>
-                    <enumerator>Rect</enumerator>
-                    <name>Quadrangle</name>
+                    <enumerator>Circle</enumerator>
+                    <name>GeodeticCircle</name>
+                    <dataType>GeodeticCircle</dataType>
+                    <semantics>A geodetic point and radius specifying a circle on the surface of the earth WGS84 where the radius is a great circle distance on the surface.</semantics>
+                </alternative>
+                <alternative>
+                    <enumerator>Quadrangle</enumerator>
+                    <name>GeodeticQuadrangle</name>
                     <dataType>GeodeticQuadrangle</dataType>
                     <semantics>A latitude-longitude quadrangle is a region bounded by two meridians and two parallels.</semantics>
                 </alternative>
                 <alternative>
-                    <enumerator>Circle</enumerator>
-                    <name>SphericalCircle</name>
-                    <dataType>GeodeticCircle</dataType>
-                    <semantics>See data type semantics.</semantics>
-                </alternative>
-                <alternative>
                     <enumerator>Polygon</enumerator>
-                    <name>SphericalPolygon</name>
+                    <name>GeodeticPolygon</name>
                     <dataType>GeodeticPolygon</dataType>
                     <semantics>A polygon on the surface of the earth defined by a number of great-circle arcs represented as lat, lon Locations. WGS84.</semantics>
                 </alternative>
                 <alternative>
-                    <enumerator>NETNGeoObjectReference</enumerator>
+                    <enumerator>NETN_UUID</enumerator>
                     <name>NETNGeoObjectReference</name>
                     <dataType>UUID</dataType>
-                    <semantics>Reference to an object instance of class Point, Path or Area, defined in NETN-SE FOM Module.</semantics>
+                    <semantics>Reference to an object instance of class Location, Path or Region, defined in NETN-SE FOM Module or a NETN Physical or Aggregate entity with UUID.</semantics>
                 </alternative>
                 <alternative>
-                    <enumerator>GeographyMarkupLanguageFeatureReference</enumerator>
-                    <name>GMLFeatureReference</name>
-                    <dataType>GMLidentifier</dataType>
-                    <semantics>Reference to a GML feature by its GML Identifier.</semantics>
-                </alternative>
-                <alternative>
-                    <enumerator>RPREntityIdentifier</enumerator>
+                    <enumerator>RPR_Entity</enumerator>
                     <name>RPREntityReference</name>
                     <dataType>EntityIdentifierStruct</dataType>
                     <semantics>Reference to an instance of a leaf node subclass of RPR-FOM BaseEntity by its EntityIdentifier. E.g. an Aircraft, SurfaceVessel etc.</semantics>
                 </alternative>
                 <alternative>
-                    <enumerator>NETNEntityUuid</enumerator>
-                    <name>NETNEntityReference</name>
-                    <dataType>UUID</dataType>
-                    <semantics>Reference to an object instance of a NETN leaf node subclass of RPR Base Entity. E.g. the NETN Aircraft or NETN Aggregate subclass of the corresponding RPR class. The reference refers to the UniqueId of the object instance.</semantics>
+                    <enumerator>NameReference</enumerator>
+                    <name>GMLFeatureReference</name>
+                    <dataType>GMLidentifier</dataType>
+                    <semantics>Reference to a GML feature by its GML Identifier.</semantics>
                 </alternative>
                 <encoding>HLAvariantRecord</encoding>
                 <semantics>The area affected by an Environment Condition can be expressed as: 
 - a location on the earth's surface represented by a Point, 
-- an area on the earth's surface, represented by a Quadrangle, SphericalPolygon, or SphericalCircle, or 
+- an area on the earth's surface, represented by a Quadrangle, GeodeticPolygon, or GeodeticCircle, or 
 - a reference to some other object/data. Objects that can be referenced are RPR entities, NETN entities, NETN-SE GeoObjects and GML Features.</semantics>
             </variantRecordData>
         </variantRecordDataTypes>
