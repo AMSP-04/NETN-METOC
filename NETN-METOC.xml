@@ -4,7 +4,7 @@
         <name>NETN METOC</name>
         <type>FOM</type>
         <version>1.0</version>
-        <modificationDate>2020-08-07</modificationDate>
+        <modificationDate>2020-09-02</modificationDate>
         <securityClassification>Not Classified</securityClassification>
         <purpose>The purpose of the NETN METOC module is to provide a standard way to exchange data related to weather conditions and primary effects of weather on terrain, on water surfaces, in the atmosphere and subsurface water conditions. The main objective is to provide a reference model that represents a core common subset of METOC related aspects and to allow extension of the module to incorporate additional detail if required. Therefore, the NETN METOC module shall be viewed as a reference FOM module where extensions are not only allowed but encouraged to fully meet federation specific requirements. However, any extension should also be considered as candidates for improving the NETN METOC module or candidates for new standard NETN modules.         </purpose>
         <applicationDomain>Training</applicationDomain>
@@ -13,7 +13,7 @@ NATO Education and Training Network (NETN) Meteorological and Oceanographic (MET
         
 This module is a specification of how to represent METOC related data to be shared among participants in a federated distributed simulation. The specification is based on IEEE 1516 High Level Architecture (HLA) Object Model Template (OMT) and primarily intended to support interoperability in a federated simulation (federation) based on HLA. An HLA OMT based Federation Object Model (FOM) is used to specify types of data and how it is encoded on the network. The NETN METOC FOM module is available as a XML file for use in HLA based federations.
         </description>
-        <useLimitation> Current weather conditions impact simulations such as platforms and sensors on the ground, on the sea, under water and in the air. In a federated distributed simulation a correlated representation of these condistions is key to meet interoperability and model requirements. Different simulations require different fidelity of weather conditions with respect to data resolution and accuracy.  The NETN METOC focus on representation of weather conditions related surfaces and layers. The main difference is that a surface condition does not have a volume and only represents the conditions directly related to the surface of a piece of terrain or water. The layer conditions represent a volume of water or air and is specified with hight/depth from surface and layer thickness. Both concepts are also geographically positioned by reference to other concepts shared in the federation such as position of objects, areal objects or reference to terrain features such as roads etc.  Based on these concepts different levels of fidelity in representing weather conditions can be achieved. Global conditions can be expressed as well as highly detailed conditions e.g. surrounding a specific aircraft.  The aspects and attributes of wather conditions included in the scope of the NETN METOC module is based on input from several sources and are designed to cover the most common levels of representation required by a large set of exising simulators.  Atmospheric Layer Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range and Clouds.  Water Layer Conditions cover the following aspects: Temperature, Salinity and Currents.  Land Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Snow Condition, Moisture and Ice Condition  Water Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Sea State, Salinity, Tide, Ice Conditions, Currents, Waves and Swell. </useLimitation>
+        <useLimitation> Current weather conditions impact simulations such as platforms and sensors on the ground, on the sea, under water and in the air. In a federated distributed simulation a correlated representation of these condistions is key to meet interoperability and model requirements. Different simulations require different fidelity of weather conditions with respect to data resolution and accuracy.  The NETN METOC focus on representation of weather conditions related surfaces and layers. The main difference is that a surface condition does not have a volume and only represents the conditions directly related to the surface of a piece of terrain or water. The layer conditions represent a volume of water or air and is specified with hight/depth from surface and layer thickness. Both concepts are also geographically positioned by reference to other concepts shared in the federation such as position of objects, areal objects or reference to terrain features such as roads etc.  Based on these concepts different levels of fidelity in representing weather conditions can be achieved. Global conditions can be expressed as well as highly detailed conditions e.g. surrounding a specific aircraft.  The aspects and attributes of wather conditions included in the scope of the NETN METOC module is based on input from several sources and are designed to cover the most common levels of representation required by a large set of exising simulators.  Tropospheric Layer Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range and Clouds.  Water Layer Conditions cover the following aspects: Temperature, Salinity and Currents.  Land Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Snow Condition, Moisture and Ice Condition  Water Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Sea State, Salinity, Tide, Ice Conditions, Currents, Waves and Swell. Subsurface Layer Conditions cover the following aspects: Temperature, Current, Salinity and BottomType.</useLimitation>
         <useHistory>v1.0 - Initial version developed by MSG-163</useHistory>
         <useHistory></useHistory>
         <poc>
@@ -61,7 +61,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>Required: Unique identifier for the Environment Condition object or METOC Service.</semantics>
+                    <semantics>Required. Unique identifier for the Environment Condition object or METOC Service.</semantics>
                 </attribute>
                 <attribute>
                     <name>Name</name>
@@ -72,7 +72,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>Optional: Name of the Environment Condition or METOC Service.</semantics>
+                    <semantics>Optional. Name of the Environment Condition or METOC Service.</semantics>
                 </attribute>
                 <objectClass>
                     <name>EnvironmentCondition</name>
@@ -97,7 +97,7 @@ If not provided, the EnvironmentCondition is considered global, only restricted 
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required: Identifies the METOC Service which produced the EnvironmentCondition object.</semantics>
+                        <semantics>Required. Identifies the METOC Service which produced the EnvironmentCondition object.</semantics>
                     </attribute>
                     <attribute>
                         <name>GeoReference</name>
@@ -108,7 +108,7 @@ If not provided, the EnvironmentCondition is considered global, only restricted 
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional: A geographical location, region, feature or simulated object.</semantics>
+                        <semantics>Optional. A geographical location, region, feature or simulated object.</semantics>
                     </attribute>
                     <objectClass>
                         <name>Weather</name>
@@ -127,7 +127,7 @@ An instance of this class without a GeoReference is considered global above sea 
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Temperature in the region/location specified by the EnvironmentCondition. 
+                            <semantics>Optional. Temperature in the region/location specified by the EnvironmentCondition. 
 If EnvironmentConditions with overlapping regions/locations exist the average temperature should be used.</semantics>
                         </attribute>
                         <attribute>
@@ -139,7 +139,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Wind speed and direction in the region/location specified by the EnvironmentCondition. 
+                            <semantics>Optional. Wind speed and direction in the region/location specified by the EnvironmentCondition. 
 If EnvironmentConditions with overlapping regions/locations exist the average wind speed and direction should be used.</semantics>
                         </attribute>
                         <attribute>
@@ -151,7 +151,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average wi
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Current precipitation type and intensity in the region/location specified by the Environment Condition. Default is No Precipitation. 
+                            <semantics>Optional. Current precipitation type and intensity in the region/location specified by the Environment Condition. Default is No Precipitation. 
 If EnvironmentConditions with overlapping regions/locations exist the average intensity should be used. 
 Conflicting precipitation types are resolved according to the following precedence: Snow, Hail, Rain, No Precipitation. 
 E.g. If there is one overlapping Environment Condition with Snow the result is always Snow.</semantics>
@@ -165,7 +165,7 @@ E.g. If there is one overlapping Environment Condition with Snow the result is a
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Current Haze type and density in the region/location specified by the Environment Condition. Default is No Haze. 
+                            <semantics>Optional. Current Haze type and density in the region/location specified by the Environment Condition. Default is No Haze. 
 If EnvironmentConditions with overlapping regions/locations exist having the same Haze type the average density should be used.</semantics>
                         </attribute>
                         <attribute>
@@ -177,7 +177,7 @@ If EnvironmentConditions with overlapping regions/locations exist having the sam
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Humidity in percent in the region/location specified by the Environment Condition. Default is 75% (Normal value) 
+                            <semantics>Optional. Humidity in percent in the region/location specified by the Environment Condition. Default is 75% (Normal value) 
 If EnvironmentConditions with overlapping regions/locations exist the average humidity should be used.</semantics>
                         </attribute>
                         <attribute>
@@ -189,7 +189,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average hu
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Barometric pressure measured in millibar or hectopascal (1 mbar = 1hPa) in the region/location specified by the Environment Condition. 
+                            <semantics>Optional. Barometric pressure measured in millibar or hectopascal (1 mbar = 1hPa) in the region/location specified by the Environment Condition. 
 If EnvironmentConditions with overlapping regions/locations exist the average barometric pressure should be used.</semantics>
                         </attribute>
                         <attribute>
@@ -201,7 +201,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average ba
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: The distance at which an object or light can be clearly discerned by the human eye in the region/location specified by the Environment Condition. 
+                            <semantics>Optional. The distance at which an object or light can be clearly discerned by the human eye in the region/location specified by the Environment Condition. 
 If EnvironmentConditions with overlapping regions/locations exist the minimum distance should be used.</semantics>
                         </attribute>
                         <objectClass>
@@ -232,7 +232,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average sn
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: Surface moisture in the region/location specified by the EnvironmentCondition. Default is 0 (Dry). 
+                                <semantics>Optional. Surface moisture in the region/location specified by the EnvironmentCondition. Default is 0 (Dry). 
 If EnvironmentConditions with overlapping regions/locations exist, moisture is calculated as the highest enumerated value making the resulting value the one with most moisture.</semantics>
                             </attribute>
                             <attribute>
@@ -244,7 +244,7 @@ If EnvironmentConditions with overlapping regions/locations exist, moisture is c
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: Surface ice condition in the region/location specified by the EnvironmentCondition. Default is no ice. 
+                                <semantics>Optional. Surface ice condition in the region/location specified by the EnvironmentCondition. Default is no ice. 
 If EnvironmentConditions with overlapping regions/locations exist, surface ice condition is calculated as the highest enumerated value making the resulting value the one with the most severe ice condition.</semantics>
                             </attribute>
                         </objectClass>
@@ -261,7 +261,7 @@ If EnvironmentConditions with overlapping regions/locations exist, surface ice c
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: State of sea surface. Default is Calm_glassy. If EnvironmentConditions with overlapping regions/locations exist, the sea state in the overlapping region is determined by the latest updated value.</semantics>
+                                <semantics>Optional. State of sea surface. Default is Calm_glassy. If EnvironmentConditions with overlapping regions/locations exist, the sea state in the overlapping region is determined by the latest updated value.</semantics>
                             </attribute>
                             <attribute>
                                 <name>Salinity</name>
@@ -272,7 +272,7 @@ If EnvironmentConditions with overlapping regions/locations exist, surface ice c
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: Salinity of sea water on the practical salinity scale 1978 (PSS-78). Default value is 35 (equivalent to 35 parts per thousand). If EnvironmentConditions with overlapping regions/locations exist the average salinity should be used.</semantics>
+                                <semantics>Optional. Salinity of sea water on the practical salinity scale 1978 (PSS-78). Default value is 35 (equivalent to 35 parts per thousand). If EnvironmentConditions with overlapping regions/locations exist the average salinity should be used.</semantics>
                             </attribute>
                             <attribute>
                                 <name>Tide</name>
@@ -283,7 +283,7 @@ If EnvironmentConditions with overlapping regions/locations exist, surface ice c
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: The height of the current tide relative to MSL. Default is 0. If EnvironmentConditions with overlapping regions/locations exist, the value for the overlapping region is the average Tide value.</semantics>
+                                <semantics>Optional. The height of the current tide relative to MSL. Default is 0. If EnvironmentConditions with overlapping regions/locations exist, the value for the overlapping region is the average Tide value.</semantics>
                             </attribute>
                             <attribute>
                                 <name>Ice</name>
@@ -294,7 +294,7 @@ If EnvironmentConditions with overlapping regions/locations exist, surface ice c
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: Ice condition on surface. Default is no ice. If EnvironmentConditions with overlapping regions/locations exist, the ice condition in the overlapping region is determined by the latest updated value.</semantics>
+                                <semantics>Optional. Ice condition on surface. Default is no ice. If EnvironmentConditions with overlapping regions/locations exist, the ice condition in the overlapping region is determined by the latest updated value.</semantics>
                             </attribute>
                             <attribute>
                                 <name>Current</name>
@@ -305,7 +305,7 @@ If EnvironmentConditions with overlapping regions/locations exist, surface ice c
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: Current on water surface. Default is no current. Ignored if surface has 100% Ice coverage. If EnvironmentConditions with overlapping regions/locations exist, the current in the overlapping region is the average current direction and speed.</semantics>
+                                <semantics>Optional. Current on water surface. Default is no current. Ignored if surface has 100% Ice coverage. If EnvironmentConditions with overlapping regions/locations exist, the current in the overlapping region is the average current direction and speed.</semantics>
                             </attribute>
                             <attribute>
                                 <name>Wave</name>
@@ -316,7 +316,7 @@ If EnvironmentConditions with overlapping regions/locations exist, surface ice c
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: Waves on the water surface. Default is no waves. Ignored if surface has 100% Ice coverage. If EnvironmentConditions with overlapping regions/locations exist, the wave condition in the overlapping region is determined by the latest updated value.</semantics>
+                                <semantics>Optional. Waves on the water surface. Default is no waves. Ignored if surface has 100% Ice coverage. If EnvironmentConditions with overlapping regions/locations exist, the wave condition in the overlapping region is determined by the latest updated value.</semantics>
                             </attribute>
                             <attribute>
                                 <name>Swell</name>
@@ -327,13 +327,15 @@ If EnvironmentConditions with overlapping regions/locations exist, surface ice c
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: Swell of the body of water. Default is no Swell. Ignored if surface has 100% Ice coverage. If EnvironmentConditions with overlapping regions/locations exist, the swell condition in the overlapping region is determined by the latest updated value.</semantics>
+                                <semantics>Optional. Swell of the body of water. Default is no Swell. Ignored if surface has 100% Ice coverage. If EnvironmentConditions with overlapping regions/locations exist, the swell condition in the overlapping region is determined by the latest updated value.</semantics>
                             </attribute>
                         </objectClass>
                         <objectClass>
                             <name>TroposphereLayer</name>
                             <sharing>PublishSubscribe</sharing>
-                            <semantics>Used to associate weather and environment contitions to a specific layer in the troposphere. Additional information on cloud coverage can be defined.
+                            <semantics>If overlapping Atmospheric Conditions exist the following merging rules apply: 
+Humidity, AirTemperature and BarometricPressure are calculated as the average of the overlapping conditions. 
+Visibility is calculated as the minimum visibility distance of the overlapping conditions. 
 A TroposhpereLayer instance without a GeoReference is considered global within its specified Layer.</semantics>
                             <attribute>
                                 <name>Layer</name>
@@ -344,7 +346,7 @@ A TroposhpereLayer instance without a GeoReference is considered global within i
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: Volume of atmosphere extending from a base altitude upwards (see LayerStruct). Any portion of the Layer extending below sea level is ignored. If Layer is not provided, it is considered to extend from the surface of the earth upward indefinitely.</semantics>
+                                <semantics>Optional. Volume of atmosphere extending from a base altitude upwards (see LayerStruct). Any portion of the Layer extending below sea level is ignored. If Layer is not provided, it is considered to extend from the surface of the earth upward indefinitely.</semantics>
                             </attribute>
                             <attribute>
                                 <name>Cloud</name>
@@ -355,7 +357,7 @@ A TroposhpereLayer instance without a GeoReference is considered global within i
                                 <sharing>PublishSubscribe</sharing>
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
-                                <semantics>Optional: Data about Clouds in the Atmospheric layer. Default is no clouds. If EnvironmentConditions with overlapping regions/locations exist, the cloud condition in the overlapping region is determined by the latest updated value.</semantics>
+                                <semantics>Optional. Data about Clouds in the Atmospheric layer. Default is no clouds. If EnvironmentConditions with overlapping regions/locations exist, the cloud condition in the overlapping region is determined by the latest updated value.</semantics>
                             </attribute>
                         </objectClass>
                     </objectClass>
@@ -372,7 +374,7 @@ A TroposhpereLayer instance without a GeoReference is considered global within i
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Temperature in the region/location specified by the EnvironmentCondition. 
+                            <semantics>Optional. Temperature in the region/location specified by the EnvironmentCondition. 
 If EnvironmentConditions with overlapping regions/locations exist the average temperature should be used.</semantics>
                         </attribute>
                         <attribute>
@@ -384,7 +386,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: A body of water extending from a (negative) base altitude upwards (see LayerStruct). Any portion of the Layer extending above sea level is ignored. If Layer is not provided, it is considered to extend from the sea floor to the surface of the water.</semantics>
+                            <semantics>Optional. A body of water extending from a (negative) base altitude upwards (see LayerStruct). Any portion of the Layer extending above sea level is ignored. If Layer is not provided, it is considered to extend from the sea floor to the surface of the water.</semantics>
                         </attribute>
                         <attribute>
                             <name>Current</name>
@@ -395,7 +397,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Describes current in the water layer. Default is no current. If EnvironmentConditions with overlapping regions/locations exist the average current direction and speed should be used.</semantics>
+                            <semantics>Optional. Describes current in the water layer. Default is no current. If EnvironmentConditions with overlapping regions/locations exist the average current direction and speed should be used.</semantics>
                         </attribute>
                         <attribute>
                             <name>Salinity</name>
@@ -406,7 +408,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Salinity of sea water on the practical salinity scale 1978 (PSS-78). Default value is 35 (equivalent to 35 parts per thousand). If EnvironmentConditions with overlapping regions/locations exist the average salinity should be used.</semantics>
+                            <semantics>Optional. Salinity of sea water on the practical salinity scale 1978 (PSS-78). Default value is 35 (equivalent to 35 parts per thousand). If EnvironmentConditions with overlapping regions/locations exist the average salinity should be used.</semantics>
                         </attribute>
                         <attribute>
                             <name>BottomType</name>
@@ -417,7 +419,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional: Type of sediment on the sea floor. Default is NoSediment. If EnvironmentConditions with overlapping regions/locations exist, the sediment type in the overlapping region is determined by the latest updated value.</semantics>
+                            <semantics>Optional. Type of sediment on the sea floor. Default is NoSediment. If EnvironmentConditions with overlapping regions/locations exist, the sediment type in the overlapping region is determined by the latest updated value.</semantics>
                         </attribute>
                     </objectClass>
                 </objectClass>
@@ -434,7 +436,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required: Type of METOC model provided by the Service. Specifies whether the Service delivers Simulated, Real (Historical), Live (Current) or Standard model data.</semantics>
+                        <semantics>Required. Type of METOC model provided by the Service. Specifies whether the Service delivers Simulated, Real (Historical), Live (Current) or Standard model data.</semantics>
                     </attribute>
                 </objectClass>
             </objectClass>
@@ -463,12 +465,12 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                     <parameter>
                         <name>GeoReference</name>
                         <dataType>GeoReferenceVariant</dataType>
-                        <semantics>Optional: Geographical reference to indicate for which point, area, path or object this request is related to. If not provided, the request is for a global environment condition.</semantics>
+                        <semantics>Optional. Geographical reference to indicate for which point, area, path or object this request is related to. If not provided, the request is for a global environment condition.</semantics>
                     </parameter>
                     <parameter>
                         <name>UpdateAsObject</name>
                         <dataType>HLAboolean</dataType>
-                        <semantics>Optional: Indicates if the service is requested to represent the environment condition as an EnvironmentCondition object instance. Default is False.</semantics>
+                        <semantics>Optional. Indicates if the service is requested to represent the environment condition as an EnvironmentCondition object instance. Default is False.</semantics>
                     </parameter>
                     <parameter>
                         <name>ServiceId</name>
@@ -498,7 +500,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                         <parameter>
                             <name>Layer</name>
                             <dataType>LayerStruct</dataType>
-                            <semantics>Optional: A description of layer for request of layered conditions troposphere environment condition. Default is the entire volume of air in the identified area.</semantics>
+                            <semantics>Optional. A description of layer for request of layered conditions troposphere environment condition. Default is the entire volume of air in the identified area.</semantics>
                         </parameter>
                     </interactionClass>
                     <interactionClass>
@@ -517,7 +519,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                         <parameter>
                             <name>Layer</name>
                             <dataType>LayerStruct</dataType>
-                            <semantics>Optional: A description of layer for request of layered subsurface environment conditions. Default is the entire body of water in the identified area.</semantics>
+                            <semantics>Optional. A description of layer for request of layered subsurface environment conditions. Default is the entire body of water in the identified area.</semantics>
                         </parameter>
                     </interactionClass>
                 </interactionClass>
@@ -530,12 +532,12 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                     <parameter>
                         <name>EnvironmentObjectId</name>
                         <dataType>UUID</dataType>
-                        <semantics>Optional: Reference to an existing environment condition object if the corresponding request includes UpdateAsObject set to true.</semantics>
+                        <semantics>Optional. Reference to an existing environment condition object if the corresponding request includes UpdateAsObject set to true.</semantics>
                     </parameter>
                     <parameter>
                         <name>GeoReference</name>
                         <dataType>GeoReferenceVariant</dataType>
-                        <semantics>Optional: Geographical reference to indicate for which point, area, path or object this request is related to. Default if not provided the environment condition data is global.</semantics>
+                        <semantics>Optional. Geographical reference to indicate for which point, area, path or object this request is related to. Default if not provided the environment condition data is global.</semantics>
                     </parameter>
                     <parameter>
                         <name>Status</name>
@@ -614,7 +616,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                             <parameter>
                                 <name>Cloud</name>
                                 <dataType>CloudStruct</dataType>
-                                <semantics>Optional: Cloud cover.</semantics>
+                                <semantics>Optional. Cloud cover.</semantics>
                             </parameter>
                         </interactionClass>
                         <interactionClass>
@@ -626,7 +628,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                             <parameter>
                                 <name>SeaState</name>
                                 <dataType>SeaStateEnum16</dataType>
-                                <semantics>Optional: Sea state data.</semantics>
+                                <semantics>Optional. Sea state data.</semantics>
                             </parameter>
                             <parameter>
                                 <name>Salinity</name>
@@ -674,17 +676,17 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                         <parameter>
                             <name>Current</name>
                             <dataType>CurrentStruct</dataType>
-                            <semantics>Optional: Average current direction and speed in the body of water.</semantics>
+                            <semantics>Optional. Average current direction and speed in the body of water.</semantics>
                         </parameter>
                         <parameter>
                             <name>Salinity</name>
                             <dataType>SalinityFloat32</dataType>
-                            <semantics>Optional: Average salinity in the body of water.</semantics>
+                            <semantics>Optional. Average salinity in the body of water.</semantics>
                         </parameter>
                         <parameter>
                             <name>BottomType</name>
                             <dataType>SedimentTypeEnum32</dataType>
-                            <semantics>Optional: Type of sediment on the sea floor. Default is 0 (NoSediment). If EnvironmentConditions with overlapping regions/locations exist, the sediment type in the overlapping region is determined by the latest updated value.</semantics>
+                            <semantics>Optional. Type of sediment on the sea floor. Default is 0 (NoSediment). If EnvironmentConditions with overlapping regions/locations exist, the sediment type in the overlapping region is determined by the latest updated value.</semantics>
                         </parameter>
                     </interactionClass>
                 </interactionClass>
@@ -1143,7 +1145,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 <field>
                     <name>VerticalSpeed</name>
                     <dataType>VelocityMeterPerSecondFloat32</dataType>
-                    <semantics>Optional: Wind speed in m/s. Negative number is  a downdraft. Default is 0.</semantics>
+                    <semantics>Optional. Wind speed in m/s. Negative number is  a downdraft. Default is 0.</semantics>
                 </field>
             </fixedRecordData>
             <fixedRecordData>
