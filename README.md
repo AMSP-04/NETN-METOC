@@ -1,7 +1,5 @@
 # NETN METOC
 NATO Education and Training Network (NETN) Meteorological and Oceanographic (METOC) Module. 
-        
-![overview](./images/overview.png)
 
 ## Introduction
 This module is a specification of how to represent METOC related data to be shared among participants in a federated distributed simulation. The specification is based on IEEE 1516 High Level Architecture (HLA) Object Model Template (OMT) and primarily intended to support interoperability in a federated simulation (federation) based on HLA. An HLA OMT based Federation Object Model (FOM) is used to specify types of data and how it is encoded on the network. The NETN METOC FOM module is available as an XML file for use in HLA based federations.
@@ -22,13 +20,15 @@ The aspects and attributes of weather conditions included in the scope of the NE
 ## Overview
 Environment Conditions are either surface based (land or water) or a layer (above terrain or below water surface) and include either Weather attributes or Sub Surface (Water) attributes. 
 
-* Atmospheric Layer Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range and Clouds.
+* Tropospheric Layer Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range and Clouds.
 
 * Water Layer Conditions cover the following aspects: Temperature, Salinity, and Currents.
 
 * Land Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Snow Condition, Moisture and Ice Condition
 
 * Water Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Sea State, Salinity, Tide, Ice Conditions, Currents, Waves and Swell. 
+
+* Subsurface Layer Conditions cover the following aspects: Temperature, Current, Salinity and BottomType.
 
 To exchange Environment Conditions the NETN-METOC offers two methods of interaction.
 

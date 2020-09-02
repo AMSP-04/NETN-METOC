@@ -333,9 +333,7 @@ If EnvironmentConditions with overlapping regions/locations exist, surface ice c
                         <objectClass>
                             <name>TroposphereLayer</name>
                             <sharing>PublishSubscribe</sharing>
-                            <semantics>If overlapping Atmospheric Conditions exist the following merging rules apply: 
-Humidity, AirTemperature and BarometricPressure are calculated as the average of the overlapping conditions. 
-Visibility is calculated as the minimum visibility distance of the overlapping conditions. 
+                            <semantics>Used to associate weather and environment contitions to a specific layer in the troposphere. Additional information on cloud coverage can be defined.
 A TroposhpereLayer instance without a GeoReference is considered global within its specified Layer.</semantics>
                             <attribute>
                                 <name>Layer</name>
