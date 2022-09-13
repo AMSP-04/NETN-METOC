@@ -3,8 +3,8 @@
     <modelIdentification notes="netn-metoc_2">
         <name>NETN METOC</name>
         <type>FOM</type>
-        <version>1.0</version>
-        <modificationDate>2020-09-02</modificationDate>
+        <version>1.1</version>
+        <modificationDate>2022-07-10</modificationDate>
         <securityClassification>Not Classified</securityClassification>
         <purpose>The purpose of the NETN METOC module is to provide a standard way to exchange data related to weather conditions and primary effects of weather on terrain, on water surfaces, in the atmosphere and subsurface water conditions. The main objective is to provide a reference model that represents a core common subset of METOC related aspects and to allow extension of the module to incorporate additional detail if required. Therefore, the NETN METOC module shall be viewed as a reference FOM module where extensions are not only allowed but encouraged to fully meet federation specific requirements. However, any extension should also be considered as candidates for improving the NETN METOC module or candidates for new standard NETN modules.         </purpose>
         <applicationDomain>Training</applicationDomain>
@@ -34,6 +34,12 @@ This module is a specification of how to represent METOC related data to be shar
             <pocOrg>NATO Modelling and Simulation Group</pocOrg>
             <pocEmail>msg@cso.nato.int</pocEmail>
         </poc>
+        <poc>
+            <pocType>Contributor</pocType>
+            <pocName>MSG-191</pocName>
+            <pocOrg>NATO Modelling and Simulation Group</pocOrg>
+            <pocEmail>msg@cso.nato.int</pocEmail>
+        </poc>
         <reference>
             <type>Dependency</type>
             <identification>NETN-BASE</identification>
@@ -51,29 +57,23 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
             <objectClass>
                 <name>METOC_Root</name>
                 <sharing>Neither</sharing>
-                <semantics>Superclass for Environment Conditions and Layers.</semantics>
-                <attribute>
-                    <name>UniqueId</name>
-                    <dataType>UUID</dataType>
-                    <updateType>Static</updateType>
-                    <updateCondition>NA</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                <semantics></semantics>
+                <objectClass>
+                    <name>Service</name>
                     <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Required. Unique identifier for the Environment Condition object or METOC Service.</semantics>
-                </attribute>
-                <attribute>
-                    <name>Name</name>
-                    <dataType>HLAunicodeString</dataType>
-                    <updateType>Static</updateType>
-                    <updateCondition>NA</updateCondition>
-                    <ownership>DivestAcquire</ownership>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Optional. Name of the Environment Condition or METOC Service.</semantics>
-                </attribute>
+                    <semantics>All systems providing EnvironmentCondition information as either object instances or as responses to service requests must register a Service object instance.</semantics>
+                    <attribute>
+                        <name>ModelType</name>
+                        <dataType>WeatherModelTypeEnum32</dataType>
+                        <updateType>Static</updateType>
+                        <updateCondition>NA</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required. Type of METOC model provided by the Service. Specifies whether the Service delivers Simulated, Real (Historical), Live (Current) or Standard model data.</semantics>
+                    </attribute>
+                </objectClass>
                 <objectClass>
                     <name>EnvironmentCondition</name>
                     <sharing>Neither</sharing>
@@ -423,22 +423,6 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                         </attribute>
                     </objectClass>
                 </objectClass>
-                <objectClass>
-                    <name>Service</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <semantics>All systems providing EnvironmentCondition information as either object instances or as responses to service requests must register a Service object instance.</semantics>
-                    <attribute>
-                        <name>ModelType</name>
-                        <dataType>WeatherModelTypeEnum32</dataType>
-                        <updateType>Static</updateType>
-                        <updateCondition>NA</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Required. Type of METOC model provided by the Service. Specifies whether the Service delivers Simulated, Real (Historical), Live (Current) or Standard model data.</semantics>
-                    </attribute>
-                </objectClass>
             </objectClass>
         </objectClass>
     </objects>
@@ -446,18 +430,9 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
         <interactionClass>
             <name>HLAinteractionRoot</name>
             <interactionClass>
-                <name>METOC_Interaction</name>
-                <sharing>Neither</sharing>
-                <transportation>HLAreliable</transportation>
-                <order>Receive</order>
-                <semantics>Root class for requesting environment data from a METOC Service.</semantics>
-                <parameter>
-                    <name>EventId</name>
-                    <dataType>TransactionId</dataType>
-                    <semantics>Required: Unique identifier of the request. Will be referenced in a resulting resulting METOC_Response interaction.</semantics>
-                </parameter>
+                <name>Response</name>
                 <interactionClass>
-                    <name>Request</name>
+                    <name>METOC_Request</name>
                     <sharing>Neither</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -524,7 +499,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                     </interactionClass>
                 </interactionClass>
                 <interactionClass>
-                    <name>Response</name>
+                    <name>METOC_Response</name>
                     <sharing>Neither</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -690,6 +665,9 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                         </parameter>
                     </interactionClass>
                 </interactionClass>
+            </interactionClass>
+            <interactionClass>
+                <name>Request</name>
             </interactionClass>
         </interactionClass>
     </interactions>
