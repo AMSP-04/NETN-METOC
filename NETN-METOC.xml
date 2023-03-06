@@ -448,7 +448,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 <semantics>Root class for requesting environment data from a METOC Service.</semantics>
                 <parameter>
                     <name>EventId</name>
-                    <dataType>TransactionId</dataType>
+                    <dataType>UUID</dataType>
                     <semantics>Required: Unique identifier of the request. Will be referenced in a resulting resulting METOC_Response interaction.</semantics>
                 </parameter>
                 <interactionClass>
