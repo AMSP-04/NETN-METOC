@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <objectModel xsi:schemaLocation="http://standards.ieee.org/IEEE1516-2010 http://standards.ieee.org/downloads/1516/1516.2-2010/IEEE1516-DIF-2010.xsd" xmlns="http://standards.ieee.org/IEEE1516-2010" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <modelIdentification notes="netn-metoc_2">
-        <name>NETN METOC</name>
+    <modelIdentification notes="netn-metoc_2 netn-metoc_1 netn-metoc_3">
+        <name>NETN-METOC</name>
         <type>FOM</type>
         <version>1.1</version>
-        <modificationDate>2023-02-20</modificationDate>
+        <modificationDate>2023-03-18</modificationDate>
         <securityClassification>Not Classified</securityClassification>
-        <purpose>The purpose of the NETN METOC module is to provide a standard way to exchange data related to weather conditions and primary effects of weather on terrain, on water surfaces, in the atmosphere and subsurface water conditions. The main objective is to provide a reference model that represents a core common subset of METOC related aspects and to allow extension of the module to incorporate additional detail if required. Therefore, the NETN METOC module shall be viewed as a reference FOM module where extensions are not only allowed but encouraged to fully meet federation specific requirements. However, any extension should also be considered as candidates for improving the NETN METOC module or candidates for new standard NETN modules.         </purpose>
+        <purpose>The purpose of the NATO Education and Training Network (NETN) Meteorological and Oceanographic (METOC) Module is to provide a standard way to exchange data related to weather conditions and primary effects of weather on terrain, on water surfaces, in the atmosphere and subsurface water conditions. The main objective is to provide a reference model that represents a core common subset of METOC-related aspects and to allow the extension of the module to incorporate additional detail if required. Therefore, the NETN-METOC module shall be viewed as a reference FOM module where extensions are not only allowed but encouraged to fully meet federation-specific requirements. However, any extension should also be considered as a candidate for improving the NETN-METOC module or candidates for new standard NETN modules.         </purpose>
         <applicationDomain>Training</applicationDomain>
-        <description>
-NATO Education and Training Network (NETN) Meteorological and Oceanographic (METOC) Module. 
-        
-This module is a specification of how to represent METOC related data to be shared among participants in a federated distributed simulation. The specification is based on IEEE 1516 High Level Architecture (HLA) Object Model Template (OMT) and primarily intended to support interoperability in a federated simulation (federation) based on HLA. An HLA OMT based Federation Object Model (FOM) is used to specify types of data and how it is encoded on the network. The NETN METOC FOM module is available as a XML file for use in HLA based federations.
+        <description>This module is a specification of how to represent METOC-related data to be shared among participants in a federated distributed simulation. The specification is based on IEEE 1516 High Level Architecture (HLA) Object Model Template (OMT) and is primarily intended to support interoperability in a federated simulation (federation) based on HLA. An HLA-based Federation Object Model (FOM) is used to specify types of data and how it is encoded on the network. The NETN-METOC FOM module is available as an XML file for use in HLA-based federations.
+
+Current weather conditions impact simulations such as platforms and sensors on the ground, on the sea, underwater and in the air. In a federated distributed simulation a correlated representation of these conditions is key to meeting interoperability and model requirements. Different simulations require different fidelity of weather conditions concerning data resolution and accuracy.  The NETN-METOC focus on the representation of weather conditions for related surfaces and layers. The main difference is that a surface condition does not have a volume and only represents the conditions directly related to the surface of a piece of terrain or water. The layer conditions represent a volume of water or air and are specified with height/depth from surface and layer thickness. Both concepts are also geographically positioned by reference to other concepts shared in the federation such as the position of objects, areal objects or reference to terrain features such as roads etc.  Based on these concepts different levels of fidelity in representing weather conditions can be achieved. Global conditions can be expressed as well as highly detailed conditions e.g. surrounding a specific aircraft.  
         </description>
-        <useLimitation> Current weather conditions impact simulations such as platforms and sensors on the ground, on the sea, under water and in the air. In a federated distributed simulation a correlated representation of these condistions is key to meet interoperability and model requirements. Different simulations require different fidelity of weather conditions with respect to data resolution and accuracy.  The NETN METOC focus on representation of weather conditions related surfaces and layers. The main difference is that a surface condition does not have a volume and only represents the conditions directly related to the surface of a piece of terrain or water. The layer conditions represent a volume of water or air and is specified with hight/depth from surface and layer thickness. Both concepts are also geographically positioned by reference to other concepts shared in the federation such as position of objects, areal objects or reference to terrain features such as roads etc.  Based on these concepts different levels of fidelity in representing weather conditions can be achieved. Global conditions can be expressed as well as highly detailed conditions e.g. surrounding a specific aircraft.  The aspects and attributes of wather conditions included in the scope of the NETN METOC module is based on input from several sources and are designed to cover the most common levels of representation required by a large set of exising simulators.  Tropospheric Layer Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range and Clouds.  Water Layer Conditions cover the following aspects: Temperature, Salinity and Currents.  Land Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Snow Condition, Moisture and Ice Condition  Water Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Sea State, Salinity, Tide, Ice Conditions, Currents, Waves and Swell. Subsurface Layer Conditions cover the following aspects: Temperature, Current, Salinity and BottomType.</useLimitation>
+        <useLimitation>The aspects and attributes of weather conditions included in the scope of the NETN-METOC module are based on input from several sources and are designed to cover the most common levels of representation required by a large set of existing simulators.</useLimitation>
         <useHistory>v1.0 - Initial version developed by MSG-163. Release included in NETN-FOM v3.0</useHistory>
         <useHistory>v1.1 - Minor update developed by MSG-191. Release included in NETN-FOM v4.0</useHistory>
         <poc>
@@ -92,13 +91,13 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
  
 The region where the EnvironmentCondition applies is defined by the GeoReference attribute, as follows. 
  
-If GeoReference is provided as a geographical area, and the sub class in question has surface semantics (water/land), the EnvironmentCondition applies only within that area of the surface. 
+If GeoReference is provided as a geographical area, and the subclass in question has surface semantics (water/land), the EnvironmentCondition applies only within that area of the surface. 
  
-If GeoReference is provided as a geographical area, and the sub class in question defines a Layer attribute, the EnvironmentCondition applies only within the volume bounded both by the Layer and by the body described by projecting each point of the area along a line through the center of the earth. (This means, e.g., that any volumes described by two adjacent geodetic quadrangles will never overlap, and if they belong to the same layer, will also be adjacent.) 
+If GeoReference is provided as a geographical area, and the sub-class in question defines a Layer attribute, the EnvironmentCondition applies only within the volume bounded both by the Layer and by the body described by projecting each point of the area along a line through the centre of the earth. (This means, e.g., that any volumes described by two adjacent geodetic quadrangles will never overlap, and if they belong to the same layer, will also be adjacent.) 
  
-If GeoReference is provided as a RPREntityReference, NETNEntityReference or GMLFeatureReference identifying a feature (as opposed to a geometry object), the EnvironmentCondition is considered to apply only to the immediate vicinity of the referenced entity/feature: any Layer attribute specified by a sub class is ignored in this case. 
+If GeoReference is provided as an RPREntityReference, NETNEntityReference or GMLFeatureReference identifying a feature (as opposed to a geometry object), the EnvironmentCondition is considered to apply only to the immediate vicinity of the referenced entity/feature: any Layer attribute specified by a subclass is ignored in this case. 
  
-If not provided, the EnvironmentCondition is considered global, only restricted by the semantics of its particular sub class.</semantics>
+If not provided, the EnvironmentCondition is considered global, only restricted by the semantics of its particular subclass.</semantics>
                     <attribute>
                         <name>ServiceId</name>
                         <dataType>UUID</dataType>
@@ -124,9 +123,8 @@ If not provided, the EnvironmentCondition is considered global, only restricted 
                     <objectClass>
                         <name>Weather</name>
                         <sharing>PublishSubscribe</sharing>
-                        <semantics>Information about the general weather condition can be represented using WeatherCondition objects. 
-Common data such as Temperature, Wind and Precipitaion is represented but also details regarding Barometric Pressure and Humidity. 
-Information about Visual Range and Haze conditions can also be represented. 
+                        <semantics>The `Weather` object class represents typical weather-related attributes such as temperature, wind and precipitation is represented but also details regarding barometric pressure and humidity. Information about Visual Range and Haze conditions can also be represented. Additional environment condition details for `LandSurface`, `WaterSurface` and in `TroposphereLayer` are provided in corresponding subclasses. 
+ 
 All attributes of WeatherCondition objects are optional. 
 An instance of this class without a GeoReference is considered global above sea level.</semantics>
                         <attribute>
@@ -218,8 +216,8 @@ If EnvironmentConditions with overlapping regions/locations exist the minimum di
                         <objectClass>
                             <name>LandSurface</name>
                             <sharing>PublishSubscribe</sharing>
-                            <semantics>The environment conditions related to a land surface. 
-Besides the common attributes such as Temperature, Wind and Precipitaion etc. additional detail regarding snow, moisture, and ice conditions of the land surface can be represented. 
+                            <semantics>The environmental conditions related to a land surface. 
+Besides the common attributes such as temperature, wind and precipitation etc. additional detail regarding snow, moisture, and ice conditions of the land surface can be represented. 
 All attributes of LandSurfaceCondition objects are optional. 
 An instance of this class without a GeoReference is considered to apply to all land surfaces.</semantics>
                             <attribute>
@@ -262,7 +260,7 @@ If EnvironmentConditions with overlapping regions/locations exist, surface ice c
                         <objectClass>
                             <name>WaterSurface</name>
                             <sharing>PublishSubscribe</sharing>
-                            <semantics>Condition of sea surface in the specified region. An instance of this class without a GeoReference is considered to apply to all water surfaces.</semantics>
+                            <semantics>The Condition of the sea surface in the specified region. An instance of this class without a GeoReference is considered to apply to all water surfaces.</semantics>
                             <attribute>
                                 <name>SeaState</name>
                                 <dataType>SeaStateEnum16</dataType>
@@ -344,7 +342,9 @@ If EnvironmentConditions with overlapping regions/locations exist, surface ice c
                         <objectClass>
                             <name>TroposphereLayer</name>
                             <sharing>PublishSubscribe</sharing>
-                            <semantics>If overlapping Atmospheric Conditions exist the following merging rules apply: 
+                            <semantics>The `TroposphereLayer` object class is used to associate weather and environmental conditions to a specific layer in the troposphere. Additional information on cloud coverage can be defined. 
+ 
+If overlapping Atmospheric Conditions exist the following merging rules apply: 
 Humidity, AirTemperature and BarometricPressure are calculated as the average of the overlapping conditions. 
 Visibility is calculated as the minimum visibility distance of the overlapping conditions. 
 A TroposhpereLayer instance without a GeoReference is considered global within its specified Layer.</semantics>
@@ -1247,13 +1247,58 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
     <notes>
         <note>
             <label>netn-metoc_2</label>
-            <semantics>Environment conditions are represented as object instances in the federation. Each instance is related to one of the following: Global condition (no GeoReference), condition related to specific object instance (RPR BaseEntity or Environment Object), explicitly defined geographical areas (Polygon or Circle) or a reference to WFS/GML identifier. 
+            <semantics>## Overview 
  
-Environment Condition Objects are either surface based (land or water) or a layer (above terrain or below water surface). 
+Environment Conditions are either surface-based (land or water) or a layer (above terrain or below the water surface) and include either weather attributes or sub-surface (Water) attributes. 
  
-Environment Condition Objects include either Weather attributes or Sub Surface (Water) attributes. 
+* Tropospheric Layer Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range and Clouds. 
  
-Environment Condition Objects are created by any federate to express need for environmental information. Ownership of environmental object attributes are divested to Weather Service federate(s) with the modelling responsibility of correlated environment conditions.</semantics>
+* Water Layer Conditions cover the following aspects: Temperature, Salinity, and Currents. 
+ 
+* Land Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Snow Condition, Moisture and Ice Condition 
+ 
+* Water Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Sea State, Salinity, Tide, Ice Conditions, Currents, Waves and Swell. 
+ 
+* Subsurface Layer Conditions cover the following aspects: Temperature, Current, Salinity and BottomType. 
+ 
+To exchange Environment Conditions, the NETN-METOC offers two methods of interaction. 
+ 
+1. Pull: Request and Response pattern for Environment Conditions based on HLA Interaction Classes. 
+2. Push: Request for Continuous updates of Environment Condition based on HLA Interactions and then updates of HLA Object instance attributes. 
+ 
+Depending on federation design and agreements, one or both methods may be suitable.</semantics>
+        </note>
+        <note>
+            <label>netn-metoc_1</label>
+            <semantics>## Environment Condition
+
+Environment Conditions can be modelled by any federate to represent METOC data. Multiple overlapping `EnvironmentCondition` objects may exist and subscribing federates should apply merge rules to calculate the resulting environment conditions. A METOC server may subscribe to multiple `EnvironmentCondition` objects and deliver correlated METOC data using a Request and Response pattern implemented as HLA interactions. 
+
+Environment conditions are always related to either the entire synthetic environment (global), a static or dynamic location, a region or a layer.This means that an environmental condition can be related to:
+* Specific geographical location
+* Specific geographical region
+* A specific simulated entity position
+* A volume of air
+* A body of water
+* A feature identified in a terrain database using Geography Markup Language (GML) identifiers
+
+### Overlapping Environment Conditions
+If EnvironmentConditions with overlapping regions/locations exist, the following rules apply: 
+
+* Wind Speed, Wind Direction, Precipitation Intensity, Temperature, Humidity, BarometricPressure, Snow Depth, Snow Density are calculated as the average in the overlapping EnvironmentConditions
+* Visibility is calculated as the minimum visibility distance of the overlapping EnvironmentConditions.
+* Conflicting precipitation types are resolved according to the following precedence: Snow, Hail, Rain, No Precipitation. E.g. If there is one overlapping Environment Condition with Snow, the result is always Snow.
+* For the same Haze type the average density should be used. Multiple overlapping EnvironmentConditions with different Haze type can exist.
+* Moisture is calculated as the highest enumerated value making the resulting value the one with most moisture.
+* LandSurface ice condition is calculated as the highest enumerated value making the resulting value the one with most severe ice condition.</semantics>
+        </note>
+        <note>
+            <label>netn-metoc_3</label>
+            <semantics>## Service
+
+A simulation capable of modelling environment conditions in the federated distributed environment registers a `Service` object instance and publish information that specifies the source and type of the METOC data available. All METOC data in the federation refers to the producing `Service` and requests for METOC data can be directed to a specific service.  
+
+Multiple METOC service providers may exist in a federation, and the use of these services should be specified in federation specific agreements.</semantics>
         </note>
     </notes>
 </objectModel>
