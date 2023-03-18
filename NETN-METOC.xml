@@ -14,7 +14,7 @@ Current weather conditions impact simulations such as platforms and sensors on t
         </description>
         <useLimitation>The aspects and attributes of weather conditions included in the scope of the NETN-METOC module are based on input from several sources and are designed to cover the most common levels of representation required by a large set of existing simulators.</useLimitation>
         <useHistory>v1.0 - Initial version developed by MSG-163. Release included in NETN-FOM v3.0</useHistory>
-        <useHistory>v1.1 - Minor update developed by MSG-191. Release included in NETN-FOM v4.0</useHistory>
+        <useHistory notes="netn-metoc_4">v1.1 - Minor update developed by MSG-191. Release included in NETN-FOM v4.0</useHistory>
         <poc>
             <pocType>Release authority</pocType>
             <pocName>NATO Modelling and Simulation Group</pocName>
@@ -1270,35 +1270,40 @@ Depending on federation design and agreements, one or both methods may be suitab
         </note>
         <note>
             <label>netn-metoc_1</label>
-            <semantics>## Environment Condition
-
+            <semantics>## Environment Condition 
+ 
 Environment Conditions can be modelled by any federate to represent METOC data. Multiple overlapping `EnvironmentCondition` objects may exist and subscribing federates should apply merge rules to calculate the resulting environment conditions. A METOC server may subscribe to multiple `EnvironmentCondition` objects and deliver correlated METOC data using a Request and Response pattern implemented as HLA interactions. 
-
-Environment conditions are always related to either the entire synthetic environment (global), a static or dynamic location, a region or a layer.This means that an environmental condition can be related to:
-* Specific geographical location
-* Specific geographical region
-* A specific simulated entity position
-* A volume of air
-* A body of water
-* A feature identified in a terrain database using Geography Markup Language (GML) identifiers
-
-### Overlapping Environment Conditions
+ 
+Environment conditions are always related to either the entire synthetic environment (global), a static or dynamic location, a region or a layer.This means that an environmental condition can be related to: 
+* Specific geographical location 
+* Specific geographical region 
+* A specific simulated entity position 
+* A volume of air 
+* A body of water 
+* A feature identified in a terrain database using Geography Markup Language (GML) identifiers 
+ 
+### Overlapping Environment Conditions 
 If EnvironmentConditions with overlapping regions/locations exist, the following rules apply: 
-
-* Wind Speed, Wind Direction, Precipitation Intensity, Temperature, Humidity, BarometricPressure, Snow Depth, Snow Density are calculated as the average in the overlapping EnvironmentConditions
-* Visibility is calculated as the minimum visibility distance of the overlapping EnvironmentConditions.
-* Conflicting precipitation types are resolved according to the following precedence: Snow, Hail, Rain, No Precipitation. E.g. If there is one overlapping Environment Condition with Snow, the result is always Snow.
-* For the same Haze type the average density should be used. Multiple overlapping EnvironmentConditions with different Haze type can exist.
-* Moisture is calculated as the highest enumerated value making the resulting value the one with most moisture.
+ 
+* Wind Speed, Wind Direction, Precipitation Intensity, Temperature, Humidity, BarometricPressure, Snow Depth, Snow Density are calculated as the average in the overlapping EnvironmentConditions 
+* Visibility is calculated as the minimum visibility distance of the overlapping EnvironmentConditions. 
+* Conflicting precipitation types are resolved according to the following precedence: Snow, Hail, Rain, No Precipitation. E.g. If there is one overlapping Environment Condition with Snow, the result is always Snow. 
+* For the same Haze type the average density should be used. Multiple overlapping EnvironmentConditions with different Haze type can exist. 
+* Moisture is calculated as the highest enumerated value making the resulting value the one with most moisture. 
 * LandSurface ice condition is calculated as the highest enumerated value making the resulting value the one with most severe ice condition.</semantics>
         </note>
         <note>
             <label>netn-metoc_3</label>
-            <semantics>## Service
-
-A simulation capable of modelling environment conditions in the federated distributed environment registers a `Service` object instance and publish information that specifies the source and type of the METOC data available. All METOC data in the federation refers to the producing `Service` and requests for METOC data can be directed to a specific service.  
-
+            <semantics>## Service 
+ 
+A simulation capable of modelling environment conditions in the federated distributed environment registers a `Service` object instance and publish information that specifies the source and type of the METOC data available. All METOC data in the federation refers to the producing `Service` and requests for METOC data can be directed to a specific service. 
+ 
 Multiple METOC service providers may exist in a federation, and the use of these services should be specified in federation specific agreements.</semantics>
+        </note>
+        <note>
+            <label>netn-metoc_4</label>
+            <semantics>* Move attribute `UniqueId` of object class `METOC_Root` to object class `HLAobjectRoot` defined in `NETN-BASE` FOM module
+* Replaced use of datatype `TransactionId` with `UUID`.</semantics>
         </note>
     </notes>
 </objectModel>
