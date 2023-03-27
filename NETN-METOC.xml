@@ -174,8 +174,8 @@ E.g. If there is one overlapping Environment Condition with Snow the result is a
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional. Current Haze type and density in the region/location specified by the Environment Condition. Default is No Haze. 
-If EnvironmentConditions with overlapping regions/locations exist having the same Haze type the average density should be used.</semantics>
+                            <semantics>Optional. Current Haze-type and density in the region/location specified by the Environment Condition. Default is No Haze. 
+If EnvironmentConditions with overlapping regions/locations exist having the same Haze-type the average density should be used.</semantics>
                         </attribute>
                         <attribute>
                             <name>Humidity</name>
@@ -242,7 +242,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average sn
                                 <transportation>HLAreliable</transportation>
                                 <order>Receive</order>
                                 <semantics>Optional. Surface moisture in the region/location specified by the EnvironmentCondition. Default is 0 (Dry). 
-If EnvironmentConditions with overlapping regions/locations exist, moisture is calculated as the highest enumerated value making the resulting value the one with most moisture.</semantics>
+If EnvironmentConditions with overlapping regions/locations exist, moisture is calculated as the highest enumerated value making the resulting value the one with the most moisture.</semantics>
                             </attribute>
                             <attribute>
                                 <name>IceCondition</name>
@@ -544,7 +544,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                         <sharing>Neither</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Response with general weather condition data.</semantics>
+                        <semantics>Response with the general weather condition data.</semantics>
                         <parameter>
                             <name>Temperature</name>
                             <dataType>TemperatureDegreeCelsiusFloat32</dataType>
@@ -585,7 +585,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Response with condition for land surface.</semantics>
+                            <semantics>Response with the condition for the land surface.</semantics>
                             <parameter>
                                 <name>Snow</name>
                                 <dataType>SnowStruct</dataType>
@@ -607,7 +607,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Response with environment condition in volume of air.</semantics>
+                            <semantics>Response with the environmental condition in a volume of air.</semantics>
                             <parameter>
                                 <name>Cloud</name>
                                 <dataType>CloudStruct</dataType>
@@ -619,7 +619,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Response with water surface condition data.</semantics>
+                            <semantics>Response with the water surface condition data.</semantics>
                             <parameter>
                                 <name>SeaState</name>
                                 <dataType>SeaStateEnum16</dataType>
@@ -662,7 +662,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Response with subsurface body of water condition data.</semantics>
+                        <semantics>Response with the subsurface body of water condition data.</semantics>
                         <parameter>
                             <name>Temperature</name>
                             <dataType>TemperatureDegreeCelsiusFloat32</dataType>
@@ -1274,7 +1274,7 @@ Depending on federation design and agreements, one or both methods may be suitab
  
 Environment Conditions can be modelled by any federate to represent METOC data. Multiple overlapping `EnvironmentCondition` objects may exist and subscribing federates should apply merge rules to calculate the resulting environment conditions. A METOC server may subscribe to multiple `EnvironmentCondition` objects and deliver correlated METOC data using a Request and Response pattern implemented as HLA interactions. 
  
-Environment conditions are always related to either the entire synthetic environment (global), a static or dynamic location, a region or a layer.This means that an environmental condition can be related to: 
+Environment conditions are always related to either the entire synthetic environment (global), a static or dynamic location, a region or a layer. This means that an environmental condition can be related to: 
 * Specific geographical location 
 * Specific geographical region 
 * A specific simulated entity position 
@@ -1288,17 +1288,17 @@ If EnvironmentConditions with overlapping regions/locations exist, the following
 * Wind Speed, Wind Direction, Precipitation Intensity, Temperature, Humidity, BarometricPressure, Snow Depth, Snow Density are calculated as the average in the overlapping EnvironmentConditions 
 * Visibility is calculated as the minimum visibility distance of the overlapping EnvironmentConditions. 
 * Conflicting precipitation types are resolved according to the following precedence: Snow, Hail, Rain, No Precipitation. E.g. If there is one overlapping Environment Condition with Snow, the result is always Snow. 
-* For the same Haze type the average density should be used. Multiple overlapping EnvironmentConditions with different Haze type can exist. 
-* Moisture is calculated as the highest enumerated value making the resulting value the one with most moisture. 
-* LandSurface ice condition is calculated as the highest enumerated value making the resulting value the one with most severe ice condition.</semantics>
+* For the same Haze-type, the average density should be used. Multiple overlapping EnvironmentConditions with different Haze-type can exist. 
+* Moisture is calculated as the highest enumerated value making the resulting value the one with the most moisture. 
+* LandSurface ice condition is calculated as the highest enumerated value making the resulting value the one with the most severe ice condition.</semantics>
         </note>
         <note>
             <label>netn-metoc_3</label>
             <semantics>## Service 
  
-A simulation capable of modelling environment conditions in the federated distributed environment registers a `Service` object instance and publish information that specifies the source and type of the METOC data available. All METOC data in the federation refers to the producing `Service` and requests for METOC data can be directed to a specific service. 
+A simulation capable of modelling environment conditions in the federated distributed environment registers a `Service` object instance and publishes information that specifies the source and type of the METOC data available. All METOC data in the federation refers to the producing `Service` and requests for METOC data can be directed to a specific service. 
  
-Multiple METOC service providers may exist in a federation, and the use of these services should be specified in federation specific agreements.</semantics>
+Multiple METOC service providers may exist in a federation, and the use of these services should be specified in federation-specific agreements.</semantics>
         </note>
         <note>
             <label>netn-metoc_4</label>
