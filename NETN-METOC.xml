@@ -3,8 +3,8 @@
     <modelIdentification notes="netn-metoc_2">
         <name>NETN METOC</name>
         <type>FOM</type>
-        <version>1.0</version>
-        <modificationDate>2020-09-02</modificationDate>
+        <version>1.1</version>
+        <modificationDate>2023-02-20</modificationDate>
         <securityClassification>Not Classified</securityClassification>
         <purpose>The purpose of the NETN METOC module is to provide a standard way to exchange data related to weather conditions and primary effects of weather on terrain, on water surfaces, in the atmosphere and subsurface water conditions. The main objective is to provide a reference model that represents a core common subset of METOC related aspects and to allow extension of the module to incorporate additional detail if required. Therefore, the NETN METOC module shall be viewed as a reference FOM module where extensions are not only allowed but encouraged to fully meet federation specific requirements. However, any extension should also be considered as candidates for improving the NETN METOC module or candidates for new standard NETN modules.         </purpose>
         <applicationDomain>Training</applicationDomain>
@@ -14,8 +14,8 @@ NATO Education and Training Network (NETN) Meteorological and Oceanographic (MET
 This module is a specification of how to represent METOC related data to be shared among participants in a federated distributed simulation. The specification is based on IEEE 1516 High Level Architecture (HLA) Object Model Template (OMT) and primarily intended to support interoperability in a federated simulation (federation) based on HLA. An HLA OMT based Federation Object Model (FOM) is used to specify types of data and how it is encoded on the network. The NETN METOC FOM module is available as a XML file for use in HLA based federations.
         </description>
         <useLimitation> Current weather conditions impact simulations such as platforms and sensors on the ground, on the sea, under water and in the air. In a federated distributed simulation a correlated representation of these condistions is key to meet interoperability and model requirements. Different simulations require different fidelity of weather conditions with respect to data resolution and accuracy.  The NETN METOC focus on representation of weather conditions related surfaces and layers. The main difference is that a surface condition does not have a volume and only represents the conditions directly related to the surface of a piece of terrain or water. The layer conditions represent a volume of water or air and is specified with hight/depth from surface and layer thickness. Both concepts are also geographically positioned by reference to other concepts shared in the federation such as position of objects, areal objects or reference to terrain features such as roads etc.  Based on these concepts different levels of fidelity in representing weather conditions can be achieved. Global conditions can be expressed as well as highly detailed conditions e.g. surrounding a specific aircraft.  The aspects and attributes of wather conditions included in the scope of the NETN METOC module is based on input from several sources and are designed to cover the most common levels of representation required by a large set of exising simulators.  Tropospheric Layer Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range and Clouds.  Water Layer Conditions cover the following aspects: Temperature, Salinity and Currents.  Land Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Snow Condition, Moisture and Ice Condition  Water Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Sea State, Salinity, Tide, Ice Conditions, Currents, Waves and Swell. Subsurface Layer Conditions cover the following aspects: Temperature, Current, Salinity and BottomType.</useLimitation>
-        <useHistory>v1.0 - Initial version developed by MSG-163</useHistory>
-        <useHistory></useHistory>
+        <useHistory>v1.0 - Initial version developed by MSG-163. Release included in NETN-FOM v3.0</useHistory>
+        <useHistory>v1.1 - Minor update developed by MSG-191. Release included in NETN-FOM v4.0</useHistory>
         <poc>
             <pocType>Release authority</pocType>
             <pocName>NATO Modelling and Simulation Group</pocName>
@@ -34,6 +34,12 @@ This module is a specification of how to represent METOC related data to be shar
             <pocOrg>NATO Modelling and Simulation Group</pocOrg>
             <pocEmail>msg@cso.nato.int</pocEmail>
         </poc>
+        <poc>
+            <pocType>Primary author</pocType>
+            <pocName>MSG-191 NATO Standards for Federated Simulation and Services for Integration, Verification and Certification</pocName>
+            <pocOrg>NATO Modelling and Simulation Group</pocOrg>
+            <pocEmail>msg@cso.nato.int</pocEmail>
+        </poc>
         <reference>
             <type>Dependency</type>
             <identification>NETN-BASE</identification>
@@ -42,7 +48,7 @@ This module is a specification of how to represent METOC related data to be shar
 Copyright © 2020 by NATO/OTAN. All rights reserved.
 This work is licensed under a Creative Commons Attribution-NoDerivatives 4.0 International License.
 
-Above license gives you the right to use and redistribute the NETN FOM Module (XML file and Documentation) in its entirety without modification. You are also allowed to develop your own new FOM Modules (in separate XML files and separate documentation) that build-on/extends the NETN module by reference. You are NOT allowed to modify the NETN FOM Module or its documentation without prior permission by the NATO Modelling and Simulation Group.</other>
+Above license gives you the right to use and redistribute this FOM Module (XML file and Documentation) in its entirety without modification. You are also allowed to develop your own new FOM Modules (in separate XML files and separate documentation) that build-on/extends this FOM module by reference. You are NOT allowed to modify this FOM Module or its documentation without prior permission by the NATO Modelling and Simulation Group.</other>
         <glyph type="png" height="48" width="48" alt="">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</glyph>
     </modelIdentification>
     <objects>
@@ -51,18 +57,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
             <objectClass>
                 <name>METOC_Root</name>
                 <sharing>Neither</sharing>
-                <semantics>Superclass for Environment Conditions and Layers.</semantics>
-                <attribute>
-                    <name>UniqueId</name>
-                    <dataType>UUID</dataType>
-                    <updateType>Static</updateType>
-                    <updateCondition>NA</updateCondition>
-                    <ownership>NoTransfer</ownership>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Required. Unique identifier for the Environment Condition object or METOC Service.</semantics>
-                </attribute>
+                <semantics></semantics>
                 <attribute>
                     <name>Name</name>
                     <dataType>HLAunicodeString</dataType>
@@ -74,6 +69,22 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                     <order>Receive</order>
                     <semantics>Optional. Name of the Environment Condition or METOC Service.</semantics>
                 </attribute>
+                <objectClass>
+                    <name>Service</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>All systems providing EnvironmentCondition information as either object instances or as responses to service requests must register a Service object instance.</semantics>
+                    <attribute>
+                        <name>ModelType</name>
+                        <dataType>WeatherModelTypeEnum32</dataType>
+                        <updateType>Static</updateType>
+                        <updateCondition>NA</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required. Type of METOC model provided by the Service. Specifies whether the Service delivers Simulated, Real (Historical), Live (Current) or Standard model data.</semantics>
+                    </attribute>
+                </objectClass>
                 <objectClass>
                     <name>EnvironmentCondition</name>
                     <sharing>Neither</sharing>
@@ -423,22 +434,6 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                         </attribute>
                     </objectClass>
                 </objectClass>
-                <objectClass>
-                    <name>Service</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <semantics>All systems providing EnvironmentCondition information as either object instances or as responses to service requests must register a Service object instance.</semantics>
-                    <attribute>
-                        <name>ModelType</name>
-                        <dataType>WeatherModelTypeEnum32</dataType>
-                        <updateType>Static</updateType>
-                        <updateCondition>NA</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Required. Type of METOC model provided by the Service. Specifies whether the Service delivers Simulated, Real (Historical), Live (Current) or Standard model data.</semantics>
-                    </attribute>
-                </objectClass>
             </objectClass>
         </objectClass>
     </objects>
@@ -453,7 +448,7 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 <semantics>Root class for requesting environment data from a METOC Service.</semantics>
                 <parameter>
                     <name>EventId</name>
-                    <dataType>TransactionId</dataType>
+                    <dataType>UUID</dataType>
                     <semantics>Required: Unique identifier of the request. Will be referenced in a resulting resulting METOC_Response interaction.</semantics>
                 </parameter>
                 <interactionClass>
