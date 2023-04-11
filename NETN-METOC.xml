@@ -803,6 +803,43 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
+                <name>GeoLocationTypeEnum32</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Specifies different ways to reference geographical locations.</semantics>
+                <enumerator>
+                    <name>Point</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>Circle</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>Polygon</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>Quadrangle</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>Path</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>NETN_UUID</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>RPR_Entity</name>
+                    <value>7</value>
+                </enumerator>
+                <enumerator>
+                    <name>NameReference</name>
+                    <value>8</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
                 <name>RoadIceConditionEnum16</name>
                 <representation>HLAinteger16BE</representation>
                 <semantics>Ice condition for roads.</semantics>
@@ -1219,12 +1256,6 @@ If EnvironmentConditions with overlapping regions/locations exist the average te
                     <semantics>A polygon on the surface of the earth defined by a number of great-circle arcs represented as lat, lon Locations. WGS84.</semantics>
                 </alternative>
                 <alternative>
-                    <enumerator>NETN_UUID</enumerator>
-                    <name>NETNGeoObjectReference</name>
-                    <dataType>UUID</dataType>
-                    <semantics>Reference to an object instance of class Location, Path or Region, defined in NETN-SE FOM Module or a NETN Physical or Aggregate entity with UUID.</semantics>
-                </alternative>
-                <alternative>
                     <enumerator>RPR_Entity</enumerator>
                     <name>RPREntityReference</name>
                     <dataType>EntityIdentifierStruct</dataType>
@@ -1302,7 +1333,7 @@ Multiple METOC service providers may exist in a federation, and the use of these
         </note>
         <note>
             <label>netn-metoc_4</label>
-            <semantics>* Move attribute `UniqueId` of object class `METOC_Root` to object class `HLAobjectRoot` defined in `NETN-BASE` FOM module
+            <semantics>* Move attribute `UniqueId` of object class `METOC_Root` to object class `HLAobjectRoot` defined in `NETN-BASE` FOM module 
 * Replaced use of datatype `TransactionId` with `UUID`.</semantics>
         </note>
     </notes>
