@@ -296,7 +296,7 @@ If not provided, the environment condition is considered global, only restricted
                         <attribute>
                             <name>Wave</name>
                             <dataType>WaveStruct</dataType>
-                            <updateType>Periodic</updateType>
+                            <updateType>Conditional</updateType>
                             <updateCondition>OnChange</updateCondition>
                             <ownership>DivestAcquire</ownership>
                             <sharing>PublishSubscribe</sharing>
