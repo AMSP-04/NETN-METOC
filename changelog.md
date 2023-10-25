@@ -1,10 +1,10 @@
 ## Changelog NETN-METOC
 
-### v1.0 - Initial version developed by MSG-163. Release included in NETN-FOM v3.0
+### v1.0 - Initial version developed by MSG-163. Release included in NETN FOM v3.0
 
 
 
-### v2.0 - Updates developed by MSG-191 and included in NETN-FOM v4.0
+### v2.0 - Updates developed by MSG-191 and included in NETN FOM v4.0
 
 * Replaced `Service` object class with `METOC_Service`
 * Replaced `EnvironmentCondition` object class with `METOC_EnvironmentCondition`
