@@ -2,7 +2,7 @@
 # NETN-METOC
 |Version| Date| Dependencies|
 |---|---|---|
-|2.0|2023-04-13|NETN-BASE|
+|2.0|2023-11-19|NETN-BASE|
 
 The purpose of the NATO Education and Training Network (NETN) Meteorological and Oceanographic (METOC) Module is to provide a standard way to exchange data related to weather conditions and the primary effects of weather on terrain and water surfaces in the atmosphere and subsurface water conditions. The main objective is to provide a reference model that represents a common core subset of METOC-related aspects and to allow the extension of the module to incorporate additional detail if required. Therefore, the NETN-METOC module is a reference FOM module where extensions are allowed and encouraged to meet federation-specific requirements fully.
 
@@ -68,23 +68,15 @@ Note that inherited and dependency attributes are not included in the descriptio
 
 ```mermaid
 graph RL
-METOC_Service-->HLAobjectRoot
 METOC_EnvironmentCondition-->HLAobjectRoot
+SMC_Service-->HLAobjectRoot
 Weather-->METOC_EnvironmentCondition
 SubsurfaceLayer-->METOC_EnvironmentCondition
 LandSurface-->Weather
 WaterSurface-->Weather
 TroposphereLayer-->Weather
+METOC_Service-->SMC_Service
 ```
-
-### METOC_Service
-
-The available METOC services are objects in the federation.
-
-|Attribute|Datatype|Semantics|
-|---|---|---|
-|Name|HLAunicodeString|Optional. Name of the METOC Service.|
-|ModelType|WeatherModelTypeEnum32|Required. Type of METOC model provided by the service. Specifies whether the service delivers Simulated, Real (Historical), Live (Current) or Standard model data.|
 
 ### METOC_EnvironmentCondition
 
@@ -103,7 +95,7 @@ If not provided, the environment condition is considered global, only restricted
 |Attribute|Datatype|Semantics|
 |---|---|---|
 |GeoReference|GeoReferenceVariant|Optional. A geographical location, region, feature or simulated object.|
-|Service|UUID|Optional. Identifies the METOC Service which produced the Environment Condition object.|
+|METOC_Service|FederateName|Optional: Reference to the METOC service that generated this Environment Condition.|
 
 ### Weather
 
@@ -164,19 +156,29 @@ The environmental condition of a subsurface water layer.
 |Salinity|SalinityFloat32|Optional. The salinity of seawater on the practical salinity scale 1978 (PSS-78). The default value is 35 (equivalent to 35 parts per thousand). Use the average salinity if overlapping layers exist.|
 |BottomType|SedimentTypeEnum32|Optional. Type of sediment on the sea floor. The default is `NoSediment`. Use the latest if overlapping layers exist.|
 
+### METOC_Service
+
+The available METOC services are objects in the federation.
+
+|Attribute|Datatype|Semantics|
+|---|---|---|
+|ModelType|WeatherModelTypeEnum32|Required. Type of METOC model provided by the service. Specifies whether the service delivers Simulated, Real (Historical), Live (Current) or Standard model data.|
+
 ## Interaction Classes
 
 Note that inherited and dependency parameters are not included in the description of interaction classes.
 
 ```mermaid
 graph RL
-METOC_Request-->HLAinteractionRoot
-METOC_Response-->HLAinteractionRoot
+SMC_FederateControl-->HLAinteractionRoot
+SMC_Response-->HLAinteractionRoot
+METOC_Request-->SMC_FederateControl
 RequestWeatherCondition-->METOC_Request
 RequestLandSurfaceCondition-->METOC_Request
 RequestTroposphereLayerCondition-->METOC_Request
 RequestWaterSurfaceCondition-->METOC_Request
 RequestSubsurfaceLayerCondition-->METOC_Request
+METOC_Response-->SMC_Response
 WeatherCondition-->METOC_Response
 SubsurfaceLayerCondition-->METOC_Response
 LandSurfaceCondition-->WeatherCondition
@@ -184,13 +186,17 @@ TroposphereLayerCondition-->WeatherCondition
 WaterSurfaceCondition-->WeatherCondition
 ```
 
+### SMC_FederateControl
+
+
+
+
 ### METOC_Request
 
 A request to a specified METOC Service to provide METOC data for a specific geographical reference. The request can result in either a response interaction including the requested data or registration of an EnvironmentCondition object for continuous updates.
 
 |Parameter|Datatype|Semantics|
 |---|---|---|
-|Service|UUID|Required: Reference to the METOC Service providing the METOC data.|
 |GeoReference|GeoReferenceVariant|Optional. Geographical reference. If not provided, the request is for a global environmental condition.|
 |UpdateAsObject|HLAboolean|Optional. Indicates if the service is requested to represent the environmental condition as an EnvironmentCondition object instance. The default is False.|
 
@@ -225,14 +231,17 @@ Request for sub-surface condition data.
 |---|---|---|
 |Layer|LayerStruct|Optional. A description of a layer for the request of layered subsurface environment conditions. Default is the entire body of water in the identified layer.|
 
+### SMC_Response
+
+
+
+
 ### METOC_Response
 
 A response to a request for METOC data.
 
 |Parameter|Datatype|Semantics|
 |---|---|---|
-|Request|UUID|Required: Reference to the corresponding request interaction.|
-|Status|HLAboolean|Required: Specifies the result of the request action. TRUE indicates success.|
 |GeoReference|GeoReferenceVariant|GeoReferenceVariant|Optional. Geographical reference. The default is global.|
 |EnvironmentObject|UUID|Optional. Reference to an existing environment condition if the corresponding request includes UpdateAsObject set to true.|
 
@@ -304,6 +313,7 @@ Note that only datatypes defined in this FOM Module are listed below. Please ref
 |CloudStruct|The cloud layer type, coverage and density.|
 |CloudTypeEnum32|Classification of different types of clouds.|
 |CurrentStruct|Water current direction and speed.|
+|FederateControlActionEnum|SMC Control action enumeration.|
 |GMLidentifier|GML Feature ID.|
 |GeoLocationTypeEnum32|Specifies different ways to reference geographical locations.|
 |GeoReferenceVariant|The area affected by an environmental condition can be expressed as: * a location on the Earth's surface represented by a Point, * an area on the Earth's surface, represented by a Quadrangle, GeodeticPolygon, or GeodeticCircle, order * a reference to some other object/data.|
@@ -336,6 +346,7 @@ Note that only datatypes defined in this FOM Module are listed below. Please ref
 |Name|Representation|Semantics|
 |---|---|---|
 |CloudTypeEnum32|HLAinteger32BE|Classification of different types of clouds.|
+|FederateControlActionEnum|HLAinteger32BE|SMC Control action enumeration.|
 |GeoLocationTypeEnum32|HLAinteger32BE|Specifies different ways to reference geographical locations.|
 |HazeTypeEnum32|HLAinteger32BE|Type of visibility obstruction.|
 |IceTypeEnum16|HLAinteger16BE|Type of Ice.|

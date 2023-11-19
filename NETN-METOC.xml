@@ -4,7 +4,7 @@
         <name>NETN-METOC</name>
         <type>FOM</type>
         <version>2.0</version>
-        <modificationDate>2023-04-13</modificationDate>
+        <modificationDate>2023-11-19</modificationDate>
         <securityClassification>Not Classified</securityClassification>
         <purpose>The purpose of the NATO Education and Training Network (NETN) Meteorological and Oceanographic (METOC) Module is to provide a standard way to exchange data related to weather conditions and the primary effects of weather on terrain and water surfaces in the atmosphere and subsurface water conditions. The main objective is to provide a reference model that represents a common core subset of METOC-related aspects and to allow the extension of the module to incorporate additional detail if required. Therefore, the NETN-METOC module is a reference FOM module where extensions are allowed and encouraged to meet federation-specific requirements fully.</purpose>
         <applicationDomain>Training</applicationDomain>
@@ -53,33 +53,6 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
         <objectClass>
             <name>HLAobjectRoot</name>
             <objectClass>
-                <name>METOC_Service</name>
-                <sharing>PublishSubscribe</sharing>
-                <semantics>The available METOC services are objects in the federation.</semantics>
-                <attribute>
-                    <name>Name</name>
-                    <dataType>HLAunicodeString</dataType>
-                    <updateType>Static</updateType>
-                    <updateCondition>NA</updateCondition>
-                    <ownership>DivestAcquire</ownership>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Optional. Name of the METOC Service.</semantics>
-                </attribute>
-                <attribute>
-                    <name>ModelType</name>
-                    <dataType>WeatherModelTypeEnum32</dataType>
-                    <updateType>Static</updateType>
-                    <updateCondition>NA</updateCondition>
-                    <ownership>DivestAcquire</ownership>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Required. Type of METOC model provided by the service. Specifies whether the service delivers Simulated, Real (Historical), Live (Current) or Standard model data.</semantics>
-                </attribute>
-            </objectClass>
-            <objectClass>
                 <name>METOC_EnvironmentCondition</name>
                 <sharing>Neither</sharing>
                 <semantics>Root class for all types of environment condition objects. 
@@ -105,15 +78,15 @@ If not provided, the environment condition is considered global, only restricted
                     <semantics>Optional. A geographical location, region, feature or simulated object.</semantics>
                 </attribute>
                 <attribute>
-                    <name>Service</name>
-                    <dataType>UUID</dataType>
+                    <name>METOC_Service</name>
+                    <dataType>FederateName</dataType>
                     <updateType>Static</updateType>
                     <updateCondition>NA</updateCondition>
                     <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>Optional. Identifies the METOC Service which produced the Environment Condition object.</semantics>
+                    <semantics>Optional: Reference to the METOC service that generated this Environment Condition.</semantics>
                 </attribute>
                 <objectClass>
                     <name>Weather</name>
@@ -405,248 +378,258 @@ If not provided, the environment condition is considered global, only restricted
                     </attribute>
                 </objectClass>
             </objectClass>
+            <objectClass>
+                <name>SMC_Service</name>
+                <objectClass>
+                    <name>METOC_Service</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>The available METOC services are objects in the federation.</semantics>
+                    <attribute>
+                        <name>ModelType</name>
+                        <dataType>WeatherModelTypeEnum32</dataType>
+                        <updateType>Static</updateType>
+                        <updateCondition>NA</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required. Type of METOC model provided by the service. Specifies whether the service delivers Simulated, Real (Historical), Live (Current) or Standard model data.</semantics>
+                    </attribute>
+                </objectClass>
+            </objectClass>
         </objectClass>
     </objects>
     <interactions>
         <interactionClass>
             <name>HLAinteractionRoot</name>
             <interactionClass>
-                <name>METOC_Request</name>
-                <sharing>Neither</sharing>
-                <transportation>HLAreliable</transportation>
-                <order>Receive</order>
-                <semantics>A request to a specified METOC Service to provide METOC data for a specific geographical reference. The request can result in either a response interaction including the requested data or registration of an EnvironmentCondition object for continuous updates.</semantics>
-                <parameter>
-                    <name>Service</name>
-                    <dataType>UUID</dataType>
-                    <semantics>Required: Reference to the METOC Service providing the METOC data.</semantics>
-                </parameter>
-                <parameter>
-                    <name>GeoReference</name>
-                    <dataType>GeoReferenceVariant</dataType>
-                    <semantics>Optional. Geographical reference. If not provided, the request is for a global environmental condition.</semantics>
-                </parameter>
-                <parameter>
-                    <name>UpdateAsObject</name>
-                    <dataType>HLAboolean</dataType>
-                    <semantics>Optional. Indicates if the service is requested to represent the environmental condition as an EnvironmentCondition object instance. The default is False.</semantics>
-                </parameter>
+                <name>SMC_FederateControl</name>
                 <interactionClass>
-                    <name>RequestWeatherCondition</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Request for general weather data.</semantics>
-                </interactionClass>
-                <interactionClass>
-                    <name>RequestLandSurfaceCondition</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Request for land surface condition data.</semantics>
-                </interactionClass>
-                <interactionClass>
-                    <name>RequestTroposphereLayerCondition</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Request for tropospheric environment condition data.</semantics>
-                    <parameter>
-                        <name>Layer</name>
-                        <dataType>LayerStruct</dataType>
-                        <semantics>Optional. A description of a layer for the request of layered conditions troposphere environment condition. Default is the entire volume of air in the identified layer.</semantics>
-                    </parameter>
-                </interactionClass>
-                <interactionClass>
-                    <name>RequestWaterSurfaceCondition</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Request for water surface condition data.</semantics>
-                </interactionClass>
-                <interactionClass>
-                    <name>RequestSubsurfaceLayerCondition</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Request for sub-surface condition data.</semantics>
-                    <parameter>
-                        <name>Layer</name>
-                        <dataType>LayerStruct</dataType>
-                        <semantics>Optional. A description of a layer for the request of layered subsurface environment conditions. Default is the entire body of water in the identified layer.</semantics>
-                    </parameter>
-                </interactionClass>
-            </interactionClass>
-            <interactionClass>
-                <name>METOC_Response</name>
-                <sharing>Neither</sharing>
-                <transportation>HLAreliable</transportation>
-                <order>Receive</order>
-                <semantics>A response to a request for METOC data.</semantics>
-                <parameter>
-                    <name>Request</name>
-                    <dataType>UUID</dataType>
-                    <semantics>Required: Reference to the corresponding request interaction.</semantics>
-                </parameter>
-                <parameter>
-                    <name>Status</name>
-                    <dataType>HLAboolean</dataType>
-                    <semantics>Required: Specifies the result of the request action. TRUE indicates success.</semantics>
-                </parameter>
-                <parameter>
-                    <name>GeoReference</name>
-                    <dataType>GeoReferenceVariant</dataType>
-                    <semantics>GeoReferenceVariant|Optional. Geographical reference. The default is global.</semantics>
-                </parameter>
-                <parameter>
-                    <name>EnvironmentObject</name>
-                    <dataType>UUID</dataType>
-                    <semantics>Optional. Reference to an existing environment condition if the corresponding request includes UpdateAsObject set to true.</semantics>
-                </parameter>
-                <interactionClass>
-                    <name>WeatherCondition</name>
+                    <name>METOC_Request</name>
                     <sharing>Neither</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>Response with the general weather condition data.</semantics>
+                    <semantics>A request to a specified METOC Service to provide METOC data for a specific geographical reference. The request can result in either a response interaction including the requested data or registration of an EnvironmentCondition object for continuous updates.</semantics>
                     <parameter>
-                        <name>Temperature</name>
-                        <dataType>TemperatureDegreeCelsiusFloat32</dataType>
-                        <semantics>Optional. The average temperature in the region/location.</semantics>
+                        <name>GeoReference</name>
+                        <dataType>GeoReferenceVariant</dataType>
+                        <semantics>Optional. Geographical reference. If not provided, the request is for a global environmental condition.</semantics>
                     </parameter>
                     <parameter>
-                        <name>Wind</name>
-                        <dataType>WindStruct</dataType>
-                        <semantics>Optional. The average wind speed and direction in the region/location.</semantics>
-                    </parameter>
-                    <parameter>
-                        <name>Precipitation</name>
-                        <dataType>PrecipitationStruct</dataType>
-                        <semantics>Optional. The average precipitation intensity in the region/location.</semantics>
-                    </parameter>
-                    <parameter>
-                        <name>Haze</name>
-                        <dataType>HazeStruct</dataType>
-                        <semantics>Optional. The average haze density in the region/location,</semantics>
-                    </parameter>
-                    <parameter>
-                        <name>Humidity</name>
-                        <dataType>PercentFloat32</dataType>
-                        <semantics>Optional. The average humidity in the region/location.</semantics>
-                    </parameter>
-                    <parameter>
-                        <name>BarometricPressure</name>
-                        <dataType>AtmosphericPressureFloat32</dataType>
-                        <semantics>Optional. The average barometric pressure in millibar or hectopascal (1 mbar = 1hPa) in the region/location.</semantics>
-                    </parameter>
-                    <parameter>
-                        <name>VisibilityRange</name>
-                        <dataType>MeterFloat32</dataType>
-                        <semantics>Optional. The average distance at which the human eye in the region/location discerns an object or light.</semantics>
+                        <name>UpdateAsObject</name>
+                        <dataType>HLAboolean</dataType>
+                        <semantics>Optional. Indicates if the service is requested to represent the environmental condition as an EnvironmentCondition object instance. The default is False.</semantics>
                     </parameter>
                     <interactionClass>
-                        <name>LandSurfaceCondition</name>
+                        <name>RequestWeatherCondition</name>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Response with the condition for the land surface.</semantics>
+                        <semantics>Request for general weather data.</semantics>
+                    </interactionClass>
+                    <interactionClass>
+                        <name>RequestLandSurfaceCondition</name>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Request for land surface condition data.</semantics>
+                    </interactionClass>
+                    <interactionClass>
+                        <name>RequestTroposphereLayerCondition</name>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Request for tropospheric environment condition data.</semantics>
                         <parameter>
-                            <name>Snow</name>
-                            <dataType>SnowStruct</dataType>
-                            <semantics>Optional. Average snow depth and density in the region/location.</semantics>
-                        </parameter>
-                        <parameter>
-                            <name>Moisture</name>
-                            <dataType>SurfaceMoistureEnum16</dataType>
-                            <semantics>Optional. Maximum surface moisture in the region/location.</semantics>
-                        </parameter>
-                        <parameter>
-                            <name>IceCondition</name>
-                            <dataType>RoadIceConditionEnum16</dataType>
-                            <semantics>Optional. The most severe ice conditions in the region/location.</semantics>
+                            <name>Layer</name>
+                            <dataType>LayerStruct</dataType>
+                            <semantics>Optional. A description of a layer for the request of layered conditions troposphere environment condition. Default is the entire volume of air in the identified layer.</semantics>
                         </parameter>
                     </interactionClass>
                     <interactionClass>
-                        <name>TroposphereLayerCondition</name>
+                        <name>RequestWaterSurfaceCondition</name>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Response specifying the environmental condition in a volume of air.</semantics>
-                        <parameter>
-                            <name>Cloud</name>
-                            <dataType>CloudStruct</dataType>
-                            <semantics>Optional. Cloud cover.</semantics>
-                        </parameter>
+                        <semantics>Request for water surface condition data.</semantics>
                     </interactionClass>
                     <interactionClass>
-                        <name>WaterSurfaceCondition</name>
+                        <name>RequestSubsurfaceLayerCondition</name>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Response specifying the environmental condition in a volume of air.</semantics>
+                        <semantics>Request for sub-surface condition data.</semantics>
                         <parameter>
-                            <name>SeaState</name>
-                            <dataType>SeaStateEnum16</dataType>
-                            <semantics>Optional. Sea state data.</semantics>
+                            <name>Layer</name>
+                            <dataType>LayerStruct</dataType>
+                            <semantics>Optional. A description of a layer for the request of layered subsurface environment conditions. Default is the entire body of water in the identified layer.</semantics>
+                        </parameter>
+                    </interactionClass>
+                </interactionClass>
+            </interactionClass>
+            <interactionClass>
+                <name>SMC_Response</name>
+                <interactionClass>
+                    <name>METOC_Response</name>
+                    <sharing>Neither</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>A response to a request for METOC data.</semantics>
+                    <parameter>
+                        <name>GeoReference</name>
+                        <dataType>GeoReferenceVariant</dataType>
+                        <semantics>GeoReferenceVariant|Optional. Geographical reference. The default is global.</semantics>
+                    </parameter>
+                    <parameter>
+                        <name>EnvironmentObject</name>
+                        <dataType>UUID</dataType>
+                        <semantics>Optional. Reference to an existing environment condition if the corresponding request includes UpdateAsObject set to true.</semantics>
+                    </parameter>
+                    <interactionClass>
+                        <name>WeatherCondition</name>
+                        <sharing>Neither</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Response with the general weather condition data.</semantics>
+                        <parameter>
+                            <name>Temperature</name>
+                            <dataType>TemperatureDegreeCelsiusFloat32</dataType>
+                            <semantics>Optional. The average temperature in the region/location.</semantics>
                         </parameter>
                         <parameter>
-                            <name>Salinity</name>
+                            <name>Wind</name>
+                            <dataType>WindStruct</dataType>
+                            <semantics>Optional. The average wind speed and direction in the region/location.</semantics>
+                        </parameter>
+                        <parameter>
+                            <name>Precipitation</name>
+                            <dataType>PrecipitationStruct</dataType>
+                            <semantics>Optional. The average precipitation intensity in the region/location.</semantics>
+                        </parameter>
+                        <parameter>
+                            <name>Haze</name>
+                            <dataType>HazeStruct</dataType>
+                            <semantics>Optional. The average haze density in the region/location,</semantics>
+                        </parameter>
+                        <parameter>
+                            <name>Humidity</name>
                             <dataType>PercentFloat32</dataType>
-                            <semantics>Optional. Salinity in the surface water.</semantics>
+                            <semantics>Optional. The average humidity in the region/location.</semantics>
                         </parameter>
                         <parameter>
-                            <name>Tide</name>
+                            <name>BarometricPressure</name>
+                            <dataType>AtmosphericPressureFloat32</dataType>
+                            <semantics>Optional. The average barometric pressure in millibar or hectopascal (1 mbar = 1hPa) in the region/location.</semantics>
+                        </parameter>
+                        <parameter>
+                            <name>VisibilityRange</name>
                             <dataType>MeterFloat32</dataType>
-                            <semantics>Optional. The height relative to the MSL.</semantics>
+                            <semantics>Optional. The average distance at which the human eye in the region/location discerns an object or light.</semantics>
                         </parameter>
+                        <interactionClass>
+                            <name>LandSurfaceCondition</name>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics>Response with the condition for the land surface.</semantics>
+                            <parameter>
+                                <name>Snow</name>
+                                <dataType>SnowStruct</dataType>
+                                <semantics>Optional. Average snow depth and density in the region/location.</semantics>
+                            </parameter>
+                            <parameter>
+                                <name>Moisture</name>
+                                <dataType>SurfaceMoistureEnum16</dataType>
+                                <semantics>Optional. Maximum surface moisture in the region/location.</semantics>
+                            </parameter>
+                            <parameter>
+                                <name>IceCondition</name>
+                                <dataType>RoadIceConditionEnum16</dataType>
+                                <semantics>Optional. The most severe ice conditions in the region/location.</semantics>
+                            </parameter>
+                        </interactionClass>
+                        <interactionClass>
+                            <name>TroposphereLayerCondition</name>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics>Response specifying the environmental condition in a volume of air.</semantics>
+                            <parameter>
+                                <name>Cloud</name>
+                                <dataType>CloudStruct</dataType>
+                                <semantics>Optional. Cloud cover.</semantics>
+                            </parameter>
+                        </interactionClass>
+                        <interactionClass>
+                            <name>WaterSurfaceCondition</name>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics>Response specifying the environmental condition in a volume of air.</semantics>
+                            <parameter>
+                                <name>SeaState</name>
+                                <dataType>SeaStateEnum16</dataType>
+                                <semantics>Optional. Sea state data.</semantics>
+                            </parameter>
+                            <parameter>
+                                <name>Salinity</name>
+                                <dataType>PercentFloat32</dataType>
+                                <semantics>Optional. Salinity in the surface water.</semantics>
+                            </parameter>
+                            <parameter>
+                                <name>Tide</name>
+                                <dataType>MeterFloat32</dataType>
+                                <semantics>Optional. The height relative to the MSL.</semantics>
+                            </parameter>
+                            <parameter>
+                                <name>Ice</name>
+                                <dataType>IceStruct</dataType>
+                                <semantics>Optional. Ice conditions on the water surface.</semantics>
+                            </parameter>
+                            <parameter>
+                                <name>Current</name>
+                                <dataType>CurrentStruct</dataType>
+                                <semantics>Optional. Surface water Current direction and speed. N/A if Ice</semantics>
+                            </parameter>
+                            <parameter>
+                                <name>Wave</name>
+                                <dataType>WaveStruct</dataType>
+                                <semantics>Optional. Surface Wave data. N/A if Ice</semantics>
+                            </parameter>
+                            <parameter>
+                                <name>Swell</name>
+                                <dataType>WaveStruct</dataType>
+                                <semantics>Optional. Surface water Swell data. N/A if Ice</semantics>
+                            </parameter>
+                        </interactionClass>
+                    </interactionClass>
+                    <interactionClass>
+                        <name>SubsurfaceLayerCondition</name>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Response specifying the subsurface body of water condition data.</semantics>
                         <parameter>
-                            <name>Ice</name>
-                            <dataType>IceStruct</dataType>
-                            <semantics>Optional. Ice conditions on the water surface.</semantics>
+                            <name>Temperature</name>
+                            <dataType>TemperatureDegreeCelsiusFloat32</dataType>
+                            <semantics>Optional. The average temperature in the body of water.</semantics>
                         </parameter>
                         <parameter>
                             <name>Current</name>
                             <dataType>CurrentStruct</dataType>
-                            <semantics>Optional. Surface water Current direction and speed. N/A if Ice</semantics>
+                            <semantics>Optional. The average current direction and speed in the body of water.</semantics>
                         </parameter>
                         <parameter>
-                            <name>Wave</name>
-                            <dataType>WaveStruct</dataType>
-                            <semantics>Optional. Surface Wave data. N/A if Ice</semantics>
+                            <name>Salinity</name>
+                            <dataType>SalinityFloat32</dataType>
+                            <semantics>Optional. The average salinity in the body of water.</semantics>
                         </parameter>
                         <parameter>
-                            <name>Swell</name>
-                            <dataType>WaveStruct</dataType>
-                            <semantics>Optional. Surface water Swell data. N/A if Ice</semantics>
+                            <name>BottomType</name>
+                            <dataType>SedimentTypeEnum32</dataType>
+                            <semantics>Optional. The type of sediment on the sea floor. The default is 0 (NoSediment).</semantics>
                         </parameter>
                     </interactionClass>
-                </interactionClass>
-                <interactionClass>
-                    <name>SubsurfaceLayerCondition</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Response specifying the subsurface body of water condition data.</semantics>
-                    <parameter>
-                        <name>Temperature</name>
-                        <dataType>TemperatureDegreeCelsiusFloat32</dataType>
-                        <semantics>Optional. The average temperature in the body of water.</semantics>
-                    </parameter>
-                    <parameter>
-                        <name>Current</name>
-                        <dataType>CurrentStruct</dataType>
-                        <semantics>Optional. The average current direction and speed in the body of water.</semantics>
-                    </parameter>
-                    <parameter>
-                        <name>Salinity</name>
-                        <dataType>SalinityFloat32</dataType>
-                        <semantics>Optional. The average salinity in the body of water.</semantics>
-                    </parameter>
-                    <parameter>
-                        <name>BottomType</name>
-                        <dataType>SedimentTypeEnum32</dataType>
-                        <semantics>Optional. The type of sediment on the sea floor. The default is 0 (NoSediment).</semantics>
-                    </parameter>
                 </interactionClass>
             </interactionClass>
         </interactionClass>
@@ -1017,6 +1000,31 @@ If not provided, the environment condition is considered global, only restricted
                     <value>4</value>
                 </enumerator>
             </enumeratedData>
+            <enumeratedData>
+                <name>FederateControlActionEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>SMC Control action enumeration.</semantics>
+                <enumerator>
+                    <name>RequestWeatherCondition</name>
+                    <value>20</value>
+                </enumerator>
+                <enumerator>
+                    <name>RequestLandSurfaceCondition</name>
+                    <value>21</value>
+                </enumerator>
+                <enumerator>
+                    <name>RequestTroposphereLayerCondition</name>
+                    <value>22</value>
+                </enumerator>
+                <enumerator>
+                    <name>RequestSubsurfaceLayerCondition</name>
+                    <value>24</value>
+                </enumerator>
+                <enumerator>
+                    <name>RequestWaterSurfaceCondition</name>
+                    <value>23</value>
+                </enumerator>
+            </enumeratedData>
         </enumeratedDataTypes>
         <arrayDataTypes>
             <arrayData>
@@ -1298,24 +1306,24 @@ Multiple METOC service providers may exist in a federation.</semantics>
         </note>
         <note>
             <label>netn-metoc_4</label>
-            <semantics>* Replaced `Service` object class with `METOC_Service`
-* Replaced `EnvironmentCondition` object class with `METOC_EnvironmentCondition`
-* Replaced `EnvironmentCondition` attribute `ServiceId` with `METOC_EnvironmentCondition` attribute `Service`
-* Replaced `EnvironmentCondition` attribute `GeoReference` with `METOC_EnvironmentCondition` attribute `GeoReference`
-* Replaced `METOC_Root` attribute `UniqueId` with HLA-BASE `HLAobjectRoot` attribute `UniqueId`
-* Replaced `METOC_Root` attribute `Name` with `METOC_Service` attribute `Name`
-* Removed object class `METOC_Root`
-
-* Replaced `METOC_Interaction` parameter `EventId` with NETN-BASE `HLAinteractionRoot` parameter `UniqueId`
-* Removed interaction class `METOC_Interaction`
-
-* Replaced `Request` parameter `ServiceId` with `METOC_Request` parameter `Service`
-* Replaced `Request` parameter `GeoReference` with `METOC_Request` parameter `GeoReference`
-* Replaced `Request` parameter `UpdateAsObject` with `METOC_Request` parameter `UpdateAsObject`
-
-* Replaced `Response` parameter `EnvironmentObjectId` with `METOC_Response` parameter `EnvironmentObject`
-* Replaced `Response` parameter `GeoReference` with `METOC_Response` parameter `GeoReference`
-* Replaced `Response` parameter `Status` with `METOC_Response` parameter `Status`
+            <semantics>* Replaced `Service` object class with `METOC_Service` 
+* Replaced `EnvironmentCondition` object class with `METOC_EnvironmentCondition` 
+* Replaced `EnvironmentCondition` attribute `ServiceId` with `METOC_EnvironmentCondition` attribute `Service` 
+* Replaced `EnvironmentCondition` attribute `GeoReference` with `METOC_EnvironmentCondition` attribute `GeoReference` 
+* Replaced `METOC_Root` attribute `UniqueId` with HLA-BASE `HLAobjectRoot` attribute `UniqueId` 
+* Replaced `METOC_Root` attribute `Name` with `METOC_Service` attribute `Name` 
+* Removed object class `METOC_Root` 
+ 
+* Replaced `METOC_Interaction` parameter `EventId` with NETN-BASE `HLAinteractionRoot` parameter `UniqueId` 
+* Removed interaction class `METOC_Interaction` 
+ 
+* Replaced `Request` parameter `ServiceId` with `METOC_Request` parameter `Service` 
+* Replaced `Request` parameter `GeoReference` with `METOC_Request` parameter `GeoReference` 
+* Replaced `Request` parameter `UpdateAsObject` with `METOC_Request` parameter `UpdateAsObject` 
+ 
+* Replaced `Response` parameter `EnvironmentObjectId` with `METOC_Response` parameter `EnvironmentObject` 
+* Replaced `Response` parameter `GeoReference` with `METOC_Response` parameter `GeoReference` 
+* Replaced `Response` parameter `Status` with `METOC_Response` parameter `Status` 
 * Added `Response` parameter `Request`</semantics>
         </note>
     </notes>
