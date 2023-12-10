@@ -88,10 +88,32 @@ If not provided, the environment condition is considered global, only restricted
                     <order>Receive</order>
                     <semantics>Optional: Reference to the METOC service that generated this Environment Condition.</semantics>
                 </attribute>
+                <attribute>
+                    <name>Priority</name>
+                    <dataType>UnsignedInteger16</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Optional: Indication of priority when calculating overlapping environment conditions of the same type. If Overlapping environment conditions of the same type, e.g., TroposphereLayer, exists, then the environment condition with the highest priority takes precedence. If multiple environment conditions with the same highest condition exists, use the NETN-METOC merging rules.</semantics>
+                </attribute>
                 <objectClass>
                     <name>Weather</name>
                     <sharing>PublishSubscribe</sharing>
                     <semantics>The `Weather` object class represents typical weather-related attributes such as temperature, wind and precipitation but also details regarding barometric pressure, humidity, visual range and haze conditions.</semantics>
+                    <attribute>
+                        <name>VisibilityRange</name>
+                        <dataType>MeterFloat32</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On Change</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional. The distance at which the human eye in the region/location can discern an object or light. Use the minimum distance if overlapping regions/locations exist.</semantics>
+                    </attribute>
                     <attribute>
                         <name>Temperature</name>
                         <dataType>TemperatureDegreeCelsiusFloat32</dataType>
@@ -101,7 +123,29 @@ If not provided, the environment condition is considered global, only restricted
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. The temperature in the region/location. Use the average temperature if overlapping weather regions/locations exist.</semantics>
+                        <semantics>Optional. The temperature in the region/location at the specified reference altitude. Temperature for specific altitudes is calculated using the International Standard Atmosphere (ISA) model. Default = 0.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>ReferenceAltitude</name>
+                        <dataType>AltitudeMeterFloat64</dataType>
+                        <updateType>Static</updateType>
+                        <updateCondition>NA</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional: The altitude/depth at which pressure and temperature values are calculated.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>BarometricPressure</name>
+                        <dataType>AtmosphericPressureFloat32</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On Change</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional. The barometric pressure in millibar or hectopascal (1 mbar = 1hPa) in the region/location at the specified reference altitude. Barometric pressure for specific altitudes are calculated using the International Standard Atmosphere (ISA) model. Default is 1013.25 hPa (standard pressure at sea level).</semantics>
                     </attribute>
                     <attribute>
                         <name>Wind</name>
@@ -148,26 +192,26 @@ If not provided, the environment condition is considered global, only restricted
                         <semantics>Optional. The humidity in the region/location. The default is 75% (Normal value). Use the average humidity if overlapping regions/locations exist.</semantics>
                     </attribute>
                     <attribute>
-                        <name>BarometricPressure</name>
-                        <dataType>AtmosphericPressureFloat32</dataType>
+                        <name>LightningType</name>
+                        <dataType>LightningTypeEnum8</dataType>
                         <updateType>Conditional</updateType>
-                        <updateCondition>On Change</updateCondition>
+                        <updateCondition>On change</updateCondition>
                         <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. The barometric pressure in millibar or hectopascal (1 mbar = 1hPa) in the region/location. Use the average barometric pressure if overlapping regions/locations exist.</semantics>
+                        <semantics>Optional: Level of lightning present. Default 0 = No lightning.</semantics>
                     </attribute>
                     <attribute>
-                        <name>VisibilityRange</name>
-                        <dataType>MeterFloat32</dataType>
+                        <name>LightningIntensity</name>
+                        <dataType>LightningIntensity32</dataType>
                         <updateType>Conditional</updateType>
-                        <updateCondition>On Change</updateCondition>
+                        <updateCondition>On change</updateCondition>
                         <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. The distance at which the human eye in the region/location can discern an object or light. Use the minimum distance if overlapping regions/locations exist.</semantics>
+                        <semantics>Optional: The intesity of lightning. Default = 0.</semantics>
                     </attribute>
                     <objectClass>
                         <name>LandSurface</name>
@@ -206,6 +250,17 @@ If not provided, the environment condition is considered global, only restricted
                             <order>Receive</order>
                             <semantics>Optional. Surface ice condition in the region/location. The default is no ice. Use the highest enumerated value (most severe ice condition) if overlapping regions/locations exist.</semantics>
                         </attribute>
+                        <attribute>
+                            <name>RainAccumulation</name>
+                            <dataType>MeterFloat32</dataType>
+                            <updateType>Conditional</updateType>
+                            <updateCondition>On change</updateCondition>
+                            <ownership>DivestAcquire</ownership>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics>Optional: Accumulated amount of rain on land surface.</semantics>
+                        </attribute>
                     </objectClass>
                     <objectClass>
                         <name>WaterSurface</name>
@@ -234,7 +289,7 @@ If not provided, the environment condition is considered global, only restricted
                             <semantics>Optional. The salinity of seawater on the practical salinity scale 1978 (PSS-78). The default value is 35 (equivalent to 35 parts per thousand). Use the average salinity if overlapping regions/locations.</semantics>
                         </attribute>
                         <attribute>
-                            <name>Tide</name>
+                            <name>SurfaceAltitude</name>
                             <dataType>MeterFloat32</dataType>
                             <updateType>Conditional</updateType>
                             <updateCondition>on change</updateCondition>
@@ -242,7 +297,18 @@ If not provided, the environment condition is considered global, only restricted
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional. The surface height of the current tide relative to MSL. The default is 0. Use the average Tide value if overlapping regions/locations exist.</semantics>
+                            <semantics>Optional. The altitude of a water surface relative to MSL. The default is 0.</semantics>
+                        </attribute>
+                        <attribute>
+                            <name>Surge</name>
+                            <dataType>MeterFloat32</dataType>
+                            <updateType>Conditional</updateType>
+                            <updateCondition>On change</updateCondition>
+                            <ownership>DivestAcquire</ownership>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics>Optional. Change in the normal altitude of the surface due to tide, surge, drought, flooding etc. Default = 0.</semantics>
                         </attribute>
                         <attribute>
                             <name>Ice</name>
@@ -288,6 +354,17 @@ If not provided, the environment condition is considered global, only restricted
                             <order>Receive</order>
                             <semantics>Optional. Swell of the body of water. The default is no Swell. Ignored if the surface has 100% Ice coverage. Use the latest updated value if overlapping regions/locations exist.</semantics>
                         </attribute>
+                        <attribute>
+                            <name>Choppiness</name>
+                            <dataType>PercentFloat32</dataType>
+                            <updateType>Conditional</updateType>
+                            <updateCondition>On change</updateCondition>
+                            <ownership>DivestAcquire</ownership>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics>Optional: A degree of choppiness of the water surface ranging from 0% = no choppiness to 100% = max choppy. Default = 0.</semantics>
+                        </attribute>
                     </objectClass>
                     <objectClass>
                         <name>TroposphereLayer</name>
@@ -322,17 +399,6 @@ If not provided, the environment condition is considered global, only restricted
                     <sharing>PublishSubscribe</sharing>
                     <semantics>The environmental condition of a subsurface water layer.</semantics>
                     <attribute>
-                        <name>Temperature</name>
-                        <dataType>TemperatureDegreeCelsiusFloat32</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>on change</updateCondition>
-                        <ownership>DivestAcquire</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Optional. The temperature in the region/location. Use the average temperature if overlapping layers exist.</semantics>
-                    </attribute>
-                    <attribute>
                         <name>Layer</name>
                         <dataType>LayerStruct</dataType>
                         <updateType>Conditional</updateType>
@@ -342,6 +408,28 @@ If not provided, the environment condition is considered global, only restricted
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
                         <semantics>Optional. A body of water extends upwards from a (negative) base altitude (see LayerStruct). Ignore any portion of the layer extending above sea level. The default value is the volume between the sea floor and the surface.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>VisibilityRange</name>
+                        <dataType>MeterFloat32</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On Change</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional. The distance at which the human eye in the region/location can discern an object or light. Use the minimum distance if overlapping regions/locations exist.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>Temperature</name>
+                        <dataType>TemperatureDegreeCelsiusFloat32</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on change</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional. The temperature at the base altitude of the subsurface layer. Default = 0.</semantics>
                     </attribute>
                     <attribute>
                         <name>Current</name>
@@ -375,6 +463,55 @@ If not provided, the environment condition is considered global, only restricted
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
                         <semantics>Optional. Type of sediment on the sea floor. The default is `NoSediment`. Use the latest if overlapping layers exist.</semantics>
+                    </attribute>
+                </objectClass>
+                <objectClass>
+                    <name>WindCorridor</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>Represents a specific wind related environment condition expressed as wind speed in a specified corridor.</semantics>
+                    <attribute>
+                        <name>Path</name>
+                        <dataType>GeodeticPath</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On change</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required. The path of the corridor.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>Width</name>
+                        <dataType>MeterFloat32</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On change</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required: The width of the corridor centered on the geodetic path.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>Height</name>
+                        <dataType>MeterFloat32</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On change</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required. The height of the corridor centered on the geodetic path.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>WindSpeed</name>
+                        <dataType>VelocityMeterPerSecondFloat32</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On change</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required. Wind speed in the direction of the wind corridor along a geodetic path.</semantics>
                     </attribute>
                 </objectClass>
             </objectClass>
@@ -659,6 +796,14 @@ If not provided, the environment condition is considered global, only restricted
                 <resolution>NA</resolution>
                 <accuracy>NA</accuracy>
                 <semantics>Practical Salinity Unit (PSU) measured in g/kg.</semantics>
+            </simpleData>
+            <simpleData>
+                <name>LightningIntensity32</name>
+                <representation>HLAfloat32BE</representation>
+                <units>flash/hour</units>
+                <resolution>NA</resolution>
+                <accuracy>NA</accuracy>
+                <semantics>Intensity of lighning measured in flashes per hour.</semantics>
             </simpleData>
         </simpleDataTypes>
         <enumeratedDataTypes>
@@ -1025,6 +1170,39 @@ If not provided, the environment condition is considered global, only restricted
                     <value>23</value>
                 </enumerator>
             </enumeratedData>
+            <enumeratedData>
+                <name>LightningTypeEnum8</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Types of lightning. Cloud to Ground (CG) positive or negative, Cloud to Air (CA), Ground to Cloud (GC), Intra Cloud (IC), Between Cloud to Cloud (CC).</semantics>
+                <enumerator>
+                    <name>NoLightning</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>CG-positive</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>CA</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>GC</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>IC</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>CC</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>CG-negative</name>
+                    <value>1</value>
+                </enumerator>
+            </enumeratedData>
         </enumeratedDataTypes>
         <arrayDataTypes>
             <arrayData>
@@ -1179,6 +1357,16 @@ If not provided, the environment condition is considered global, only restricted
                     <name>Density</name>
                     <dataType>MassDensityFloat32</dataType>
                     <semantics>kg/m3</semantics>
+                </field>
+                <field>
+                    <name>MinimumAltitude</name>
+                    <dataType>AltitudeMeterFloat64</dataType>
+                    <semantics>Minimum altitude relative to MSL where snow is present.</semantics>
+                </field>
+                <field>
+                    <name>RoadAccumulation</name>
+                    <dataType>MeterFloat64</dataType>
+                    <semantics>Specific accumulation of snow on roads which may differ from terrain snow depth.</semantics>
                 </field>
             </fixedRecordData>
             <fixedRecordData>
