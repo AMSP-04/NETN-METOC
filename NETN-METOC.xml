@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <objectModel xsi:schemaLocation="http://standards.ieee.org/IEEE1516-2010 http://standards.ieee.org/downloads/1516/1516.2-2010/IEEE1516-DIF-2010.xsd" xmlns="http://standards.ieee.org/IEEE1516-2010" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <modelIdentification notes="netn-metoc_2">
+    <modelIdentification notes="netn-metoc_overview">
         <name>NETN-METOC</name>
         <type>FOM</type>
         <version>2.0</version>
@@ -13,7 +13,7 @@
 Current weather conditions impact simulations such as platforms and sensors on the ground, sea, underwater and in the air. A correlated representation of these conditions is key to meeting interoperability and model requirements in a federated distributed simulation. Different simulations require different fidelity of weather conditions concerning data resolution and accuracy. The NETN-METOC focus on representing weather conditions for related surfaces and layers. The main difference is that a surface condition does not have a volume and only represents the conditions directly related to the surface of a piece of terrain or water. The layer conditions represent a volume of water or air with height/depth from surface and layer thickness. Environmental conditions have explicit locations or positions related to other simulated entities and objects in the synthetic environment.</description>
         <useLimitation>NETN-METOC covers the most common levels of representation required by a large set of existing simulators.</useLimitation>
         <useHistory>v1.0 - Initial version developed by MSG-163. Release included in NETN FOM v3.0</useHistory>
-        <useHistory notes="netn-metoc_4">v2.0 - Updates developed by MSG-191 and included in NETN FOM v4.0</useHistory>
+        <useHistory notes="netn-metoc_changelog">v2.0 - Updates developed by MSG-191 and included in NETN FOM v4.0</useHistory>
         <poc>
             <pocType>Release authority</pocType>
             <pocName>NATO Modelling and Simulation Group</pocName>
@@ -1442,7 +1442,7 @@ If not provided, the environment condition is considered global, only restricted
     </dataTypes>
     <notes>
         <note>
-            <label>netn-metoc_2</label>
+            <label>netn-metoc_overview</label>
             <semantics>## Overview 
  
 Environment Conditions are either surface-based (land or water) or a layer (above terrain or below the water surface) and include either weather attributes or sub-surface (Water) attributes. 
@@ -1493,7 +1493,7 @@ A simulation capable of modelling environment conditions in the federated distri
 Multiple METOC service providers may exist in a federation.</semantics>
         </note>
         <note>
-            <label>netn-metoc_4</label>
+            <label>netn-metoc_changelog</label>
             <semantics>* Replaced `Service` object class with `METOC_Service` 
 * Replaced `EnvironmentCondition` object class with `METOC_EnvironmentCondition` 
 * Replaced `EnvironmentCondition` attribute `ServiceId` with `METOC_EnvironmentCondition` attribute `Service` 
