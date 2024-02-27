@@ -523,7 +523,7 @@ If not provided, the environment condition is considered global, only restricted
                     <semantics>The available METOC services are objects in the federation.</semantics>
                     <attribute>
                         <name>ModelType</name>
-                        <dataType>WeatherModelTypeEnum32</dataType>
+                        <dataType>EnvironmentConditionModelTypeEnum32</dataType>
                         <updateType>Static</updateType>
                         <updateCondition>NA</updateCondition>
                         <ownership>DivestAcquire</ownership>
@@ -1096,7 +1096,7 @@ If not provided, the environment condition is considered global, only restricted
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
-                <name>WeatherModelTypeEnum32</name>
+                <name>EnvironmentConditionModelTypeEnum32</name>
                 <representation>HLAinteger32BE</representation>
                 <semantics>Type of weather model used by a METOC service.</semantics>
                 <enumerator>
@@ -1201,6 +1201,31 @@ If not provided, the environment condition is considered global, only restricted
                 <enumerator>
                     <name>CG-negative</name>
                     <value>1</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>FederateControlActionEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Enumeration of Federate Control Actions. The datatype is expected to be extended in specific modules defining additional actions.</semantics>
+                <enumerator>
+                    <name>RequestWeatherCondition</name>
+                    <value>801</value>
+                </enumerator>
+                <enumerator>
+                    <name>RequestLandSurfaceCondition</name>
+                    <value>802</value>
+                </enumerator>
+                <enumerator>
+                    <name>RequestTroposphereLayerCondition</name>
+                    <value>803</value>
+                </enumerator>
+                <enumerator>
+                    <name>RequestWaterSurfaceCondition</name>
+                    <value>804</value>
+                </enumerator>
+                <enumerator>
+                    <name>RequestSubsurfaceLayerCondition</name>
+                    <value>805</value>
                 </enumerator>
             </enumeratedData>
         </enumeratedDataTypes>
@@ -1512,7 +1537,9 @@ Multiple METOC service providers may exist in a federation.</semantics>
 * Replaced `Response` parameter `EnvironmentObjectId` with `METOC_Response` parameter `EnvironmentObject` 
 * Replaced `Response` parameter `GeoReference` with `METOC_Response` parameter `GeoReference` 
 * Replaced `Response` parameter `Status` with `METOC_Response` parameter `Status` 
-* Added `Response` parameter `Request`</semantics>
+* Added `Response` parameter `Request`
+* Added `FederateControlActionEnum` Enumerated datatype.
+* Reamed `WeatherModelTypeEnum32` Enumerated datatype to `EnvironmentConditionModelTypeEnum32`</semantics>
         </note>
     </notes>
 </objectModel>

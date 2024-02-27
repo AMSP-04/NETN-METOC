@@ -25,4 +25,6 @@
 * Replaced `Response` parameter `GeoReference` with `METOC_Response` parameter `GeoReference` 
 * Replaced `Response` parameter `Status` with `METOC_Response` parameter `Status` 
 * Added `Response` parameter `Request`
+* Added `FederateControlActionEnum` Enumerated datatype.
+* Reamed `WeatherModelTypeEnum32` Enumerated datatype to `EnvironmentConditionModelTypeEnum32`
 

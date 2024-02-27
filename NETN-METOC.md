@@ -70,6 +70,7 @@ direction LR
 
 HLAobjectRoot <|-- METOC_EnvironmentCondition
 HLAobjectRoot <|-- SMC_Service
+HLAobjectRoot : UniqueId(NETN-BASE)
 METOC_EnvironmentCondition <|-- Weather
 METOC_EnvironmentCondition <|-- SubsurfaceLayer
 METOC_EnvironmentCondition <|-- WindCorridor
@@ -115,6 +116,8 @@ WindCorridor : Path
 WindCorridor : Width
 WindCorridor : WindSpeed
 SMC_Service <|-- METOC_Service
+SMC_Service : Federate(NETN-SMC)
+SMC_Service : SupportedActions(NETN-SMC)
 METOC_Service : ModelType
 ```
 
@@ -269,7 +272,10 @@ The available METOC services are objects in the federation.
 
 |Attribute|Datatype|Semantics|
 |---|---|---|
-|ModelType|WeatherModelTypeEnum32|Required. Type of METOC model provided by the service. Specifies whether the service delivers Simulated, Real (Historical), Live (Current) or Standard model data.|
+|ModelType|EnvironmentConditionModelTypeEnum32|Required. Type of METOC model provided by the service. Specifies whether the service delivers Simulated, Real (Historical), Live (Current) or Standard model data.|
+|Federate<br/>(NETN-SMC)|FederateName|Required. Required: The federate providing the service.| 
+|SupportedActions<br/>(NETN-SMC)|FederateControlActions|Required. Required: Indicates which SMC control actions are supported by the referenced federate.| 
+|UniqueId<br/>(NETN-BASE)|UUID|Required. A unique identifier for the object. The Universally Unique Identifier (UUID) is generated or pre-defined.| 
 
 ## Interaction Classes
 
@@ -279,6 +285,7 @@ direction LR
 HLAinteractionRoot <|-- SMC_FederateControl
 HLAinteractionRoot <|-- SMC_Response
 SMC_FederateControl <|-- METOC_Request
+SMC_FederateControl : Federate(NETN-SMC)
 METOC_Request <|-- RequestWeatherCondition
 METOC_Request <|-- RequestLandSurfaceCondition
 METOC_Request <|-- RequestTroposphereLayerCondition
@@ -289,6 +296,8 @@ METOC_Request : UpdateAsObject
 RequestTroposphereLayerCondition : Layer
 RequestSubsurfaceLayerCondition : Layer
 SMC_Response <|-- METOC_Response
+SMC_Response : Action(NETN-SMC)
+SMC_Response : Status(NETN-SMC)
 METOC_Response <|-- WeatherCondition
 METOC_Response <|-- SubsurfaceLayerCondition
 METOC_Response : EnvironmentObject
@@ -484,7 +493,9 @@ Note that only datatypes defined in this FOM Module are listed below. Please ref
 |CloudStruct|The cloud layer type, coverage and density.|
 |CloudTypeEnum32|Classification of different types of clouds.|
 |CurrentStruct|Water current direction and speed.|
+|EnvironmentConditionModelTypeEnum32|Type of weather model used by a METOC service.|
 |FederateControlActionEnum|SMC Control action enumeration.|
+|FederateControlActionEnum|Enumeration of Federate Control Actions. The datatype is expected to be extended in specific modules defining additional actions.|
 |GMLidentifier|GML Feature ID.|
 |GeoLocationTypeEnum32|Specifies different ways to reference geographical locations.|
 |GeoReferenceVariant|The area affected by an environmental condition can be expressed as: * a location on the Earth's surface represented by a Point, * an area on the Earth's surface, represented by a Quadrangle, GeodeticPolygon, or GeodeticCircle, order * a reference to some other object/data.|
@@ -505,7 +516,6 @@ Note that only datatypes defined in this FOM Module are listed below. Please ref
 |SnowStruct|Depth and density of snow cover.|
 |SurfaceMoistureEnum16|Road surface wetness or soil moisture.|
 |WaveStruct|Water surface wave conditions and direction.|
-|WeatherModelTypeEnum32|Type of weather model used by a METOC service.|
 |WindStruct|Wind direction and speeds.|
         
 ### Simple Datatypes
@@ -520,7 +530,9 @@ Note that only datatypes defined in this FOM Module are listed below. Please ref
 |Name|Representation|Semantics|
 |---|---|---|
 |CloudTypeEnum32|HLAinteger32BE|Classification of different types of clouds.|
+|EnvironmentConditionModelTypeEnum32|HLAinteger32BE|Type of weather model used by a METOC service.|
 |FederateControlActionEnum|HLAinteger32BE|SMC Control action enumeration.|
+|FederateControlActionEnum|HLAinteger32BE|Enumeration of Federate Control Actions. The datatype is expected to be extended in specific modules defining additional actions.|
 |GeoLocationTypeEnum32|HLAinteger32BE|Specifies different ways to reference geographical locations.|
 |HazeTypeEnum32|HLAinteger32BE|Type of visibility obstruction.|
 |IceTypeEnum16|HLAinteger16BE|Type of Ice.|
@@ -530,7 +542,6 @@ Note that only datatypes defined in this FOM Module are listed below. Please ref
 |SeaStateEnum16|HLAinteger16BE|State of the sea measured in Douglas Sea Scale.|
 |SedimentTypeEnum32|HLAinteger32BE|The type of sediment on the sea floor.|
 |SurfaceMoistureEnum16|HLAinteger16BE|Road surface wetness or soil moisture.|
-|WeatherModelTypeEnum32|HLAinteger32BE|Type of weather model used by a METOC service.|
         
 ### Array Datatypes
 |Name|Element Datatype|Semantics|
