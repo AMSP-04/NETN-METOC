@@ -2,64 +2,63 @@
 # NETN-METOC
 |Version| Date| Dependencies|
 |---|---|---|
-|2.0|2024-02-27|NETN-BASE|
+|2.0|2024-03-10|NETN-BASE|
 
-The purpose of the NATO Education and Training Network (NETN) Meteorological and Oceanographic (METOC) Module is to provide a standard way to exchange data related to weather conditions and the primary effects of weather on terrain and water surfaces in the atmosphere and subsurface water conditions. The main objective is to provide a reference model that represents a common core subset of METOC-related aspects and to allow the extension of the module to incorporate additional detail if required. Therefore, the NETN-METOC module is a reference FOM module where extensions are allowed and encouraged to meet federation-specific requirements fully.
+The purpose of the NATO Education and Training Network Meteorological and Oceanographic Module (NETN-METOC) is to provide a standard way to exchange data related to environmental conditions, including weather and the primary effects of weather on terrain and water surfaces in the atmosphere and subsurface water conditions.
 
-This module specifies how to represent METOC-related data in a federated distributed simulation. The specification is based on IEEE 1516 High Level Architecture (HLA) Object Model Template (OMT) and supports interoperability in a federated simulation (federation) based on HLA.
+NETN-METOC provides a reference model that represents a common core subset of METOC-related aspects and allows the module's extension to incorporate additional detail if required.
 
-Current weather conditions impact simulations such as platforms and sensors on the ground, sea, underwater and in the air. A correlated representation of these conditions is key to meeting interoperability and model requirements in a federated distributed simulation. Different simulations require different fidelity of weather conditions concerning data resolution and accuracy. The NETN-METOC focus on representing weather conditions for related surfaces and layers. The main difference is that a surface condition does not have a volume and only represents the conditions directly related to the surface of a piece of terrain or water. The layer conditions represent a volume of water or air with height/depth from surface and layer thickness. Environmental conditions have explicit locations or positions related to other simulated entities and objects in the synthetic environment.
 
-NETN-METOC covers the most common levels of representation required by a large set of existing simulators.
 
 ## Overview 
+
+ Current environmental conditions impact simulations such as platforms and sensors on the ground, sea, underwater and in the air. A correlated representation of these conditions is vital to meeting interoperability and model requirements in a federated distributed simulation.
  
-Environment Conditions are either surface-based (land or water) or a layer (above terrain or below the water surface) and include either weather attributes or sub-surface (Water) attributes. 
+ NETN-METOC represents environmental conditions for surfaces, layers, and corridors. 
+
+* Surface conditions do not have a volume and only represent the conditions directly related to the surface of a piece of terrain or water. 
+    * Land Surface Conditions
+    * Water Surface Conditions
+* Layer conditions represent a volume of water or air with height/depth from surface and layer thickness. 
+    * Tropospheric Layer Conditions
+    * Water Layer Conditions
+    * Subsurface Layer
+* Wind Corridor models wind speed conditions concerning a specified path.
  
-* Tropospheric Layer Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range and Clouds. 
+
+Environment condition data are published as objects using the classes defined in the NETN-METOC FOM module. In addition, or as an alternative method, interactions can be used to request data from a METOC service.
+
  
-* Water Layer Conditions cover the following aspects: Temperature, Salinity, and Currents. 
+### Environment Condition
  
-* Land Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Snow Condition, Moisture and Ice Condition 
+Environment Conditions can be modelled as objects related to global conditions, explicit locations, or other simulated entities and objects in the synthetic environment.
+
+Since multiple overlapping Environment Condition objects may exist, subscribing federates should apply the following merging rules to calculate the resulting environment conditions.
+* Wind Speed, Wind Direction, Precipitation Intensity, Temperature, Humidity, Barometric Pressure, Snow Depth, and Snow Density are calculated as the average in the overlapping Environment Condition objects.
+* Visibility is calculated as the minimum visibility distance of the overlapping Environment Condition objects.
+* Conflicting precipitation types are resolved according to the following precedence: Snow, Hail, Rain, and No Precipitation. For example, if there is one overlapping Environment Condition object with Snow, the result is always Snow.
+* The average density should be used for the same haze type. Multiple overlapping Environment Condition objects with different Haze types can exist.
+* Moisture is calculated as the highest enumerated value, making the resulting value the one with the most moisture.
+* The land surface ice condition is calculated as the highest enumerated value making the resulting value the one with the most severe ice condition.
+
  
-* Water Surface Conditions cover the following aspects: Temperature, Winds, Precipitation, Haze, Humidity, Barometric Pressure, Visibility Range, Sea State, Salinity, Tide, Ice Conditions, Currents, Waves and Swell. 
- 
-* Subsurface Layer Conditions cover the following aspects: Temperature, Current, Salinity and BottomType. 
- 
-To exchange Environment Conditions, the NETN-METOC offers two methods of interaction. 
- 
-1. Pull: Request and Response pattern for Environment Conditions based on HLA Interaction Classes. 
-2. Push: Request for Continuous updates of Environment Condition based on HLA Interactions and then updates of HLA Object instance attributes. 
- 
-One or both methods may be suitable depending on federation design and agreements. 
- 
-### Environment Condition 
- 
-Environment Conditions can be modelled by any federate to represent METOC data. Multiple overlapping `METOC_EnvironmentCondition` objects may exist, and subscribing federates should apply merge rules to calculate the resulting environment conditions. A METOC server may subscribe to multiple `METOC_EnvironmentCondition` objects and deliver correlated METOC data using a Request and Response pattern implemented as HLA interactions. 
- 
-Environment conditions are always related to either the entire synthetic environment (global), a static or dynamic location, a region or a layer. An environmental condition can be related to: 
-* Specific geographical location 
-* Specific geographical region 
-* A specific simulated entity position 
-* A volume of air 
-* A body of water 
-* A feature identified in a terrain database using Geography Markup Language (GML) identifiers 
- 
-#### Overlapping Environment Conditions 
-If `METOC_EnvironmentCondition` with overlapping regions/locations exist, the following rules apply: 
- 
-* Wind Speed, Wind Direction, Precipitation Intensity, Temperature, Humidity, BarometricPressure, Snow Depth, and Snow Density are calculated as the average in the overlapping `METOC_EnvironmentCondition` 
-* Visibility is calculated as the minimum visibility distance of the overlapping `METOC_EnvironmentCondition`. 
-* Conflicting precipitation types are resolved according to the following precedence: Snow, Hail, Rain, and No Precipitation. E.g. If there is one overlapping `METOC_EnvironmentCondition` with Snow, the result is always Snow. 
-* For the same Haze-type, the average density should be used. Multiple overlapping `METOC_EnvironmentCondition` with different Haze-type can exist. 
-* Moisture is calculated as the highest enumerated value making the resulting value the one with the most moisture. 
-* LandSurface ice condition is calculated as the highest enumerated value making the resulting value the one with the most severe ice condition. 
  
 ### Service 
- 
-A simulation capable of modelling environment conditions in the federated distributed environment registers a `METOC_Service` object instance and publishes information that specifies the source and type of the METOC data available. All METOC data in the federation refers to the producing `METOC_Service`, and requests for METOC data reference a specific service. 
- 
-Multiple METOC service providers may exist in a federation.
+
+The NETN-METOC module also supports requesting environmental condition data from a server or service provider. 
+
+A METOC Service publishes its supported actions and the type of data provided using the METOC_Service object class. The type of data is one of the following:
+* Simulated
+* Real-Historical
+* Live
+* Standard model
+
+To request environment condition data from a METOC service, the NETN-METOC offers two methods.
+* Pull - uses a Request and Response pattern based on NETN-SMC.
+* Push - uses the same Request pattern as the pull method but with the feature that the information is provided as continuous updates of Environment Condition objects published by the METOC service provided.
+
+One or both methods may be suitable depending on federation design and agreements.
+
 
 
 ## Object Classes
@@ -494,7 +493,6 @@ Note that only datatypes defined in this FOM Module are listed below. Please ref
 |CloudTypeEnum32|Classification of different types of clouds.|
 |CurrentStruct|Water current direction and speed.|
 |EnvironmentConditionModelTypeEnum32|Type of weather model used by a METOC service.|
-|FederateControlActionEnum|SMC Control action enumeration.|
 |FederateControlActionEnum|Enumeration of Federate Control Actions. The datatype is expected to be extended in specific modules defining additional actions.|
 |GMLidentifier|GML Feature ID.|
 |GeoLocationTypeEnum32|Specifies different ways to reference geographical locations.|
@@ -531,7 +529,6 @@ Note that only datatypes defined in this FOM Module are listed below. Please ref
 |---|---|---|
 |CloudTypeEnum32|HLAinteger32BE|Classification of different types of clouds.|
 |EnvironmentConditionModelTypeEnum32|HLAinteger32BE|Type of weather model used by a METOC service.|
-|FederateControlActionEnum|HLAinteger32BE|SMC Control action enumeration.|
 |FederateControlActionEnum|HLAinteger32BE|Enumeration of Federate Control Actions. The datatype is expected to be extended in specific modules defining additional actions.|
 |GeoLocationTypeEnum32|HLAinteger32BE|Specifies different ways to reference geographical locations.|
 |HazeTypeEnum32|HLAinteger32BE|Type of visibility obstruction.|
